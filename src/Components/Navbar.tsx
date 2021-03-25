@@ -6,7 +6,7 @@ const Nav: React.FC = () => {
     return (
         <Navbar>
             <NavSection>
-                <NavLogo href="/">{"{logo}"}</NavLogo>
+                <NavLogo href="/">{"{log}"}</NavLogo>
             </NavSection>
             <NavItemsSection></NavItemsSection>
             <NavSection></NavSection>
