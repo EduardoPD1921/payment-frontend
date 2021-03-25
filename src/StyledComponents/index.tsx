@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 
-//Navbar components
 export const Navbar = styled.nav`
     display: flex;
     flex-direction: row;
@@ -39,19 +38,6 @@ export const NavItem = styled.a`
         color: #c3e8d1;
     }
 `;
-
-// export const LoginButton = styled(Button)`
-//     && {
-//         height: 40px;
-//         width: 130px;
-//         font-weight: 600;
-//         border-radius: 30px;
-//         background: #426dff;
-//         :hover {
-//             background: #365ad6;
-//         }
-//     }
-// `;
 
 interface DefaultButtonProps {
     borderRadius: string;
@@ -98,4 +84,85 @@ export const HeaderInputSection = styled.div`
     display: flex;
     width: 30%;
     align-items: center;
+`;
+
+export const FooterSection = styled.footer`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    bottom: 0;
+    background: #11c76f;
+`;
+
+export const FooterContent = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 70%;
+`;
+
+export const FooterColumn = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding-top: 50px;
+`;
+
+export const FooterColumnTitle = styled.span`
+    color: #0C874C;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+`;
+
+export const FooterLogo = styled(NavLogo)`
+    font-size: 30px;
+`;
+
+export const FooterColumnContent = styled(NavItem)`
+    margin: 0 0 10px 0;
+    font-size: 16px;
+`;
+
+export const DividerSection = styled.div`
+    width: 100%;
+`;
+
+export const ExtraInfo = styled(FooterColumn)`
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+`;
+
+export const ExtraInfoContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    width: 70%;
+    color: white;
+`;
+
+export const ExtraInfoItemLeft = styled.span`
+    align-self: flex-start;
+`;
+
+export const ExtraInfoItemRight = styled.span`
+    align-self: flex-end;
+    position: absolute;
+`;
+
+export const SocialMediaIcon = styled.a`
+    color: white;
+    margin: 10px;
+    :focus {
+        outline: none;
+    }
 `;

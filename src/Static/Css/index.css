@@ -1,0 +1,10 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: manrope, sans-serif;
+}
+
+@font-face {
+    font-family: manrope;
+    src: url('../Fonts/Manrope-VariableFont_wght.ttf');
+}

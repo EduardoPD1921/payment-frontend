@@ -7,7 +7,7 @@ import {
     NavItemsSection,
     NavItem,
     DefaultButton
-} from '../StyledComponents'
+} from '../StyledComponents';
 
 const Nav: React.FC = () => {
     return (
