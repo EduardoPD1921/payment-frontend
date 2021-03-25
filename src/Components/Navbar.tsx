@@ -6,7 +6,7 @@ import {
     NavLogo,
     NavItemsSection,
     NavItem,
-    LoginButton
+    DefaultButton
 } from '../StyledComponents'
 
 const Nav: React.FC = () => {
@@ -21,7 +21,7 @@ const Nav: React.FC = () => {
                 <NavItem href="/">payload</NavItem>
             </NavItemsSection>
             <NavSection>
-                <LoginButton variant="contained" color="primary">Entrar</LoginButton>
+                <DefaultButton borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
             </NavSection>
         </Navbar>
     )

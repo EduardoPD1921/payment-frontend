@@ -2,14 +2,6 @@ import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 
-// interface Props {
-//     height?: string;
-// }
-
-// export const StyledButton = styled(Button)`
-//     height: ${(props: Props) => props.height || '20px'};
-// `;
-
 //Navbar components
 export const Navbar = styled.nav`
     display: flex;
@@ -48,12 +40,32 @@ export const NavItem = styled.a`
     }
 `;
 
-export const LoginButton = styled(Button)`
+// export const LoginButton = styled(Button)`
+//     && {
+//         height: 40px;
+//         width: 130px;
+//         font-weight: 600;
+//         border-radius: 30px;
+//         background: #426dff;
+//         :hover {
+//             background: #365ad6;
+//         }
+//     }
+// `;
+
+interface DefaultButtonProps {
+    borderRadius: string;
+    margin?: string;
+}
+
+export const DefaultButton = styled(Button)`
     && {
-        height: 40px;
+        height: 50px;
         width: 130px;
+        color: white;
         font-weight: 600;
-        border-radius: 30px;
+        margin: ${(props: DefaultButtonProps) => props.margin || '0'};
+        border-radius: ${(props: DefaultButtonProps) => props.borderRadius};
         background: #426dff;
         :hover {
             background: #365ad6;
@@ -61,24 +73,29 @@ export const LoginButton = styled(Button)`
     }
 `;
 
-//Header components
-// interface HeaderProps {
-//     imageUrl: string;
-// }
-
-// export const Header = styled.section`
-//     width: 100%;
-//     background-image: ${(props: HeaderProps) => props.imageUrl || 'test'};
-// `;
-
-interface HeaderProps {
-    imageUrl: string;
-}
-
 export const HeaderSection = styled.section`
+    display: flex;
     width: 100%;
-    height: 500px;
-    background-image: url(${(props: HeaderProps) => props.imageUrl});
-    background-repeat: no-repeat;
-    background-size: cover;
+    height: 200px;
+    justify-content: center;
+    background: #11c76f;
+`;
+
+export const SearchInput = styled.input`
+    flex: 1;
+    height: 50px;
+    padding-left: 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    :focus {
+        outline: none;
+    }
+`;
+
+export const HeaderInputSection = styled.div`
+    display: flex;
+    width: 30%;
+    align-items: center;
 `;

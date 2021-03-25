@@ -1,15 +1,18 @@
 import React from 'react';
 
-import {
-    HeaderSection
-} from '../StyledComponents';
+import { HeaderSection, SearchInput, HeaderInputSection, DefaultButton } from '../StyledComponents';
 
-import headerImage from '../Static/Images/pagamento.jpg';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Header: React.FC = () => {
     return (
-        <HeaderSection imageUrl={headerImage}>
-            test
+        <HeaderSection>
+            <HeaderInputSection>
+                <SearchInput type="text" placeholder="Buscar usuário" />
+                <DefaultButton borderRadius="10px" margin="10px">
+                    <SearchIcon />
+                </DefaultButton>
+            </HeaderInputSection>
         </HeaderSection>
     )
 }
