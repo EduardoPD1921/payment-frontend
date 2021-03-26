@@ -132,7 +132,7 @@ export const DividerSection = styled.div`
     width: 100%;
 `;
 
-export const ExtraInfo = styled(FooterColumn)`
+export const ExtraInfoSection = styled(FooterColumn)`
     display: flex;
     flex-direction: column;
     flex: 0.5;

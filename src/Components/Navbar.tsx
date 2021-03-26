@@ -21,7 +21,7 @@ const Nav: React.FC = () => {
                 <NavItem href="/">payload</NavItem>
             </NavItemsSection>
             <NavSection>
-                <DefaultButton borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
+                <DefaultButton href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
             </NavSection>
         </Navbar>
     )
