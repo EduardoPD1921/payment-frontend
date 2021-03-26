@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export const Navbar = styled.nav`
     display: flex;
@@ -178,10 +179,55 @@ export const RegisterPageSection = styled.div`
 export const RegisterFormSection = styled.div`
     display: flex;
     flex-direction: row;
-    width: 50%;
+    width: 40%;
     height: 600px;
     border-radius: 10px;
     -webkit-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
+`;
+
+export const RegisterFormInputs = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 2;
+    border-radius: 0 10px 10px 0;
+`;
+
+export const RegisterFormIllustration = styled.div`
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    border-radius: 10px 0 0 10px;
+    background: #003ecb;
+`;
+// 426dff
+// 003ecb
+
+export const RegisterIllustration = styled.img`
+    width: 100%;
+`;
+
+export const CustomTextField = styled(TextField)`
+    & .MuiInput-underline:after {
+        border-bottom-color: #11c76f;
+    }
+
+    && .MuiInput-underline:hover:before {
+        border-bottom: 1px solid gray;
+    }
+
+    & label.Mui-focused {
+        color: #11c76f;
+    }
+`;
+
+export const RegisterFormTitle = styled.span`
+    margin: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 20px;
+    color: #617865;
+    font-weight: 400;
 `;
