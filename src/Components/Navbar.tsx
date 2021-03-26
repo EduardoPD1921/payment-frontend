@@ -9,7 +9,21 @@ import {
     DefaultButton
 } from '../StyledComponents';
 
-const Nav: React.FC = () => {
+interface NavbarProps {
+    mainPage?: boolean;
+}
+
+const Nav: React.FC<NavbarProps> = props => {
+    const renderButton = () => {
+        if (props.mainPage) {
+            return (
+                <NavSection>
+                    <DefaultButton href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
+                </NavSection>
+            )
+        }
+    }
+
     return (
         <Navbar>
             <NavSection>
@@ -20,9 +34,10 @@ const Nav: React.FC = () => {
                 <NavItem href="/">payload</NavItem>
                 <NavItem href="/">payload</NavItem>
             </NavItemsSection>
-            <NavSection>
+            {renderButton()}
+            {/* <NavSection>
                 <DefaultButton href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
-            </NavSection>
+            </NavSection> */}
         </Navbar>
     )
 }

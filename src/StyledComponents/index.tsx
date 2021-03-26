@@ -92,7 +92,7 @@ export const FooterSection = styled.footer`
     align-items: center;
     width: 100%;
     height: 500px;
-    position: absolute;
+    position: static;
     bottom: 0;
     background: #11c76f;
 `;
@@ -165,4 +165,23 @@ export const SocialMediaIcon = styled.a`
     :focus {
         outline: none;
     }
+`;
+
+export const RegisterPageSection = styled.div`
+    display: flex;
+    flex: 1;
+    height: 880px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const RegisterFormSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 600px;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
 `;

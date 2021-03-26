@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+
+import {
+    RegisterPageSection,
+    RegisterFormSection
+} from '../StyledComponents';
+
 const RegisterPage: React.FC = () => {
-    const [render, setRender] = useState(false);
-
-    const renderMessage = () => {
-        if (render) {
-            return <span>message</span>
-        }
-    }
-
     return (
-        <div>
-            <button onClick={() => setRender(true)}>
-                test
-            </button>
-            {renderMessage()}
+        <div className="app">
+            <Navbar />
+            <RegisterPageSection>
+                <RegisterFormSection>
+                </RegisterFormSection>
+            </RegisterPageSection>
+            <Footer />
         </div>
     )
 }
