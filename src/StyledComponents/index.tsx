@@ -43,6 +43,8 @@ export const NavItem = styled.a`
 interface DefaultButtonProps {
     borderRadius: string;
     margin?: string;
+    backgroundDefault: string;
+    backgroundHover: string;
 }
 
 export const DefaultButton = styled(Button)`
@@ -53,12 +55,15 @@ export const DefaultButton = styled(Button)`
         font-weight: 600;
         margin: ${(props: DefaultButtonProps) => props.margin || '0'};
         border-radius: ${(props: DefaultButtonProps) => props.borderRadius};
-        background: #426dff;
+        background: ${(props: DefaultButtonProps) => props.backgroundDefault};
         :hover {
-            background: #365ad6;
+            background: ${(props: DefaultButtonProps) => props.backgroundHover};
         }
     }
 `;
+
+//426dff
+// hover: 365ad6
 
 export const HeaderSection = styled.section`
     display: flex;
@@ -189,7 +194,7 @@ export const RegisterFormSection = styled.div`
 
 export const RegisterFormInputs = styled.div`
     display: flex;
-    justify-content: center;
+    padding-top: 50px;
     flex-direction: column;
     flex: 2;
     border-radius: 0 10px 10px 0;
@@ -210,6 +215,7 @@ export const RegisterIllustration = styled.img`
 `;
 
 export const CustomTextField = styled(TextField)`
+    width: 120%;
     & .MuiInput-underline:after {
         border-bottom-color: #11c76f;
     }
@@ -230,4 +236,11 @@ export const RegisterFormTitle = styled.span`
     font-size: 20px;
     color: #617865;
     font-weight: 400;
+`;
+
+export const RegisterFormButtonSection = styled.div`
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    width: 70%;
 `;

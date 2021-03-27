@@ -18,7 +18,7 @@ const Nav: React.FC<NavbarProps> = props => {
         if (props.mainPage) {
             return (
                 <NavSection>
-                    <DefaultButton href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
+                    <DefaultButton backgroundDefault="#426dff" backgroundHover="#365ad6" href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
                 </NavSection>
             )
         }
@@ -35,9 +35,6 @@ const Nav: React.FC<NavbarProps> = props => {
                 <NavItem href="/">payload</NavItem>
             </NavItemsSection>
             {renderButton()}
-            {/* <NavSection>
-                <DefaultButton href="/register" borderRadius="30px" variant="contained" color="primary">Entrar</DefaultButton>
-            </NavSection> */}
         </Navbar>
     )
 }

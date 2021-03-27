@@ -9,7 +9,7 @@ const Header: React.FC = () => {
         <HeaderSection>
             <HeaderInputSection>
                 <SearchInput type="text" placeholder="Buscar usuário" />
-                <DefaultButton borderRadius="10px" margin="10px">
+                <DefaultButton backgroundDefault="#426dff" backgroundHover="#365ad6" borderRadius="10px" margin="10px">
                     <SearchIcon />
                 </DefaultButton>
             </HeaderInputSection>
