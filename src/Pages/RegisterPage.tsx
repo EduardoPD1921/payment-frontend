@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+import VMasker from 'vanilla-masker';
+
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import RegisterInput from '../Components/RegisterInput';
+
 import Image from '../Static/Images/bitcoin-trading.svg';
 
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +14,7 @@ import UserIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
 import EventIcon from '@material-ui/icons/Event';
 import LockIcon from '@material-ui/icons/Lock';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 
 import {
     RegisterPageSection,
@@ -26,22 +31,43 @@ import {
 const RegisterPage: React.FC = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [birthdate, setBirthDate] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
 
-    const onChangeTextHandle = (value: string, type: string) => {
+    const [nameMessage, setNameMessage] = useState('');
+    const [emailMessage, setEmailMessage] = useState('');
+    const [birthDateMessage, setBirthDateMessage] = useState('');
+    const [phoneMessage, setPhoneMessage] = useState('');
+    const [passwordMessage, setPasswordMessage] = useState('');
+
+    const onChangeTextHandler = (value: string, type: string) => {
         switch (type) {
             case 'name':
                 return setName(value);
             case 'email':
                 return setEmail(value);
             case 'birthDate':
-                return setBirthDate(value);
+                return setBirthDate(birthDateMasker(value));
+            case 'phone':
+                return setPhone(phoneMasker(value));
             case 'password':
                 return setPassword(value);
             default:
                 console.log(type);
         }
+    }
+
+    const phoneMasker = (value: string) => {
+        const phoneMasked = VMasker.toPattern(value, '(99) 99999-9999');
+
+        return phoneMasked;
+    }
+
+    const birthDateMasker = (value: string) => {
+        const birthMasked = VMasker.toPattern(value, "99/99/9999");
+
+        return birthMasked;
     }
 
     return (
@@ -54,42 +80,44 @@ const RegisterPage: React.FC = () => {
                     </RegisterFormIllustration>
                     <RegisterFormInputs>
                         <RegisterFormTitle>Cadastro</RegisterFormTitle>
-                        <Grid style={{ marginLeft: 20 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <UserIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <CustomTextField onChange={e => onChangeTextHandle(e.target.value, 'email')} value={name} label="Nome" />
-                            </Grid>
-                        </Grid>
-
-                        <Grid style={{ marginLeft: 20, marginTop: 30 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <EmailIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <CustomTextField label="E-mail" />
-                            </Grid>
-                        </Grid>
-
-                        <Grid style={{ marginLeft: 20, marginTop: 30 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <EventIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <CustomTextField type="text" label="Data de nascimento" />
-                            </Grid>
-                        </Grid>
-
-                        <Grid style={{ marginLeft: 20, marginTop: 30 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <LockIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <CustomTextField type="password" label="Senha" />
-                            </Grid>
-                        </Grid>
-
+                        <RegisterInput 
+                            label="Nome" 
+                            value={name} 
+                            type="name" 
+                            onChangeTextHandler={onChangeTextHandler} error={!!nameMessage} errorMessage={nameMessage} 
+                        />
+                        <RegisterInput
+                            label="E-mail"
+                            value={email}
+                            type="email"
+                            onChangeTextHandler={onChangeTextHandler}
+                            error={!!emailMessage}
+                            errorMessage={emailMessage} 
+                        />
+                        <RegisterInput
+                            label="Data de nascimento"
+                            value={birthDate}
+                            type="birthDate"
+                            onChangeTextHandler={onChangeTextHandler}
+                            error={!!birthDateMessage}
+                            errorMessage={birthDateMessage} 
+                        />
+                        <RegisterInput
+                            label="Telefone"
+                            value={phone}
+                            type="phone"
+                            onChangeTextHandler={onChangeTextHandler}
+                            error={!!phoneMessage}
+                            errorMessage={phoneMessage} 
+                        />
+                        <RegisterInput
+                            label="Senha"
+                            value={password}
+                            type="password"
+                            onChangeTextHandler={onChangeTextHandler}
+                            error={!!passwordMessage}
+                            errorMessage={passwordMessage}
+                        />
                         <RegisterFormButtonSection>
                             <DefaultButton borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
                                 Cadastrar

@@ -230,7 +230,7 @@ export const CustomTextField = styled(TextField)`
 `;
 
 export const RegisterFormTitle = styled.span`
-    margin: 20px;
+    margin: 20px 0 0 40px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 20px;
@@ -242,5 +242,5 @@ export const RegisterFormButtonSection = styled.div`
     display: flex;
     margin-top: 40px;
     justify-content: center;
-    width: 70%;
+    width: 80%;
 `;
