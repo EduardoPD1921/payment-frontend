@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import VMasker from 'vanilla-masker';
 
@@ -8,21 +9,12 @@ import RegisterInput from '../Components/RegisterInput';
 
 import Image from '../Static/Images/bitcoin-trading.svg';
 
-import Grid from '@material-ui/core/Grid';
-
-import UserIcon from '@material-ui/icons/AccountCircle';
-import EmailIcon from '@material-ui/icons/Email';
-import EventIcon from '@material-ui/icons/Event';
-import LockIcon from '@material-ui/icons/Lock';
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
-
 import {
     RegisterPageSection,
     RegisterFormSection,
     RegisterFormIllustration,
     RegisterFormInputs,
     RegisterIllustration,
-    CustomTextField,
     RegisterFormTitle,
     DefaultButton,
     RegisterFormButtonSection
@@ -68,6 +60,19 @@ const RegisterPage: React.FC = () => {
         const birthMasked = VMasker.toPattern(value, "99/99/9999");
 
         return birthMasked;
+    }
+
+    const submitRegisterForm = () => {
+        const phoneUnmasked = VMasker.toPattern(phone, "99999999999");
+        const data = {
+            name,
+            email,
+            birth_date: birthDate,
+            phone_number: phoneUnmasked,
+            password
+        }
+
+        axios.get('/sanctum/csrf-cookie').then(resp => console.log(resp));
     }
 
     return (
@@ -119,7 +124,7 @@ const RegisterPage: React.FC = () => {
                             errorMessage={passwordMessage}
                         />
                         <RegisterFormButtonSection>
-                            <DefaultButton borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
+                            <DefaultButton onClick={() => submitRegisterForm()} borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
                                 Cadastrar
                             </DefaultButton> 
                         </RegisterFormButtonSection> 
