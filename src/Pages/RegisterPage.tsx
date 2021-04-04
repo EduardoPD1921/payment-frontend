@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { CustomTextField } from '../StyledComponents';
 
 import Grid from '@material-ui/core/Grid';
+import Loading from '@material-ui/core/CircularProgress';
 
 import UserIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
@@ -35,21 +36,50 @@ interface InputValues {
     name: string;
     email: string;
     birth_date: string;
-    phone: string;
+    phone_number: string;
     password: string;
 }
 
 const RegisterPage: React.FC = () => {
     const { register, handleSubmit, control } = useForm<InputValues>();
 
-    const [nameMessage, setNameMessage] = useState('');
-    const [emailMessage, setEmailMessage] = useState('');
-    const [birthDateMessage, setBirthDateMessage] = useState('');
-    const [phoneMessage, setPhoneMessage] = useState('');
-    const [passwordMessage, setPasswordMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        setIsLoading(true)
+
+        const unmaskedPhoneNumber = VMasker.toPattern(data.phone_number, "99999999999");
+
+        data = {
+            ...data,
+            phone_number: unmaskedPhoneNumber
+        }
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/register',
+            data: data
+        })
+            .then(resp => {
+                setIsLoading(false);
+                console.log(resp);
+            })
+            .catch(error => {
+                setIsLoading(false);
+                console.log(error.response);
+            });
+    }
+
+    const renderSubmitButton = () => {
+        if (isLoading) {
+            return <Loading style={{ color: '#11c76f' }} />
+        }
+
+        return (
+            <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
+                Cadastrar
+            </DefaultButton> 
+        )
     }
 
     return (
@@ -122,7 +152,7 @@ const RegisterPage: React.FC = () => {
                                 <Grid item>
                                     <MaskedInput
                                         mask="(99) 99999-9999"
-                                        {...register("phone")}
+                                        {...register("phone_number")}
                                     >
                                         {(inputProps: object) => (
                                             <CustomTextField
@@ -153,9 +183,10 @@ const RegisterPage: React.FC = () => {
                                 </Grid>
                             </Grid>
                             <RegisterFormButtonSection>
-                                <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
+                                {/* <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
                                     Cadastrar
-                                </DefaultButton> 
+                                </DefaultButton>  */}
+                                {renderSubmitButton()}
                             </RegisterFormButtonSection> 
                         </form>
                     </RegisterFormInputs>
