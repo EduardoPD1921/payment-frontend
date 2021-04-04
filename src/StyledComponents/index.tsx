@@ -62,9 +62,6 @@ export const DefaultButton = styled(Button)`
     }
 `;
 
-//426dff
-// hover: 365ad6
-
 export const HeaderSection = styled.section`
     display: flex;
     width: 100%;
@@ -207,8 +204,6 @@ export const RegisterFormIllustration = styled.div`
     border-radius: 10px 0 0 10px;
     background: #003ecb;
 `;
-// 426dff
-// 003ecb
 
 export const RegisterIllustration = styled.img`
     width: 100%;

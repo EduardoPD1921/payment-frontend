@@ -6,6 +6,7 @@ import VMasker from 'vanilla-masker';
 
 interface Inputs {
     example: string;
+    example2: string;
 }
 
 const TestPage: React.FC = () => {
@@ -13,27 +14,44 @@ const TestPage: React.FC = () => {
     const { register, handleSubmit, control } = useForm<Inputs>();
 
     const onSubmit = (data: any) => {
-        const unMasked = VMasker.toPattern(data.example, "99999999999");
-
-        console.log(unMasked);
+        console.log(data);
     }
 
     return (
+        // <form onSubmit={handleSubmit(onSubmit)}>
+        //     {/* <Controller
+        //         name="example"
+        //         control={control}
+        //         defaultValue=""
+        //         render={({ field }) => <CustomTextField {...field} {...register("example", { pattern: /^[A-Za-z]+$/i })} />}
+        //     /> */}
+        //     <MaskedInput
+        //         mask="(99) 99999-9999"
+        //         {...register("example")}
+        //     >
+        //         {(inputProps: object) => (
+        //             <CustomTextField {...inputProps} />
+        //         )}
+        //     </MaskedInput>
+        //     <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
+        //         Cadastrar
+        //     </DefaultButton> 
+        // </form>
         <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <Controller
-                name="example"
+            <Controller
                 control={control}
+                name="example"
                 defaultValue=""
-                render={({ field }) => <CustomTextField {...field} {...register("example", { pattern: /^[A-Za-z]+$/i })} />}
-            /> */}
-            <MaskedInput
-                mask="(99) 99999-9999"
-                {...register("example")}
-            >
-                {(inputProps: object) => (
-                    <CustomTextField {...inputProps} />
-                )}
-            </MaskedInput>
+                render={({ field }) => <CustomTextField label="test" {...field} />}  
+            />
+
+            <Controller
+                control={control}
+                name="example2"
+                defaultValue=""
+                render={({ field }) => <CustomTextField label="test2" {...field} />} 
+            />
+
             <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
                 Cadastrar
             </DefaultButton> 
