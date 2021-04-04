@@ -72,7 +72,13 @@ const RegisterPage: React.FC = () => {
             password
         }
 
-        axios.get('/sanctum/csrf-cookie').then(resp => console.log(resp));
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/register',
+            data: data
+        })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error.response));
     }
 
     return (
@@ -85,49 +91,53 @@ const RegisterPage: React.FC = () => {
                     </RegisterFormIllustration>
                     <RegisterFormInputs>
                         <RegisterFormTitle>Cadastro</RegisterFormTitle>
-                        <RegisterInput 
-                            label="Nome" 
-                            value={name} 
-                            type="name" 
-                            onChangeTextHandler={onChangeTextHandler} error={!!nameMessage} errorMessage={nameMessage} 
-                        />
-                        <RegisterInput
-                            label="E-mail"
-                            value={email}
-                            type="email"
-                            onChangeTextHandler={onChangeTextHandler}
-                            error={!!emailMessage}
-                            errorMessage={emailMessage} 
-                        />
-                        <RegisterInput
-                            label="Data de nascimento"
-                            value={birthDate}
-                            type="birthDate"
-                            onChangeTextHandler={onChangeTextHandler}
-                            error={!!birthDateMessage}
-                            errorMessage={birthDateMessage} 
-                        />
-                        <RegisterInput
-                            label="Telefone"
-                            value={phone}
-                            type="phone"
-                            onChangeTextHandler={onChangeTextHandler}
-                            error={!!phoneMessage}
-                            errorMessage={phoneMessage} 
-                        />
-                        <RegisterInput
-                            label="Senha"
-                            value={password}
-                            type="password"
-                            onChangeTextHandler={onChangeTextHandler}
-                            error={!!passwordMessage}
-                            errorMessage={passwordMessage}
-                        />
-                        <RegisterFormButtonSection>
-                            <DefaultButton onClick={() => submitRegisterForm()} borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
-                                Cadastrar
-                            </DefaultButton> 
-                        </RegisterFormButtonSection> 
+                        <form>
+                            <RegisterInput 
+                                label="Nome" 
+                                value={name} 
+                                type="name" 
+                                onChangeTextHandler={onChangeTextHandler} 
+                                error={!!nameMessage} 
+                                errorMessage={nameMessage} 
+                            />
+                            <RegisterInput
+                                label="E-mail"
+                                value={email}
+                                type="email"
+                                onChangeTextHandler={onChangeTextHandler}
+                                error={!!emailMessage}
+                                errorMessage={emailMessage} 
+                            />
+                            <RegisterInput
+                                label="Data de nascimento"
+                                value={birthDate}
+                                type="birthDate"
+                                onChangeTextHandler={onChangeTextHandler}
+                                error={!!birthDateMessage}
+                                errorMessage={birthDateMessage} 
+                            />
+                            <RegisterInput
+                                label="Telefone"
+                                value={phone}
+                                type="phone"
+                                onChangeTextHandler={onChangeTextHandler}
+                                error={!!phoneMessage}
+                                errorMessage={phoneMessage} 
+                            />
+                            <RegisterInput
+                                label="Senha"
+                                value={password}
+                                type="password"
+                                onChangeTextHandler={onChangeTextHandler}
+                                error={!!passwordMessage}
+                                errorMessage={passwordMessage}
+                            />
+                            <RegisterFormButtonSection>
+                                <DefaultButton onClick={() => submitRegisterForm()} borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
+                                    Cadastrar
+                                </DefaultButton> 
+                            </RegisterFormButtonSection> 
+                        </form>
                     </RegisterFormInputs>
                 </RegisterFormSection>
             </RegisterPageSection>

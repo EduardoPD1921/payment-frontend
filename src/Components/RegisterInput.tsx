@@ -19,6 +19,14 @@ interface RegisterInputProps {
     onChangeTextHandler: (value: string, type: string) => void;
 }
 
+interface Inputs {
+    name: string;
+    email: string;
+    birthDate: string;
+    password: string;
+    phone: string;
+}
+
 const RegisterInput: React.FC<RegisterInputProps> = props => {
     const renderIcon = () => {
         switch (props.type) {
@@ -43,13 +51,16 @@ const RegisterInput: React.FC<RegisterInputProps> = props => {
                 {renderIcon()}
             </Grid>
             <Grid item>
-                <CustomTextField 
+                {/* <CustomTextField 
                     label={props.label} 
                     type={props.type === 'password' ? 'password' : 'text'} 
                     value={props.value} 
                     onChange={e => props.onChangeTextHandler(e.target.value, props.type)}
                     error={props.error}
                     helperText={props.errorMessage} 
+                /> */}
+                <CustomTextField
+                    label={props.type} 
                 />
             </Grid>
         </Grid>
