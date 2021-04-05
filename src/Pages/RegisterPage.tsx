@@ -22,6 +22,8 @@ import Footer from '../Components/Footer';
 
 import Image from '../Static/Images/bitcoin-trading.svg';
 
+import errorHandler from '../ErrorHandler';
+
 import {
     RegisterPageSection,
     RegisterFormSection,
@@ -46,6 +48,11 @@ const RegisterPage: React.FC = () => {
     const { register, handleSubmit, control } = useForm<InputValues>();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [nameMessage, setNameMessage] = useState('');
+    const [emailMessage, setEmailMessage] = useState('');
+    const [birthDateMessage, setBirthDateMessage] = useState('');
+    const [phoneNumberMessage, setPhoneNumberMessage] = useState('');
+    const [passwordMessage, setPasswordMessage] = useState('');
 
     const onSubmit = (data: any) => {
         setIsLoading(true)
@@ -72,7 +79,7 @@ const RegisterPage: React.FC = () => {
             })
             .catch(error => {
                 setIsLoading(false);
-                console.log(error.response);
+                submitErrorHandler(error.response.data);
             });
     }
 
@@ -88,12 +95,41 @@ const RegisterPage: React.FC = () => {
         )
     }
 
-    // const history = useHistory();
+    interface ErrorTypes {
+        name: [string];
+        email: [string];
+        birth_date: [string];
+        phone_number: [string];
+        password: [string];
+    }
 
-    // const test = () => {
-    //     const path = '/';
-    //     history.push(path);
-    // }
+    const submitErrorHandler = (error: ErrorTypes) => {
+        setNameMessage('');
+        setEmailMessage('');
+        setBirthDateMessage('');
+        setPhoneNumberMessage('');
+        setPasswordMessage('');
+
+        if (error.name) {
+            return setNameMessage(errorHandler(error));
+        }
+
+        if (error.email) {
+            return setEmailMessage(errorHandler(error));
+        }
+
+        if (error.birth_date) {
+            return setBirthDateMessage(errorHandler(error));
+        }
+
+        if (error.phone_number) {
+            return setPhoneNumberMessage(errorHandler(error));
+        }
+
+        if (error.password) {
+            return setPasswordMessage(errorHandler(error));
+        }
+    }
 
     return (
         <div className="app">
@@ -117,6 +153,8 @@ const RegisterPage: React.FC = () => {
                                          defaultValue=""
                                          render={({ field }) => 
                                         <CustomTextField
+                                            helperText={nameMessage}
+                                            error={!!nameMessage}
                                             label="Nome"
                                             {...field} 
                                         />}
@@ -134,6 +172,8 @@ const RegisterPage: React.FC = () => {
                                          defaultValue=""
                                          render={({ field }) => 
                                         <CustomTextField
+                                            helperText={emailMessage}
+                                            error={!!emailMessage}
                                             label="E-mail"
                                             {...field} 
                                         />}
@@ -150,7 +190,9 @@ const RegisterPage: React.FC = () => {
                                         {...register("birth_date")}
                                     >
                                         {(inputProps: object) => (
-                                            <CustomTextField 
+                                            <CustomTextField
+                                                helperText={birthDateMessage}
+                                                error={!!birthDateMessage} 
                                                 label="Data de nascimento" 
                                                 {...inputProps} 
                                             />
@@ -169,6 +211,8 @@ const RegisterPage: React.FC = () => {
                                     >
                                         {(inputProps: object) => (
                                             <CustomTextField
+                                                helperText={phoneNumberMessage}
+                                                error={!!phoneNumberMessage}
                                                 label="Telefone"
                                                 {...inputProps} 
                                             />
@@ -187,6 +231,8 @@ const RegisterPage: React.FC = () => {
                                         defaultValue=""
                                         render={({ field }) => (
                                             <CustomTextField
+                                                helperText={passwordMessage}
+                                                error={!!passwordMessage}
                                                 type="password"
                                                 label="Senha"
                                                 {...field} 
