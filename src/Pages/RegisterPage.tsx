@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import { CustomTextField } from '../StyledComponents';
 
@@ -41,6 +42,7 @@ interface InputValues {
 }
 
 const RegisterPage: React.FC = () => {
+    const history = useHistory();
     const { register, handleSubmit, control } = useForm<InputValues>();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +64,11 @@ const RegisterPage: React.FC = () => {
         })
             .then(resp => {
                 setIsLoading(false);
-                console.log(resp);
+                if (resp.data === 'user-created') {
+                    localStorage.setItem('snackbarOpen', 'true');
+                    const path = '/';
+                    history.push(path);
+                }
             })
             .catch(error => {
                 setIsLoading(false);
@@ -81,6 +87,13 @@ const RegisterPage: React.FC = () => {
             </DefaultButton> 
         )
     }
+
+    // const history = useHistory();
+
+    // const test = () => {
+    //     const path = '/';
+    //     history.push(path);
+    // }
 
     return (
         <div className="app">
@@ -183,9 +196,6 @@ const RegisterPage: React.FC = () => {
                                 </Grid>
                             </Grid>
                             <RegisterFormButtonSection>
-                                {/* <DefaultButton type="submit" borderRadius="6px" backgroundDefault="#11c76f" backgroundHover="#10ad61">
-                                    Cadastrar
-                                </DefaultButton>  */}
                                 {renderSubmitButton()}
                             </RegisterFormButtonSection> 
                         </form>
