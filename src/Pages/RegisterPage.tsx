@@ -25,8 +25,8 @@ import Image from '../Static/Images/bitcoin-trading.svg';
 import errorHandler from '../ErrorHandler';
 
 import {
-    RegisterPageSection,
-    RegisterFormSection,
+    FormSection,
+    DefaultFormSection,
     RegisterFormIllustration,
     RegisterFormInputs,
     RegisterIllustration,
@@ -134,8 +134,8 @@ const RegisterPage: React.FC = () => {
     return (
         <div className="app">
             <Navbar />
-            <RegisterPageSection>
-                <RegisterFormSection>
+            <FormSection height={880}>
+                <DefaultFormSection flexDirection="row" width="40%" height={600}>
                     <RegisterFormIllustration>
                         <RegisterIllustration src={Image} />
                     </RegisterFormIllustration>
@@ -246,8 +246,8 @@ const RegisterPage: React.FC = () => {
                             </RegisterFormButtonSection> 
                         </form>
                     </RegisterFormInputs>
-                </RegisterFormSection>
-            </RegisterPageSection>
+                </DefaultFormSection>
+            </FormSection>
             <Footer />
         </div>
     )

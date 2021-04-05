@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+// import Drawer from '@material-ui/core/Drawer';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
 
 import '../Static/Css/index.css';
 
@@ -13,7 +13,7 @@ import Snackbar from '../Components/SnackbarNotification';
 
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    // const [drawerOpen, setDrawerOpen] = useState(false);
 
     useEffect(() => {
         const storageSnackbar = localStorage.getItem('snackbarOpen');
@@ -32,28 +32,28 @@ const MainPage: React.FC = () => {
         setSnackbarOpen(false);
     }
 
-    const list = () => {
-        return (
-            <React.Fragment>
-                <List>
-                    <ListItem>
-                        Test
-                    </ListItem>
-                    <ListItem>
-                        Test2
-                    </ListItem>
-                </List>
-            </React.Fragment>
-        )
-    }
+    // const list = () => {
+    //     return (
+    //         <React.Fragment>
+    //             <List>
+    //                 <ListItem>
+    //                     Test
+    //                 </ListItem>
+    //                 <ListItem>
+    //                     Test2
+    //                 </ListItem>
+    //             </List>
+    //         </React.Fragment>
+    //     )
+    // }
 
-    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
-            return;
-        }
+    // const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    //     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
+    //         return;
+    //     }
 
-        setDrawerOpen(open);
-    }
+    //     setDrawerOpen(open);
+    // }
 
     return (
         <div className="app">

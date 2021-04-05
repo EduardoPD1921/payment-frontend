@@ -170,19 +170,35 @@ export const SocialMediaIcon = styled.a`
     }
 `;
 
-export const RegisterPageSection = styled.div`
+interface FormSectionProps {
+    height: number;
+}
+
+export const FormSection = styled.div`
     display: flex;
     flex: 1;
-    height: 880px;
+    height: ${(props: FormSectionProps) => props.height}px;
     justify-content: center;
     align-items: center;
 `;
 
-export const RegisterFormSection = styled.div`
+interface DefaultFormSectionProps {
+    width: string;
+    height: number;
+    flexDirection: string;
+}
+
+// RegisterPage:
+// flex-direction: row;
+//     width: 40%;
+//     height: 600px;
+// RegisterFormSection
+
+export const DefaultFormSection = styled.div`
     display: flex;
-    flex-direction: row;
-    width: 40%;
-    height: 600px;
+    flex-direction: ${(props: DefaultFormSectionProps) => props.flexDirection};
+    width: ${(props: DefaultFormSectionProps) => props.width};
+    height: ${(props: DefaultFormSectionProps) => props.height}px;
     border-radius: 10px;
     -webkit-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
