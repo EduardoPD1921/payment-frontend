@@ -3,6 +3,22 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+interface LightTextProps {
+    fontSize: number;
+}
+
+export const LightText = styled.span`
+    margin-top: 10px;
+    color: #5c5c5c;
+    font-size: ${(props: LightTextProps) => props.fontSize}px;
+`;
+
+export const Link = styled.a`
+    color: #11c76f;
+    font-size: 14px;
+    margin-left: 5px;
+`;
+
 export const Navbar = styled.nav`
     display: flex;
     flex-direction: row;
@@ -188,12 +204,6 @@ interface DefaultFormSectionProps {
     flexDirection: string;
 }
 
-// RegisterPage:
-// flex-direction: row;
-//     width: 40%;
-//     height: 600px;
-// RegisterFormSection
-
 export const DefaultFormSection = styled.div`
     display: flex;
     flex-direction: ${(props: DefaultFormSectionProps) => props.flexDirection};
@@ -207,7 +217,7 @@ export const DefaultFormSection = styled.div`
 
 export const RegisterFormInputs = styled.div`
     display: flex;
-    padding-top: 50px;
+    padding: 30px;
     flex-direction: column;
     flex: 2;
     border-radius: 0 10px 10px 0;
@@ -252,6 +262,7 @@ export const RegisterFormTitle = styled.span`
 export const RegisterFormButtonSection = styled.div`
     display: flex;
     margin-top: 40px;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 80%;
 `;

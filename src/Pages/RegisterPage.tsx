@@ -32,7 +32,9 @@ import {
     RegisterIllustration,
     RegisterFormTitle,
     DefaultButton,
-    RegisterFormButtonSection
+    RegisterFormButtonSection,
+    LightText,
+    Link
 } from '../StyledComponents';
 
 interface InputValues {
@@ -243,6 +245,11 @@ const RegisterPage: React.FC = () => {
                             </Grid>
                             <RegisterFormButtonSection>
                                 {renderSubmitButton()}
+                                <LightText fontSize={12}>ou</LightText>
+                                <span style={{ marginTop: 5 }}>
+                                    <LightText fontSize={14}>Já possui uma conta?</LightText>
+                                    <Link href="/login">Entrar</Link>
+                                </span>
                             </RegisterFormButtonSection> 
                         </form>
                     </RegisterFormInputs>
