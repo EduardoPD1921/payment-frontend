@@ -8,7 +8,7 @@ import { CustomTextField } from '../StyledComponents';
 import Grid from '@material-ui/core/Grid';
 import Loading from '@material-ui/core/CircularProgress';
 
-import UserIcon from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import EventIcon from '@material-ui/icons/Event';
 import LockIcon from '@material-ui/icons/Lock';
@@ -146,7 +146,7 @@ const RegisterPage: React.FC = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
                                 <Grid item>
-                                    <UserIcon style={{ color: '#11c76f' }} />
+                                    <PersonIcon style={{ color: '#11c76f' }} />
                                 </Grid>
                                 <Grid item>
                                     <Controller

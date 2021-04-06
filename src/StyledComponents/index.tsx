@@ -202,6 +202,8 @@ interface DefaultFormSectionProps {
     width: string;
     height: number;
     flexDirection: string;
+    justifyContent?: string;
+    alignItems?: string;
 }
 
 export const DefaultFormSection = styled.div`
@@ -209,6 +211,8 @@ export const DefaultFormSection = styled.div`
     flex-direction: ${(props: DefaultFormSectionProps) => props.flexDirection};
     width: ${(props: DefaultFormSectionProps) => props.width};
     height: ${(props: DefaultFormSectionProps) => props.height}px;
+    justify-content: ${(props: DefaultFormSectionProps) => props.justifyContent};
+    align-items: ${(props: DefaultFormSectionProps) => props.alignItems};
     border-radius: 10px;
     -webkit-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 25px -5px rgba(0,0,0,0.75);
@@ -235,8 +239,12 @@ export const RegisterIllustration = styled.img`
     width: 100%;
 `;
 
+interface CustomTextFieldProps {
+    width?: string;
+}
+
 export const CustomTextField = styled(TextField)`
-    width: 120%;
+    width: ${(props: CustomTextFieldProps) => props.width || '120%'};
     & .MuiInput-underline:after {
         border-bottom-color: #11c76f;
     }
