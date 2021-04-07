@@ -278,3 +278,9 @@ export const FormButtonSection = styled.div`
     align-items: center;
     width: ${(props: FormButtonSectionProps) => props.width};
 `;
+
+export const MenuButton = styled(Button)`
+    && {
+        margin: 20px 40px 20px 20px;
+    }
+`;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import Cookie from 'js-cookie';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
@@ -28,6 +30,8 @@ interface InputValues {
 }
 
 const LoginPage: React.FC = () => {
+    const history = useHistory();
+
     const { handleSubmit, control } = useForm<InputValues>();
 
     const [emailMessage, setEmailMessage] = useState('');
@@ -47,8 +51,16 @@ const LoginPage: React.FC = () => {
             url: 'http://127.0.0.1:8000/api/user/login',
             data,
         })
-            .then(resp => console.log(resp))
+            .then(resp => submitSuccessHandler(resp.data.token))
             .catch(error => submitErrorHandler(error.response.data));
+    }
+
+    const submitSuccessHandler = (token: string) => {
+        setIsLoading(false);
+        Cookie.set('authToken', token, { secure: true });
+
+        const path = '/';
+        history.push(path);
     }
 
     interface ErrorTypes {
