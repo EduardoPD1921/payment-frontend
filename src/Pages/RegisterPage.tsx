@@ -71,14 +71,7 @@ const RegisterPage: React.FC = () => {
             url: 'http://127.0.0.1:8000/api/user/register',
             data: data
         })
-            .then(resp => {
-                setIsLoading(false);
-                if (resp.data === 'user-created') {
-                    localStorage.setItem('snackbarOpen', 'true');
-                    const path = '/';
-                    history.push(path);
-                }
-            })
+            .then(resp => submitSuccessHandler(resp.data))
             .catch(error => {
                 setIsLoading(false);
                 submitErrorHandler(error.response.data);
@@ -95,6 +88,17 @@ const RegisterPage: React.FC = () => {
                 Cadastrar
             </DefaultButton> 
         )
+    }
+
+    const submitSuccessHandler = (resp: string) => {
+        setIsLoading(false);
+
+        if (resp === 'user-created') {
+            localStorage.setItem('snackbarOpen', 'true');
+
+            const path = '/';
+            history.push(path);
+        }
     }
 
     interface ErrorTypes {
