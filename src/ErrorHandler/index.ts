@@ -4,6 +4,7 @@ interface ErrorTypes {
     birth_date: [string];
     phone_number: [string];
     password: [string];
+    message: string;
 }
 
 export default function errorHandler(error: ErrorTypes) {
@@ -50,6 +51,16 @@ export default function errorHandler(error: ErrorTypes) {
     if (error.password) {
         if (error.password[0] === 'The password field is required.') {
             return 'O campo senha é obrigatório!';
+        }
+    }
+
+    if (error.message) {
+        if (error.message === 'wrong-email') {
+            return 'E-mail incorreto!';
+        }
+
+        if (error.message === 'wrong-password') {
+            return 'Senha incorreta!';
         }
     }
 

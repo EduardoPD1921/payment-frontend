@@ -267,10 +267,14 @@ export const RegisterFormTitle = styled.span`
     font-weight: 400;
 `;
 
-export const RegisterFormButtonSection = styled.div`
+interface FormButtonSectionProps {
+    width: string;
+}
+
+export const FormButtonSection = styled.div`
     display: flex;
     margin-top: 40px;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: ${(props: FormButtonSectionProps) => props.width};
 `;

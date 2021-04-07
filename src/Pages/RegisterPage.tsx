@@ -32,7 +32,7 @@ import {
     RegisterIllustration,
     RegisterFormTitle,
     DefaultButton,
-    RegisterFormButtonSection,
+    FormButtonSection,
     LightText,
     Link
 } from '../StyledComponents';
@@ -103,6 +103,7 @@ const RegisterPage: React.FC = () => {
         birth_date: [string];
         phone_number: [string];
         password: [string];
+        message: string;
     }
 
     const submitErrorHandler = (error: ErrorTypes) => {
@@ -243,14 +244,14 @@ const RegisterPage: React.FC = () => {
                                     />
                                 </Grid>
                             </Grid>
-                            <RegisterFormButtonSection>
+                            <FormButtonSection width="80%">
                                 {renderSubmitButton()}
                                 <LightText fontSize={12}>ou</LightText>
                                 <span style={{ marginTop: 5 }}>
                                     <LightText fontSize={14}>Já possui uma conta?</LightText>
                                     <Link href="/login">Entrar</Link>
                                 </span>
-                            </RegisterFormButtonSection> 
+                            </FormButtonSection> 
                         </form>
                     </RegisterFormInputs>
                 </DefaultFormSection>
