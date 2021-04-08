@@ -5,10 +5,11 @@ import TextField from '@material-ui/core/TextField';
 
 interface LightTextProps {
     fontSize: number;
+    marginTop?: number;
 }
 
 export const LightText = styled.span`
-    margin-top: 10px;
+    margin-top: ${(props: LightTextProps) => props.marginTop || 0}px;
     color: #5c5c5c;
     font-size: ${(props: LightTextProps) => props.fontSize}px;
 `;
@@ -273,7 +274,7 @@ interface FormButtonSectionProps {
 
 export const FormButtonSection = styled.div`
     display: flex;
-    margin-top: 40px;
+    margin-top: 20px;
     flex-direction: column;
     align-items: center;
     width: ${(props: FormButtonSectionProps) => props.width};
@@ -283,4 +284,13 @@ export const MenuButton = styled(Button)`
     && {
         margin: 20px 40px 20px 20px;
     }
+`;
+
+export const RememberAccountSection = styled.div`
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
 `;

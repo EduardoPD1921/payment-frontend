@@ -18,9 +18,10 @@ interface NavbarProps {
 
 const Nav: React.FC<NavbarProps> = props => {
     const renderButton = () => {
-        const token = Cookie.get('authToken');
+        const cookieToken = Cookie.get('authToken');
+        const sessionToken = sessionStorage.getItem('authToken');
 
-        if (token) {
+        if (cookieToken || sessionToken) {
             return <SideMenu />
         }
 

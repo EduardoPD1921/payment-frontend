@@ -3,6 +3,7 @@ import Cookie from 'js-cookie';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
@@ -12,6 +13,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 
 import Grid from '@material-ui/core/Grid';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import Loading from '@material-ui/core/CircularProgress';
 
 import errorHandler from '../ErrorHandler';
@@ -21,13 +23,26 @@ import {
     DefaultFormSection,
     DefaultButton,
     CustomTextField,
-    FormButtonSection
+    FormButtonSection,
+    RememberAccountSection,
+    LightText
 } from '../StyledComponents';
 
 interface InputValues {
     email: string;
     password: string;
+    rememberAccount: boolean;
 }
+
+const GreenCheckbox = withStyles({
+    root: {
+        color: '#11c76f',
+        '&$checked': {
+            color: '#11c76f'
+        }
+    },
+    checked: {}
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />)
 
 const LoginPage: React.FC = () => {
     const history = useHistory();
@@ -41,23 +56,34 @@ const LoginPage: React.FC = () => {
     interface FormDataType {
         email: string;
         password: string;
+        rememberAccount: boolean;
     }
 
     const onSubmit = (data: FormDataType) => {
         setIsLoading(true);
 
+        const formData = {
+            email: data.email,
+            password: data.password
+        }
+
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:8000/api/user/login',
-            data,
+            data: formData
         })
-            .then(resp => submitSuccessHandler(resp.data.token))
+            .then(resp => submitSuccessHandler(resp.data.token, data.rememberAccount))
             .catch(error => submitErrorHandler(error.response.data));
     }
 
-    const submitSuccessHandler = (token: string) => {
+    const submitSuccessHandler = (token: string, rememberAccount: boolean) => {
         setIsLoading(false);
-        Cookie.set('authToken', token, { secure: true });
+
+        if (rememberAccount) {
+            Cookie.set('authToken', token, { secure: true });
+        } else {
+            sessionStorage.setItem('authToken', token);
+        }
 
         const path = '/';
         history.push(path);
@@ -158,6 +184,19 @@ const LoginPage: React.FC = () => {
                                 />
                             </Grid>
                         </Grid>
+                        <RememberAccountSection>
+                            <Controller
+                                name="rememberAccount" 
+                                defaultValue={false}
+                                control={control}
+                                render={({ field }) => (
+                                    <GreenCheckbox
+                                        {...field} 
+                                    />
+                                )}
+                            />
+                            <LightText fontSize={14}>Lembrar usuário?</LightText>
+                        </RememberAccountSection>
                         <FormButtonSection width="100%">
                             {renderSubmitButton()}
                         </FormButtonSection> 

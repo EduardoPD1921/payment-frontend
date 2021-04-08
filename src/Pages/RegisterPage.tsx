@@ -252,7 +252,7 @@ const RegisterPage: React.FC = () => {
                                 {renderSubmitButton()}
                                 <LightText fontSize={12}>ou</LightText>
                                 <span style={{ marginTop: 5 }}>
-                                    <LightText fontSize={14}>Já possui uma conta?</LightText>
+                                    <LightText marginTop={10} fontSize={14}>Já possui uma conta?</LightText>
                                     <Link href="/login">Entrar</Link>
                                 </span>
                             </FormButtonSection> 

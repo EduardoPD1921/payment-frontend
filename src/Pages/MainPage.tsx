@@ -11,6 +11,8 @@ import Snackbar from '../Components/SnackbarNotification';
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
+    console.log(sessionStorage.getItem('test'));
+
     useEffect(() => {
         const storageSnackbar = localStorage.getItem('snackbarOpen');
 
