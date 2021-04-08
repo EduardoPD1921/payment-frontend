@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+import Content from './Content';
+
 import {
     MenuButton
-} from '../StyledComponents';
+} from '../../StyledComponents';
 
 const SideMenu: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -21,21 +21,11 @@ const SideMenu: React.FC = () => {
         setDrawerOpen(open);
     }
 
-    const list = () => {
-        return (
-            <React.Fragment>
-                <List>
-                    <ListItem>test</ListItem>
-                </List>
-            </React.Fragment>
-        )
-    }
-
     return (
         <React.Fragment>
             <MenuButton onClick={toggleDrawer(true)}><AccountCircleIcon style={{ color: 'white', fontSize: 40 }} /></MenuButton>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-                {list()}
+                <Content />
             </Drawer>
         </React.Fragment>
     )

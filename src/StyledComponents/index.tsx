@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
 
 interface LightTextProps {
     fontSize: number;
@@ -293,4 +294,23 @@ export const RememberAccountSection = styled.div`
     margin-top: 10px;
     align-items: center;
     justify-content: center;
+`;
+
+export const SideMenuList = styled(List)`
+    && {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background: #11c76f;
+        width: 200px;
+    }
+`;
+
+export const SideMenuButton = styled(Button)`
+    && {
+        text-transform: none;
+        color: white;
+        width: 100%;
+        font-size: 15px;
+    }
 `;

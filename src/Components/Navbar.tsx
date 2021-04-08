@@ -1,7 +1,7 @@
 import React from 'react';
 import Cookie from 'js-cookie';
 
-import SideMenu from '../Components/SideMenu';
+import SideMenu from './SideMenu';
 
 import {
     Navbar,

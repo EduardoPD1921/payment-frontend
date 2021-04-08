@@ -7,14 +7,15 @@ import RegisterPage from '../Pages/RegisterPage';
 import LoginPage from '../Pages/LoginPage';
 
 const Routes: React.FC = () => {
-    const authToken = Cookie.get('authToken');
+    const cookieToken = Cookie.get('authToken');
+    const sessionToken = sessionStorage.getItem('authToken');
 
     return (
         <Router>
             <Switch>
                 <Route path="/" exact component={MainPage} />
-                {!authToken ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
-                {!authToken ? <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
+                {!cookieToken && !sessionToken ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
+                {!cookieToken && !sessionToken ?  <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
             </Switch>
         </Router>
     )
