@@ -317,3 +317,8 @@ export const SideMenuOption = styled(Button)`
         text-transform: none;
     }
 `;
+
+export const ProfileTitleSection = styled.nav`
+    width: 100%;
+    height: 85px;
+`;

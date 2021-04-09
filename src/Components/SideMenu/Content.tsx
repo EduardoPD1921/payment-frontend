@@ -22,6 +22,7 @@ const Content: React.FC = () => {
             <SideMenuSection>
                 <SideMenuOption
                     startIcon={<PersonIcon />}
+                    href="/user/profile"
                 >
                     Perfil
                 </SideMenuOption>
