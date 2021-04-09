@@ -1,33 +1,45 @@
 import React from 'react';
-
-import ListItem from '@material-ui/core/ListItem';
+import Cookie from 'js-cookie';
 
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import {
-    SideMenuList,
-    SideMenuButton,
+    SideMenuSection,
+    SideMenuOption
 } from '../../StyledComponents';
 
 const Content: React.FC = () => {
+    const logout = () => {
+        Cookie.remove('authToken');
+        sessionStorage.removeItem('authToken');
+        window.location.reload();
+    }
+
     return (
-        <SideMenuList>
-            <ListItem>
-                <SideMenuButton
+        <React.Fragment>
+            <SideMenuSection>
+                <SideMenuOption
                     startIcon={<PersonIcon />}
                 >
                     Perfil
-                </SideMenuButton>
-            </ListItem>
-            <ListItem style={{ alignSelf: 'flex-end' }}>
-                <SideMenuButton
+                </SideMenuOption>
+                <SideMenuOption
                     startIcon={<AccountBalanceWalletIcon />}
                 >
                     Carteira
-                </SideMenuButton>
-            </ListItem>
-        </SideMenuList>   
+                </SideMenuOption>
+            </SideMenuSection>
+            <SideMenuSection subMenu>
+                <SideMenuOption
+                    onClick={() => {logout()}}
+                    startIcon={<ExitToAppIcon />}
+                >
+                    Sair
+                </SideMenuOption>
+            </SideMenuSection>
+        </React.Fragment>
     )
 }
 

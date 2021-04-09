@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-
 interface LightTextProps {
     fontSize: number;
     marginTop?: number;
@@ -296,21 +294,26 @@ export const RememberAccountSection = styled.div`
     justify-content: center;
 `;
 
-export const SideMenuList = styled(List)`
-    && {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        background: #11c76f;
-        width: 200px;
-    }
+interface SideMenuSectionProps {
+    subMenu?: boolean;
+}
+
+export const SideMenuSection = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: ${(props: SideMenuSectionProps) => props.subMenu ? 'flex-end' : 'flex-start'};
+    flex-direction: column;
+    align-items: center;
+    background: #11c76f;
+    width: 200px;
 `;
 
-export const SideMenuButton = styled(Button)`
+export const SideMenuOption = styled(Button)`
     && {
-        text-transform: none;
-        color: white;
-        width: 100%;
+        margin: 5px;
+        width: 70%;
         font-size: 15px;
+        color: white;
+        text-transform: none;
     }
 `;
