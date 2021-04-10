@@ -46,7 +46,7 @@ const Nav: React.FC<NavbarProps> = props => {
     return (
         <Navbar>
             <NavSection>
-                <NavLogo href="/">{"{logo}"}</NavLogo>
+                <NavLogo color="white" href="/">{"{logo}"}</NavLogo>
             </NavSection>
             <NavItemsSection>
                 <NavItem href="/">payload</NavItem>

@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         <FooterSection>
             <FooterContent>
                 <FooterColumn>
-                    <FooterLogo href="/">{"{logo}"}</FooterLogo>
+                    <FooterLogo color="white" href="/">{"{logo}"}</FooterLogo>
                 </FooterColumn>
                 <Column title="Sobre nós" />
                 <Column title="Soluções" />

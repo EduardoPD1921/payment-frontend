@@ -38,8 +38,12 @@ export const NavItemsSection = styled(NavSection)`
     flex: 2;
 `;
 
+interface NavLogoProps {
+    color: string;
+}
+
 export const NavLogo = styled.a`
-    color: white;
+    color: ${(props: NavLogoProps) => props.color};
     font-size: 40px;
     font-weight: 600;
     text-decoration: none;
@@ -319,6 +323,32 @@ export const SideMenuOption = styled(Button)`
 `;
 
 export const ProfileTitleSection = styled.nav`
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 85px;
+`;
+
+export const ProfileTitleLogoSection = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const TitleSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+`;
+
+export const MainTitle = styled.span`
+    margin-top: 5px;
+    font-size: 30px;
+    color: #454545;
+`;
+
+export const SubTitle = styled.span`
+    font-size: 15px;
+    color: #919191;
 `;
