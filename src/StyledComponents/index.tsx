@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
+
 interface LightTextProps {
     fontSize: number;
     marginTop?: number;
@@ -13,7 +16,7 @@ export const LightText = styled.span`
     font-size: ${(props: LightTextProps) => props.fontSize}px;
 `;
 
-export const Link = styled.a`
+export const LinkItem = styled.a`
     color: #11c76f;
     font-size: 14px;
     margin-left: 5px;
@@ -351,4 +354,46 @@ export const MainTitle = styled.span`
 export const SubTitle = styled.span`
     font-size: 15px;
     color: #919191;
+`;
+
+export const ProfilePageSection = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+`;
+
+export const SideNavSection = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: center;
+`;
+
+export const ProfilePageContent = styled.div`
+    flex: 4;
+`;
+
+export const SideNavLink = styled(Link)`
+    color: #bcbcbc;
+    text-decoration: none;
+    transition: 0.3s;
+`;
+
+export const CustomGrid = styled(Grid)`
+    && {
+        display: flex;
+        justify-content: center;
+        color: #bcbcbc;
+        border-radius: 5px;
+        margin-top: 50px;
+        width: 30%;
+        transition: 0.3s;
+        :hover {
+            background: #f5f5f5;
+            color: #5c5c5c;
+
+            ${SideNavLink} {
+                color: #5c5c5c;
+            }
+        }
+    }
 `;

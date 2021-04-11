@@ -34,7 +34,7 @@ import {
     DefaultButton,
     FormButtonSection,
     LightText,
-    Link
+    LinkItem
 } from '../StyledComponents';
 
 interface InputValues {
@@ -253,7 +253,7 @@ const RegisterPage: React.FC = () => {
                                 <LightText fontSize={12}>ou</LightText>
                                 <span style={{ marginTop: 5 }}>
                                     <LightText marginTop={10} fontSize={14}>Já possui uma conta?</LightText>
-                                    <Link href="/login">Entrar</Link>
+                                    <LinkItem href="/login">Entrar</LinkItem>
                                 </span>
                             </FormButtonSection> 
                         </form>
