@@ -21,7 +21,7 @@ const cookieToken = Cookie.get('authToken');
 const sessionToken = sessionStorage.getItem('authToken');
 
 const ProfilePage: React.FC = () => {
-    const [profileInfo, setProfileInfo] = useState({});
+    const [profileInfo, setProfileInfo] = useState<any>({});
 
     useEffect(() => {
         axios({
@@ -34,6 +34,26 @@ const ProfilePage: React.FC = () => {
             .then(resp => setProfileInfo(resp.data))
             .catch(error => console.log(error.response));
     }, [])
+
+    const dateFormatter = (date: string) => {
+        const temp = new Date(date);
+
+        let year: any = temp.getFullYear();
+        let month: any = temp.getMonth() + 1;
+        let dt: any = temp.getDate();
+
+        if (dt < 10) {
+            dt = '0' + dt; 
+        }
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        const formattedDate = `${dt}/${month}/${year}`;
+        
+        return formattedDate;
+    }
 
     return (
         <div className="app">
@@ -53,7 +73,7 @@ const ProfilePage: React.FC = () => {
                                 <TitleInfo>
                                     <Title>Test</Title>
                                     <TimeStamps>
-                                        <span></span>
+                                        <span>Criação da conta: {dateFormatter(profileInfo.created_at)}</span>
                                         <span></span>
                                     </TimeStamps>
                                 </TitleInfo>
