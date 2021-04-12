@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import background from '../Static/Images/background.svg';
+// import background from '../Static/Images/background.svg';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -373,9 +373,6 @@ export const SideNavSection = styled.div`
 `;
 
 export const ProfilePageContent = styled.div`
-    background-image: url(${background});
-    background-repeat: no-repeat;
-    background-size: cover;
     height: 100%;
     flex: 4;
 `;
@@ -411,9 +408,44 @@ export const CustomGrid = styled(Grid)`
 `;
 
 export const UserInfo = styled.div`
-    height: 90%;
-    width: 90%;
+    height: 85%;
+    width: 85%;
+    padding: 50px;
     border-radius: 25px;
     background: black;
-    opacity: 0.1;
+    background: rgba(0, 0, 0, 0.1);
+`;
+
+export const MainInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 25px;
+    height: 100%;
+    width: 50%;
+`;
+
+export const ImageInfo = styled.div`
+    flex: 1;
+`;
+
+export const BottomInfo = styled.div`
+    flex: 1;
+`;
+
+export const TitleInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+    background: red;
+    margin: 20px 40px 20px 40px;
+`;
+
+export const Title = styled.div`
+    flex: 1;
+`;
+
+export const TimeStamps = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 `;
