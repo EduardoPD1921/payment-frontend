@@ -33,7 +33,7 @@ import {
     RegisterFormTitle,
     DefaultButton,
     FormButtonSection,
-    LightText,
+    LightTextRegister,
     LinkItem
 } from '../StyledComponents';
 
@@ -250,9 +250,9 @@ const RegisterPage: React.FC = () => {
                             </Grid>
                             <FormButtonSection width="80%">
                                 {renderSubmitButton()}
-                                <LightText fontSize={12}>ou</LightText>
+                                <LightTextRegister fontSize={12}>ou</LightTextRegister>
                                 <span style={{ marginTop: 5 }}>
-                                    <LightText marginTop={10} fontSize={14}>Já possui uma conta?</LightText>
+                                    <LightTextRegister marginTop={10} fontSize={14}>Já possui uma conta?</LightTextRegister>
                                     <LinkItem href="/login">Entrar</LinkItem>
                                 </span>
                             </FormButtonSection> 

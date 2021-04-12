@@ -14,7 +14,9 @@ import {
     ImageInfo,
     TitleInfo,
     Title,
-    TimeStamps
+    TimeStamps,
+    LightText,
+    LightTextRegister
 } from '../StyledComponents';
 
 const cookieToken = Cookie.get('authToken');
@@ -67,21 +69,22 @@ const ProfilePage: React.FC = () => {
                     <UserInfo>
                         <MainInfo>
                             <ImageInfo>
-                                test
+                                
                             </ImageInfo>
                             <BottomInfo>
                                 <TitleInfo>
-                                    <Title>Test</Title>
+                                    <Title>
+                                        <LightTextRegister fontSize={18}>Meu perfil</LightTextRegister>
+                                    </Title>
                                     <TimeStamps>
-                                        <span>Criação da conta: {dateFormatter(profileInfo.created_at)}</span>
-                                        <span></span>
+                                        <LightText fontSize={13}>Criação da conta: {dateFormatter(profileInfo.created_at)}</LightText>
+                                        <LightText marginTop={10} fontSize={13}>Última atualização: {dateFormatter(profileInfo.updated_at)}</LightText>
                                     </TimeStamps>
                                 </TitleInfo>
                             </BottomInfo>
                         </MainInfo>
                     </UserInfo>
                 </ProfilePageContent>
-                <button onClick={() => console.log(profileInfo)}>dsadasda</button>
             </ProfilePageSection>
         </div>
     )

@@ -25,7 +25,7 @@ import {
     CustomTextField,
     FormButtonSection,
     RememberAccountSection,
-    LightText
+    LightTextRegister
 } from '../StyledComponents';
 
 interface InputValues {
@@ -195,7 +195,7 @@ const LoginPage: React.FC = () => {
                                     />
                                 )}
                             />
-                            <LightText fontSize={14}>Lembrar usuário?</LightText>
+                            <LightTextRegister fontSize={14}>Lembrar usuário?</LightTextRegister>
                         </RememberAccountSection>
                         <FormButtonSection width="100%">
                             {renderSubmitButton()}

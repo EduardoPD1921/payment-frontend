@@ -7,15 +7,21 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 
-interface LightTextProps {
+interface LightTextGeneralProps {
     fontSize: number;
     marginTop?: number;
 }
 
-export const LightText = styled.span`
-    margin-top: ${(props: LightTextProps) => props.marginTop || 0}px;
+export const LightTextRegister = styled.span`
+    margin-top: ${(props: LightTextGeneralProps) => props.marginTop || 0}px;
     color: #5c5c5c;
-    font-size: ${(props: LightTextProps) => props.fontSize}px;
+    font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
+`;
+
+export const LightText = styled.span`
+    margin-top: ${(props: LightTextGeneralProps) => props.marginTop || 0}px;
+    color: #d4d4d4;
+    font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
 `;
 
 export const LinkItem = styled.a`
@@ -436,12 +442,12 @@ export const BottomInfo = styled.div`
 export const TitleInfo = styled.div`
     display: flex;
     flex-direction: row;
-    background: red;
     margin: 20px 40px 20px 40px;
 `;
 
 export const Title = styled.div`
     flex: 1;
+    margin-left: 10px;
 `;
 
 export const TimeStamps = styled.div`
