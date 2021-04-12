@@ -364,8 +364,9 @@ export const ProfilePageSection = styled.div`
 
 export const SideNavSection = styled.div`
     display: flex;
+    flex-direction: column;
     flex: 1;
-    justify-content: center;
+    align-items: center;
 `;
 
 export const ProfilePageContent = styled.div`
@@ -378,14 +379,18 @@ export const SideNavLink = styled(Link)`
     transition: 0.3s;
 `;
 
+interface CustomGridProps {
+    first?: boolean;
+}
+
 export const CustomGrid = styled(Grid)`
     && {
         display: flex;
         justify-content: center;
         color: #bcbcbc;
         border-radius: 5px;
-        margin-top: 50px;
-        width: 30%;
+        margin-top: ${(props: CustomGridProps) => props.first ? '50px' : '20px'};
+        width: 40%;
         transition: 0.3s;
         :hover {
             background: #f5f5f5;
