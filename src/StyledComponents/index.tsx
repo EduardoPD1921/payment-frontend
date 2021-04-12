@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import background from '../Static/Images/background.svg';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -359,6 +361,7 @@ export const SubTitle = styled.span`
 export const ProfilePageSection = styled.div`
     display: flex;
     flex: 1;
+    height: 91%;
     flex-direction: row;
 `;
 
@@ -370,6 +373,10 @@ export const SideNavSection = styled.div`
 `;
 
 export const ProfilePageContent = styled.div`
+    background-image: url(${background});
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
     flex: 4;
 `;
 
@@ -401,4 +408,12 @@ export const CustomGrid = styled(Grid)`
             }
         }
     }
+`;
+
+export const UserInfo = styled.div`
+    height: 90%;
+    width: 90%;
+    border-radius: 25px;
+    background: black;
+    opacity: 0.1;
 `;

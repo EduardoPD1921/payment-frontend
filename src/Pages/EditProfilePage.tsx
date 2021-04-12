@@ -5,7 +5,8 @@ import SideNav from '../Components/SideNav';
 
 import {
     ProfilePageSection,
-    ProfilePageContent
+    ProfilePageContent,
+    UserInfo
 } from '../StyledComponents';
 
 const EditProfilePage: React.FC = () => {
@@ -18,7 +19,9 @@ const EditProfilePage: React.FC = () => {
             <ProfilePageSection>
                 <SideNav />
                 <ProfilePageContent>
-                    test
+                    <UserInfo>
+                        test
+                    </UserInfo>
                 </ProfilePageContent>
             </ProfilePageSection>
         </div>
