@@ -25,7 +25,8 @@ import {
     LightTextRegister,
     CurrentInfo,
     ProfileInfo,
-    InfoGroup
+    InfoGroup,
+    EmailConfirmButton
 } from '../StyledComponents';
 
 const cookieToken = Cookie.get('authToken');
@@ -82,6 +83,12 @@ const ProfilePage: React.FC = () => {
         return <EmailNotConfirmed />
     }
 
+    const renderConfirmEmailButton = (confirmed: string) => {
+        if (!!confirmed !== true) {
+            return <EmailConfirmButton>Confirmar e-mail</EmailConfirmButton>
+        }
+    }
+
     const renderInfo = () => {
         if (isLoading) {
             return <Loading style={{ color: '#11c76f', fontSize: 15 }} />
@@ -118,6 +125,9 @@ const ProfilePage: React.FC = () => {
                             <ProfileInfo>
                                 {checkEmailConfirmed(profileInfo.email_verified_at)}
                             </ProfileInfo>
+                        </InfoGroup>
+                        <InfoGroup justifyContent="center" marginTop={50}>
+                            {renderConfirmEmailButton(profileInfo.email_verified_at)}
                         </InfoGroup>
                     </CurrentInfo>
                 </BottomInfo>

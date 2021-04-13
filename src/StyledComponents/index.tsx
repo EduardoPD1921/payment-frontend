@@ -501,11 +501,25 @@ export const ProfileInfo = styled.div`
 
 interface InfoGroupProps {
     marginTop?: number;
+    justifyContent?: string;
 }
 
 export const InfoGroup = styled.div`
     display: flex;
     margin-top: ${(props: InfoGroupProps) => props.marginTop || ''}px;
+    justify-content: ${(props: InfoGroupProps) => props.justifyContent || ''};
     flex-direction: row;
     flex: 1;
+`;
+
+export const EmailConfirmButton = styled(Button)`
+    && {
+        text-transform: none;
+        color: white;
+        border-radius: 15px;
+        font-weight: 600;
+        width: 35%;
+        background: rgb(255,135,3);
+        background: linear-gradient(149deg, rgba(255,135,3,1) 23%, rgba(255,73,107,1) 83%);
+    }
 `;
