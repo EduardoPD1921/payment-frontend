@@ -441,6 +441,8 @@ export const UserInfo = styled.div`
 export const MainInfo = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: white;
     border-radius: 25px;
     height: 100%;

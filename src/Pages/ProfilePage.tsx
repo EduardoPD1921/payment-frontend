@@ -9,7 +9,7 @@ import ProfileInput from '../Components/ProfileInput';
 import EmailNotConfirmed from '../Components/EmailNotConfirmed';
 import EmailConfirmed from '../Components/EmailConfirmed';
 
-// import Loading from '@material-ui/core/CircularProgress';
+import Loading from '@material-ui/core/CircularProgress';
 
 import {
     ProfilePageSection,
@@ -33,7 +33,7 @@ const sessionToken = sessionStorage.getItem('authToken');
 
 const ProfilePage: React.FC = () => {
     const [profileInfo, setProfileInfo] = useState<any>({});
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios({
@@ -44,6 +44,7 @@ const ProfilePage: React.FC = () => {
             }
         })
             .then(resp => setProfileInfo(resp.data))
+            .then(() => setIsLoading(false))
             .catch(error => console.log(error.response));
     }, [])
 
@@ -73,11 +74,56 @@ const ProfilePage: React.FC = () => {
         return formattedPhone;
     }
 
-    // const checkEmailConfirmed = (confirmed: boolean) => {
-    //     console.log(!!confirmed);
+    const checkEmailConfirmed = (confirmed: string) => {
+        if (!!confirmed === true) {
+            return <EmailConfirmed />
+        }
 
-    //     return 'sad';
-    // }
+        return <EmailNotConfirmed />
+    }
+
+    const renderInfo = () => {
+        if (isLoading) {
+            return <Loading style={{ color: '#11c76f', fontSize: 15 }} />
+        }
+
+        return (
+            <React.Fragment>
+                <ImageInfo>
+                    {/* Área para imagem de perfil */}
+                </ImageInfo>
+                <BottomInfo>
+                    <TitleInfo>
+                        <Title>
+                            <LightTextRegister fontSize={18}>Meu perfil</LightTextRegister>
+                        </Title>
+                        <TimeStamps>
+                            <LightText fontSize={13}>Criação da conta: {dateFormatter(profileInfo.created_at)}</LightText>
+                            <LightText marginTop={10} fontSize={13}>Última atualização: {dateFormatter(profileInfo.updated_at)}</LightText>
+                        </TimeStamps>
+                    </TitleInfo>
+                    <CurrentInfo>
+                        <InfoGroup>
+                            <ProfileInfo>
+                                <ProfileInput inputValue={profileInfo.name} />
+                            </ProfileInfo>
+                            <ProfileInfo>
+                                <ProfileInput inputValue={phoneFormatter(profileInfo.phone_number)} />
+                            </ProfileInfo>
+                        </InfoGroup>
+                        <InfoGroup marginTop={30}>
+                            <ProfileInfo>
+                                <ProfileInput inputValue={profileInfo.email} />
+                            </ProfileInfo>
+                            <ProfileInfo>
+                                {checkEmailConfirmed(profileInfo.email_verified_at)}
+                            </ProfileInfo>
+                        </InfoGroup>
+                    </CurrentInfo>
+                </BottomInfo>
+            </React.Fragment>
+        )
+    }
 
     return (
         <div className="app">
@@ -90,38 +136,7 @@ const ProfilePage: React.FC = () => {
                 <ProfilePageContent>
                     <UserInfo>
                         <MainInfo>
-                            <ImageInfo>
-                                {/* Área para imagem de perfil */}
-                            </ImageInfo>
-                            <BottomInfo>
-                                <TitleInfo>
-                                    <Title>
-                                        <LightTextRegister fontSize={18}>Meu perfil</LightTextRegister>
-                                    </Title>
-                                    <TimeStamps>
-                                        <LightText fontSize={13}>Criação da conta: {dateFormatter(profileInfo.created_at)}</LightText>
-                                        <LightText marginTop={10} fontSize={13}>Última atualização: {dateFormatter(profileInfo.updated_at)}</LightText>
-                                    </TimeStamps>
-                                </TitleInfo>
-                                <CurrentInfo>
-                                    <InfoGroup>
-                                        <ProfileInfo>
-                                            <ProfileInput inputValue={profileInfo.name} />
-                                        </ProfileInfo>
-                                        <ProfileInfo>
-                                            <ProfileInput inputValue={profileInfo.phone_number} />
-                                        </ProfileInfo>
-                                    </InfoGroup>
-                                    <InfoGroup marginTop={30}>
-                                        <ProfileInfo>
-                                            <ProfileInput inputValue={profileInfo.email} />
-                                        </ProfileInfo>
-                                        <ProfileInfo>
-                                            <EmailConfirmed />
-                                        </ProfileInfo>
-                                    </InfoGroup>
-                                </CurrentInfo>
-                            </BottomInfo>
+                            {renderInfo()}
                         </MainInfo>
                     </UserInfo>
                 </ProfilePageContent>
