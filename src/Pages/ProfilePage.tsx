@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookie from 'js-cookie';
+import VMasker from 'vanilla-masker';
 
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
 import ProfileInput from '../Components/ProfileInput';
+
+// import Loading from '@material-ui/core/CircularProgress';
 
 import {
     ProfilePageSection,
@@ -18,7 +21,9 @@ import {
     TimeStamps,
     LightText,
     LightTextRegister,
-    CurrentInfo
+    CurrentInfo,
+    ProfileInfo,
+    InfoGroup
 } from '../StyledComponents';
 
 const cookieToken = Cookie.get('authToken');
@@ -26,6 +31,7 @@ const sessionToken = sessionStorage.getItem('authToken');
 
 const ProfilePage: React.FC = () => {
     const [profileInfo, setProfileInfo] = useState<any>({});
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios({
@@ -59,6 +65,12 @@ const ProfilePage: React.FC = () => {
         return formattedDate;
     }
 
+    const phoneFormatter = (phone: string) => {
+        const formattedPhone = VMasker.toPattern(phone, "(99) 99999-9999");
+
+        return formattedPhone;
+    }
+
     return (
         <div className="app">
             <ProfileTitle 
@@ -71,7 +83,7 @@ const ProfilePage: React.FC = () => {
                     <UserInfo>
                         <MainInfo>
                             <ImageInfo>
-                                
+                                {/* Área para imagem de perfil */}
                             </ImageInfo>
                             <BottomInfo>
                                 <TitleInfo>
@@ -84,7 +96,19 @@ const ProfilePage: React.FC = () => {
                                     </TimeStamps>
                                 </TitleInfo>
                                 <CurrentInfo>
-                                    <ProfileInput inputValue={profileInfo.name} />
+                                    <InfoGroup>
+                                        <ProfileInfo>
+                                            <ProfileInput inputValue={profileInfo.name} />
+                                        </ProfileInfo>
+                                        <ProfileInfo>
+                                            <ProfileInput inputValue={profileInfo.phone_number} />
+                                        </ProfileInfo>
+                                    </InfoGroup>
+                                    <InfoGroup>
+                                        <ProfileInfo>
+                                            <ProfileInput inputValue={profileInfo.email} />
+                                        </ProfileInfo>
+                                    </InfoGroup>
                                 </CurrentInfo>
                             </BottomInfo>
                         </MainInfo>

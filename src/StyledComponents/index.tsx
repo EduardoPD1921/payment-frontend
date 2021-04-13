@@ -473,6 +473,8 @@ export const TimeStamps = styled.div`
 
 export const CurrentInfo = styled.div`
     display: flex;
+    flex: 1;
+    flex-direction: column;
     margin: 40px 40px 20px 50px;
 `;
 
@@ -483,5 +485,16 @@ export const NotEditableInput = styled.input`
         border-bottom: 1px solid #B8B8B8;
         padding-bottom: 10px;
         background: white;
+        width: 90%;
     }
+`;
+
+export const ProfileInfo = styled.div`
+    flex: 1;
+`;
+
+export const InfoGroup = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex: 1;
 `;
