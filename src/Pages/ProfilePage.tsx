@@ -6,7 +6,8 @@ import VMasker from 'vanilla-masker';
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
 import ProfileInput from '../Components/ProfileInput';
-import EmailNotConfirmed from '../Components/EmailError';
+import EmailNotConfirmed from '../Components/EmailNotConfirmed';
+import EmailConfirmed from '../Components/EmailConfirmed';
 
 // import Loading from '@material-ui/core/CircularProgress';
 
@@ -72,6 +73,12 @@ const ProfilePage: React.FC = () => {
         return formattedPhone;
     }
 
+    // const checkEmailConfirmed = (confirmed: boolean) => {
+    //     console.log(!!confirmed);
+
+    //     return 'sad';
+    // }
+
     return (
         <div className="app">
             <ProfileTitle 
@@ -110,7 +117,7 @@ const ProfilePage: React.FC = () => {
                                             <ProfileInput inputValue={profileInfo.email} />
                                         </ProfileInfo>
                                         <ProfileInfo>
-                                            <EmailNotConfirmed />
+                                            <EmailConfirmed />
                                         </ProfileInfo>
                                     </InfoGroup>
                                 </CurrentInfo>

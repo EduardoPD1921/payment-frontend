@@ -492,6 +492,8 @@ export const NotEditableInput = styled.input`
 `;
 
 export const ProfileInfo = styled.div`
+    display: flex;
+    align-items: center;
     flex: 1;
 `;
 
