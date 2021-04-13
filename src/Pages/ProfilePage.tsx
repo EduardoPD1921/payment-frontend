@@ -6,6 +6,7 @@ import VMasker from 'vanilla-masker';
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
 import ProfileInput from '../Components/ProfileInput';
+import EmailNotConfirmed from '../Components/EmailError';
 
 // import Loading from '@material-ui/core/CircularProgress';
 
@@ -104,9 +105,12 @@ const ProfilePage: React.FC = () => {
                                             <ProfileInput inputValue={profileInfo.phone_number} />
                                         </ProfileInfo>
                                     </InfoGroup>
-                                    <InfoGroup>
+                                    <InfoGroup marginTop={30}>
                                         <ProfileInfo>
                                             <ProfileInput inputValue={profileInfo.email} />
+                                        </ProfileInfo>
+                                        <ProfileInfo>
+                                            <EmailNotConfirmed />
                                         </ProfileInfo>
                                     </InfoGroup>
                                 </CurrentInfo>

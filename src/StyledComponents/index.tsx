@@ -10,12 +10,14 @@ import { Link } from 'react-router-dom';
 interface LightTextGeneralProps {
     fontSize: number;
     marginTop?: number;
+    marginRight?: number;
 }
 
 export const LightTextRegister = styled.span`
     margin-top: ${(props: LightTextGeneralProps) => props.marginTop || 0}px;
-    color: #5c5c5c;
+    margin-right: ${(props: LightTextGeneralProps) => props.marginRight || ''}px;
     font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
+    color: #5c5c5c;
 `;
 
 export const LightText = styled.span`
@@ -493,8 +495,13 @@ export const ProfileInfo = styled.div`
     flex: 1;
 `;
 
+interface InfoGroupProps {
+    marginTop?: number;
+}
+
 export const InfoGroup = styled.div`
     display: flex;
+    margin-top: ${(props: InfoGroupProps) => props.marginTop || ''}px;
     flex-direction: row;
     flex: 1;
 `;
