@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-// import background from '../Static/Images/background.svg';
+import background from '../Static/Images/background.png';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -51,6 +51,7 @@ export const NavItemsSection = styled(NavSection)`
 
 interface NavLogoProps {
     color: string;
+    profilePage?: boolean;
 }
 
 export const NavLogo = styled.a`
@@ -58,6 +59,17 @@ export const NavLogo = styled.a`
     font-size: 40px;
     font-weight: 600;
     text-decoration: none;
+    ${(props: NavLogoProps) => props.profilePage ?
+        `background: #FE6C40;
+        background: -webkit-linear-gradient(to right, #FE6C40 0%, #ff00cb 100%);
+        background: -moz-linear-gradient(to right, #FE6C40 0%, #ff00cb 100%);
+        background: linear-gradient(to right, #FE6C40 0%, #ff00cb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        ` 
+    :
+    ''
+};
 `;
 
 export const NavItem = styled.a`
@@ -379,6 +391,8 @@ export const SideNavSection = styled.div`
 `;
 
 export const ProfilePageContent = styled.div`
+    background-image: url(${background});
+    background-size: cover;
     height: 100%;
     flex: 4;
 `;
@@ -454,4 +468,20 @@ export const TimeStamps = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
+    align-items: flex-end;
+`;
+
+export const CurrentInfo = styled.div`
+    display: flex;
+    margin: 40px 40px 20px 50px;
+`;
+
+export const NotEditableInput = styled.input`
+    :disabled {
+        border-style: solid;
+        border: none;
+        border-bottom: 1px solid #B8B8B8;
+        padding-bottom: 10px;
+        background: white;
+    }
 `;

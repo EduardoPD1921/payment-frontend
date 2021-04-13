@@ -18,7 +18,7 @@ const ProfileTitle: React.FC<ProfileTitleProps> = props => {
     return (
         <ProfileTitleSection>
             <ProfileTitleLogoSection>
-                <NavLogo href="/" color="#a8a8a8">
+                <NavLogo profilePage href="/" color="#a8a8a8">
                     {"{logo}"}
                 </NavLogo>
             </ProfileTitleLogoSection>

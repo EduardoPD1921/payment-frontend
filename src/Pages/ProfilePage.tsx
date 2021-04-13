@@ -4,6 +4,7 @@ import Cookie from 'js-cookie';
 
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
+import ProfileInput from '../Components/ProfileInput';
 
 import {
     ProfilePageSection,
@@ -16,7 +17,8 @@ import {
     Title,
     TimeStamps,
     LightText,
-    LightTextRegister
+    LightTextRegister,
+    CurrentInfo
 } from '../StyledComponents';
 
 const cookieToken = Cookie.get('authToken');
@@ -81,6 +83,9 @@ const ProfilePage: React.FC = () => {
                                         <LightText marginTop={10} fontSize={13}>Última atualização: {dateFormatter(profileInfo.updated_at)}</LightText>
                                     </TimeStamps>
                                 </TitleInfo>
+                                <CurrentInfo>
+                                    <ProfileInput inputValue={profileInfo.name} />
+                                </CurrentInfo>
                             </BottomInfo>
                         </MainInfo>
                     </UserInfo>
