@@ -11,6 +11,8 @@ import EmailConfirmed from '../Components/EmailConfirmed';
 
 import Loading from '@material-ui/core/CircularProgress';
 
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 import {
     ProfilePageSection,
     ProfilePageContent,
@@ -89,6 +91,16 @@ const ProfilePage: React.FC = () => {
         }
     }
 
+    const checkProfileImage = (image: string) => {
+        if (!!image !== true) {
+            return <AccountCircleIcon style={{ fontSize: 300, color: '#d6d6d6' }} />
+        }
+        
+        // Ainda não retorna a imagem do usuário
+        // pois não temos a opção de upa-la
+        return 'ProfileImage';
+    }
+
     const renderInfo = () => {
         if (isLoading) {
             return <Loading style={{ color: '#11c76f', fontSize: 15 }} />
@@ -98,6 +110,7 @@ const ProfilePage: React.FC = () => {
             <React.Fragment>
                 <ImageInfo>
                     {/* Área para imagem de perfil */}
+                    {checkProfileImage(profileInfo.image)}
                 </ImageInfo>
                 <BottomInfo>
                     <TitleInfo>

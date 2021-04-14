@@ -450,6 +450,9 @@ export const MainInfo = styled.div`
 `;
 
 export const ImageInfo = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
 `;
 
