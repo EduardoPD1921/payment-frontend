@@ -430,6 +430,8 @@ export const CustomGrid = styled(Grid)`
 `;
 
 export const UserInfo = styled.div`
+    display: flex;
+    flex-direction: row;
     height: 85%;
     width: 85%;
     padding: 50px;
@@ -451,6 +453,8 @@ export const MainInfo = styled.div`
 
 export const ImageInfo = styled.div`
     display: flex;
+    flex-direction: column;
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex: 1;
@@ -522,7 +526,6 @@ export const EmailConfirmButton = styled(Button)`
         border-radius: 15px;
         font-weight: 600;
         width: 35%;
-        background: rgb(255,135,3);
         background: linear-gradient(149deg, rgba(255,135,3,1) 23%, rgba(255,73,107,1) 83%);
     }
 `;

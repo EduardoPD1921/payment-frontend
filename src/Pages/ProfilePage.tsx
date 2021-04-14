@@ -15,8 +15,8 @@ import {
     MainInfo
 } from '../StyledComponents';
 
-const cookieToken = Cookie.get('authToken');
-const sessionToken = sessionStorage.getItem('authToken');
+const cookie_token = Cookie.get('authToken');
+const session_token = sessionStorage.getItem('authToken');
 
 const ProfilePage: React.FC = () => {
     const [profileInfo, setProfileInfo] = useState<any>({});
@@ -27,7 +27,7 @@ const ProfilePage: React.FC = () => {
             method: 'GET',
             url: 'http://127.0.0.1:8000/api/user/getInfo',
             headers: {
-                'Authorization': `Bearer ${cookieToken || sessionToken}`
+                'Authorization': `Bearer ${cookie_token || session_token}`
             }
         })
             .then(resp => setProfileInfo(resp.data))
