@@ -26,6 +26,7 @@ const session_token = sessionStorage.getItem('authToken');
 const EditProfilePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profileInfo, setProfileInfo] = useState<any>({});
+    const [currentImage, setCurrentImage] = useState<any>();
 
     useEffect(() => {
         axios({
@@ -53,7 +54,8 @@ const EditProfilePage: React.FC = () => {
                         accept="image/*"
                         id="file-button"
                         type="file"
-                        hidden 
+                        hidden
+                        onChange={event => test(event.target.files)} 
                     />
                     <label htmlFor="file-button"> 
                         <Button
@@ -62,7 +64,8 @@ const EditProfilePage: React.FC = () => {
                                 textTransform: 'none',
                                 borderRadius: 15,
                                 color: 'white',
-                                fontWeight: 600
+                                fontWeight: 600,
+                                width: 160
                             }}
                             component="span"
                         >
@@ -71,10 +74,27 @@ const EditProfilePage: React.FC = () => {
                     </label>
                 </ImageInfo>
                 <BottomInfo>
-                    test
+                    <button onClick={() => test2()}>test</button>
                 </BottomInfo>
             </React.Fragment>
         )
+    }
+
+    const test = (image: any) => {
+        setCurrentImage(image[0]);
+    }
+
+    const test2 = () => {
+        const formData = new FormData();
+        formData.append('image', currentImage);
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/test',
+            data: formData
+        })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error.response));
     }
 
     const renderProfileImage = () => {
