@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
 
 interface LightTextGeneralProps {
     fontSize: number;
@@ -527,5 +528,13 @@ export const EmailConfirmButton = styled(Button)`
         font-weight: 600;
         width: 35%;
         background: linear-gradient(149deg, rgba(255,135,3,1) 23%, rgba(255,73,107,1) 83%);
+    }
+`;
+
+export const AvatarIcon = styled(Avatar)`
+    && {
+        background: #d6d6d6;
+        height: 250px;
+        width: 250px;
     }
 `;

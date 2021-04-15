@@ -8,8 +8,8 @@ import SideNav from '../Components/SideNav';
 import Button from '@material-ui/core/Button';
 import Loading from '@material-ui/core/CircularProgress';
 
-
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
 
 import {
     ProfilePageSection,
@@ -18,6 +18,7 @@ import {
     MainInfo,
     ImageInfo,
     BottomInfo,
+    AvatarIcon
 } from '../StyledComponents';
 
 const cookie_token = Cookie.get('authToken');
@@ -27,6 +28,7 @@ const EditProfilePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profileInfo, setProfileInfo] = useState<any>({});
     const [currentImage, setCurrentImage] = useState<any>();
+    const [previewImage, setPreviewImage] = useState<any>();
 
     useEffect(() => {
         axios({
@@ -49,7 +51,8 @@ const EditProfilePage: React.FC = () => {
         return (
             <React.Fragment>
                 <ImageInfo>
-                    {renderProfileImage()}
+                    {/* {renderProfileImage()} */}
+                    <AvatarIcon src={previewImage ? previewImage : profileInfo.image} />
                     <input
                         accept="image/*"
                         id="file-button"
@@ -82,6 +85,7 @@ const EditProfilePage: React.FC = () => {
 
     const test = (image: any) => {
         setCurrentImage(image[0]);
+        setPreviewImage(URL.createObjectURL(image[0]));
     }
 
     const test2 = () => {
@@ -91,6 +95,9 @@ const EditProfilePage: React.FC = () => {
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:8000/api/user/test',
+            headers: {
+                'Authorization': `Bearer ${cookie_token || session_token}`
+            },
             data: formData
         })
             .then(resp => console.log(resp))
