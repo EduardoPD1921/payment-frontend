@@ -271,10 +271,15 @@ export const RegisterIllustration = styled.img`
 
 interface CustomTextFieldProps {
     width?: string;
+    marginTop?: number;
 }
 
 export const CustomTextField = styled(TextField)`
-    width: ${(props: CustomTextFieldProps) => props.width || '120%'};
+    && {
+        width: ${(props: CustomTextFieldProps) => props.width || '120%'};
+        margin-top: ${(props: CustomTextFieldProps) => props.marginTop || ''}px;
+    }
+
     & .MuiInput-underline:after {
         border-bottom-color: #11c76f;
     }
@@ -465,6 +470,13 @@ export const BottomInfo = styled.div`
     flex: 1;
 `;
 
+export const BottomEditInfo = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background: red;
+`;
+
 export const TitleInfo = styled.div`
     display: flex;
     flex-direction: row;
@@ -501,6 +513,10 @@ export const NotEditableInput = styled.input`
     }
 `;
 
+export const EditableInput = styled(TextField)`
+    width: 40%;
+`;
+
 export const ProfileInfo = styled.div`
     display: flex;
     align-items: center;
@@ -534,7 +550,9 @@ export const EmailConfirmButton = styled(Button)`
 export const AvatarIcon = styled(Avatar)`
     && {
         background: #d6d6d6;
-        height: 250px;
-        width: 250px;
+        height: 300px;
+        width: 300px;
+        margin-top: 45px;
+        margin-bottom: 20px;
     }
 `;

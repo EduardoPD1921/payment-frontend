@@ -8,17 +8,19 @@ import SideNav from '../Components/SideNav';
 import Button from '@material-ui/core/Button';
 import Loading from '@material-ui/core/CircularProgress';
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Avatar from '@material-ui/core/Avatar';
-
 import {
     ProfilePageSection,
     ProfilePageContent,
     UserInfo,
     MainInfo,
     ImageInfo,
+    AvatarIcon,
+    BottomEditInfo,
+    CustomTextField,
+    ProfileInfo,
+    InfoGroup,
     BottomInfo,
-    AvatarIcon
+    CurrentInfo
 } from '../StyledComponents';
 
 const cookie_token = Cookie.get('authToken');
@@ -27,7 +29,7 @@ const session_token = sessionStorage.getItem('authToken');
 const EditProfilePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profileInfo, setProfileInfo] = useState<any>({});
-    const [currentImage, setCurrentImage] = useState<any>();
+    // const [currentImage, setCurrentImage] = useState<any>();
     const [previewImage, setPreviewImage] = useState<any>();
 
     useEffect(() => {
@@ -52,7 +54,8 @@ const EditProfilePage: React.FC = () => {
             <React.Fragment>
                 <ImageInfo>
                     {/* {renderProfileImage()} */}
-                    <AvatarIcon src={previewImage ? previewImage : profileInfo.image} />
+                    {/* previewImage ? previewImage : profileInfo.image */}
+                    <AvatarIcon src={previewImage} />
                     <input
                         accept="image/*"
                         id="file-button"
@@ -77,40 +80,53 @@ const EditProfilePage: React.FC = () => {
                     </label>
                 </ImageInfo>
                 <BottomInfo>
-                    <button onClick={() => test2()}>test</button>
+                    <CurrentInfo>
+                        <InfoGroup>
+                            <ProfileInfo>
+                                <CustomTextField
+                                    label="Nome"
+                                    width="90%"
+                                    defaultValue={profileInfo.name} 
+                                />
+                            </ProfileInfo>
+                            <ProfileInfo>
+                                <CustomTextField
+                                    label="E-mail"
+                                    width="90%"
+                                    defaultValue={profileInfo.email} 
+                                />
+                            </ProfileInfo>
+                        </InfoGroup>
+                        <InfoGroup>
+                            <ProfileInfo>test</ProfileInfo>
+                            <ProfileInfo>test</ProfileInfo>
+                        </InfoGroup>
+                    </CurrentInfo>
                 </BottomInfo>
             </React.Fragment>
         )
     }
 
     const test = (image: any) => {
-        setCurrentImage(image[0]);
+        // setCurrentImage(image[0]);
         setPreviewImage(URL.createObjectURL(image[0]));
     }
 
-    const test2 = () => {
-        const formData = new FormData();
-        formData.append('image', currentImage);
+    // const test2 = () => {
+    //     const formData = new FormData();
+    //     formData.append('image', currentImage);
 
-        axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:8000/api/user/test',
-            headers: {
-                'Authorization': `Bearer ${cookie_token || session_token}`
-            },
-            data: formData
-        })
-            .then(resp => console.log(resp))
-            .catch(error => console.log(error.response));
-    }
-
-    const renderProfileImage = () => {
-        if (!!profileInfo.image !== true) {
-            return <AccountCircleIcon style={{ fontSize: 300, color: '#d6d6d6' }} />
-        }
-
-        return 'ProfileImage';
-    }
+    //     axios({
+    //         method: 'POST',
+    //         url: 'http://127.0.0.1:8000/api/user/test',
+    //         headers: {
+    //             'Authorization': `Bearer ${cookie_token || session_token}`
+    //         },
+    //         data: formData
+    //     })
+    //         .then(resp => console.log(resp))
+    //         .catch(error => console.log(error.response));
+    // }
 
     return (
         <div className="app">
