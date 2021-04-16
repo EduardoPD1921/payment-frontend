@@ -8,7 +8,7 @@ import {
     CurrentInfo,
     InfoGroup,
     ProfileInfo,
-    EmailConfirmButton
+    GradientButton
 } from '../../../StyledComponents';
 
 interface MainInfoProps {
@@ -29,7 +29,7 @@ const MainInfo: React.FC<MainInfoProps> = props => {
 
     const renderConfirmEmailButton = () => {
         if (!!props.emailVerifiedAt !== true) {
-            return <EmailConfirmButton>Confirmar e-mail</EmailConfirmButton>
+            return <GradientButton>Confirmar e-mail</GradientButton>
         }
     }
 

@@ -470,13 +470,6 @@ export const BottomInfo = styled.div`
     flex: 1;
 `;
 
-export const BottomEditInfo = styled.div`
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    background: red;
-`;
-
 export const TitleInfo = styled.div`
     display: flex;
     flex-direction: row;
@@ -536,13 +529,17 @@ export const InfoGroup = styled.div`
     flex: 1;
 `;
 
-export const EmailConfirmButton = styled(Button)`
+interface GradientButtonProps {
+    width?: string;
+}
+
+export const GradientButton = styled(Button)`
     && {
         text-transform: none;
         color: white;
         border-radius: 15px;
         font-weight: 600;
-        width: 35%;
+        width: ${(props: GradientButtonProps) => props.width || '35%'};
         background: linear-gradient(149deg, rgba(255,135,3,1) 23%, rgba(255,73,107,1) 83%);
     }
 `;

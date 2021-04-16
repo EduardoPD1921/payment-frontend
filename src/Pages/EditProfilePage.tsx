@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import VMasker from 'vanilla-masker';
+import MaskedInput from 'react-input-mask';
 import axios from 'axios';
 import Cookie from 'js-cookie';
 
@@ -15,18 +18,27 @@ import {
     MainInfo,
     ImageInfo,
     AvatarIcon,
-    BottomEditInfo,
     CustomTextField,
     ProfileInfo,
     InfoGroup,
     BottomInfo,
-    CurrentInfo
+    CurrentInfo,
+    GradientButton
 } from '../StyledComponents';
 
 const cookie_token = Cookie.get('authToken');
 const session_token = sessionStorage.getItem('authToken');
 
+interface EditInputValues {
+    name: string;
+    email: string;
+    birth_date: string;
+    phone_number: string;
+}
+
 const EditProfilePage: React.FC = () => {
+    const { register, handleSubmit, control } = useForm<EditInputValues>();
+
     const [isLoading, setIsLoading] = useState(true);
     const [profileInfo, setProfileInfo] = useState<any>({});
     // const [currentImage, setCurrentImage] = useState<any>();
@@ -81,30 +93,86 @@ const EditProfilePage: React.FC = () => {
                 </ImageInfo>
                 <BottomInfo>
                     <CurrentInfo>
-                        <InfoGroup>
-                            <ProfileInfo>
-                                <CustomTextField
-                                    label="Nome"
-                                    width="90%"
-                                    defaultValue={profileInfo.name} 
-                                />
-                            </ProfileInfo>
-                            <ProfileInfo>
-                                <CustomTextField
-                                    label="E-mail"
-                                    width="90%"
-                                    defaultValue={profileInfo.email} 
-                                />
-                            </ProfileInfo>
-                        </InfoGroup>
-                        <InfoGroup>
-                            <ProfileInfo>test</ProfileInfo>
-                            <ProfileInfo>test</ProfileInfo>
-                        </InfoGroup>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <InfoGroup>
+                                <ProfileInfo>
+                                    <Controller
+                                        name="name"
+                                        control={control}
+                                        defaultValue={profileInfo.name}
+                                        render={({ field }) => (
+                                            <CustomTextField
+                                                label="Nome"
+                                                {...field} 
+                                            />
+                                        )} 
+                                    />
+                                </ProfileInfo>
+                            </InfoGroup>
+                            <InfoGroup marginTop={50}>
+                                <ProfileInfo>
+                                    <MaskedInput
+                                        mask="(99) 99999-9999"
+                                        {...register("phone_number")}
+                                        defaultValue={profileInfo.phone_number}
+                                    >
+                                        {(inputProps: object) => (
+                                            <CustomTextField
+                                                width="90%"
+                                                label="Telefone"
+                                                {...inputProps} 
+                                            />
+                                        )}
+                                    </MaskedInput>
+                                </ProfileInfo>
+                                <ProfileInfo>
+                                    <MaskedInput
+                                        mask="99/99/9999"
+                                        {...register("birth_date")}
+                                        defaultValue={dateFormatter(profileInfo.birth_date)}
+                                    >
+                                        {(inputProps: object) => (
+                                            <CustomTextField
+                                                label="Data de nascimento"
+                                                {...inputProps} 
+                                            />
+                                        )}
+                                    </MaskedInput>
+                                </ProfileInfo>
+                            </InfoGroup>
+                            <InfoGroup marginTop={50} justifyContent="center">
+                                <GradientButton type="submit" width="25%">Salvar</GradientButton>
+                            </InfoGroup>
+                        </form>
                     </CurrentInfo>
                 </BottomInfo>
             </React.Fragment>
         )
+    }
+
+    const onSubmit = (data: any) => {
+        console.log(data);
+    }
+
+    const dateFormatter = (date: string) => {
+        const gmtDate = date + 'T20:00-04:00';
+        const temp = new Date(gmtDate);
+
+        let year: any = temp.getFullYear();
+        let month: any = temp.getMonth() + 1;
+        let dt: any = temp.getDate();
+
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        const formattedDate = `${dt}${month}${year}`;
+
+        return formattedDate;
     }
 
     const test = (image: any) => {
