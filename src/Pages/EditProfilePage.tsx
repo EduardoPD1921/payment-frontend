@@ -40,8 +40,9 @@ const EditProfilePage: React.FC = () => {
     const { register, handleSubmit, control } = useForm<EditInputValues>();
 
     const [isLoading, setIsLoading] = useState(true);
+    const [loadingRequest, setLoadingRequest] = useState(false);
     const [profileInfo, setProfileInfo] = useState<any>({});
-    // const [currentImage, setCurrentImage] = useState<any>();
+    const [currentImage, setCurrentImage] = useState<any>();
     const [previewImage, setPreviewImage] = useState<any>();
 
     useEffect(() => {
@@ -65,15 +66,13 @@ const EditProfilePage: React.FC = () => {
         return (
             <React.Fragment>
                 <ImageInfo>
-                    {/* {renderProfileImage()} */}
-                    {/* previewImage ? previewImage : profileInfo.image */}
-                    <AvatarIcon src={previewImage} />
+                    <AvatarIcon src={previewImage ? previewImage : profileInfo.image} />
                     <input
                         accept="image/*"
                         id="file-button"
                         type="file"
                         hidden
-                        onChange={event => test(event.target.files)} 
+                        onChange={event => onImageChange(event.target.files)} 
                     />
                     <label htmlFor="file-button"> 
                         <Button
@@ -141,7 +140,7 @@ const EditProfilePage: React.FC = () => {
                                 </ProfileInfo>
                             </InfoGroup>
                             <InfoGroup marginTop={50} justifyContent="center">
-                                <GradientButton type="submit" width="25%">Salvar</GradientButton>
+                                {renderSaveButton()}
                             </InfoGroup>
                         </form>
                     </CurrentInfo>
@@ -150,8 +149,41 @@ const EditProfilePage: React.FC = () => {
         )
     }
 
+    const renderSaveButton = () => {
+        if (loadingRequest) {
+            return <Loading style={{ color: '#11c76f' }} />
+        }
+
+        return <GradientButton type="submit" width="25%">Salvar</GradientButton>
+    }
+
     const onSubmit = (data: any) => {
-        console.log(data);
+        setLoadingRequest(true);
+
+        const formData = new FormData();
+        const phoneRawValue = VMasker.toPattern(data.phone_number, '99999999999');
+
+        formData.append('name', data.name);
+        formData.append('phone_number', phoneRawValue);
+        formData.append('birth_date', data.birth_date);
+        formData.append('image', currentImage || '');
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/update',
+            headers: {
+                'Authorization': `Bearer ${cookie_token || session_token}`
+            },
+            data: formData
+        })
+            .then(resp => {
+                setLoadingRequest(false);
+                console.log(resp);
+            })
+            .catch(error => {
+                setLoadingRequest(false);
+                console.log(error.response);
+            });
     }
 
     const dateFormatter = (date: string) => {
@@ -175,26 +207,10 @@ const EditProfilePage: React.FC = () => {
         return formattedDate;
     }
 
-    const test = (image: any) => {
-        // setCurrentImage(image[0]);
+    const onImageChange = (image: any) => {
+        setCurrentImage(image[0]);
         setPreviewImage(URL.createObjectURL(image[0]));
     }
-
-    // const test2 = () => {
-    //     const formData = new FormData();
-    //     formData.append('image', currentImage);
-
-    //     axios({
-    //         method: 'POST',
-    //         url: 'http://127.0.0.1:8000/api/user/test',
-    //         headers: {
-    //             'Authorization': `Bearer ${cookie_token || session_token}`
-    //         },
-    //         data: formData
-    //     })
-    //         .then(resp => console.log(resp))
-    //         .catch(error => console.log(error.response));
-    // }
 
     return (
         <div className="app">
