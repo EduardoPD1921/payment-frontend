@@ -12,6 +12,10 @@ export default function errorHandler(error: ErrorTypes) {
         if (error.name[0] === 'The name field is required.') {
             return 'O campo nome é obrigatório!';
         }
+
+        if (error.name[0] === 'The name must be at least 5 characters.') {
+            return 'Nome muito pequeno!';
+        }
     }
 
     if (error.email) {
@@ -46,11 +50,19 @@ export default function errorHandler(error: ErrorTypes) {
         if (error.phone_number[0] === 'The phone number has already been taken.') {
             return 'O número de telefone já está em uso!';
         }
+
+        if (error.phone_number[0] === 'The phone number must be at least 11 characters.') {
+            return 'Número de telefone inválido!';
+        }
     }
 
     if (error.password) {
         if (error.password[0] === 'The password field is required.') {
             return 'O campo senha é obrigatório!';
+        }
+
+        if (error.password[0] === 'The password must be at least 10 characters.') {
+            return 'A senha é muito fraca!';
         }
     }
 
@@ -63,6 +75,8 @@ export default function errorHandler(error: ErrorTypes) {
             return 'Senha incorreta!';
         }
     }
+
+    console.log(error);
 
     return 'Erro desconhecido!';
 }
