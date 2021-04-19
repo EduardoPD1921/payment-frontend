@@ -106,6 +106,8 @@ const RegisterPage: React.FC = () => {
         password: [string];
         newEmail: [string];
         oldEmail: [string];
+        newPassword: [string];
+        oldPassword: [string];
         message: string;
     }
 

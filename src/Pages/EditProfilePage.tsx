@@ -45,6 +45,8 @@ interface EditInputValues {
     phone_number: string;
     oldEmail: string;
     newEmail: string;
+    oldPassword: string;
+    newPassword: string;
 }
 
 const EditProfilePage: React.FC = () => {
@@ -53,6 +55,7 @@ const EditProfilePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [loadingRequest, setLoadingRequest] = useState(false);
     const [loadingEmailRequest, setLoadingEmailRequest] = useState(false);
+    const [loadingPasswordRequest, setLoadingPasswordRequest] = useState(false);
     const [profileInfo, setProfileInfo] = useState<any>({});
     const [currentImage, setCurrentImage] = useState<any>();
     const [previewImage, setPreviewImage] = useState<any>();
@@ -63,7 +66,8 @@ const EditProfilePage: React.FC = () => {
     const [oldEmailError, setOldEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [birthDateError, setBirthDateError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [oldPasswordError, setOldPasswordError] = useState('');
+    const [newPasswordError, setNewPasswordError] = useState('');
 
     useEffect(() => {
         const tmp = localStorage.getItem('snackbar');
@@ -207,6 +211,14 @@ const EditProfilePage: React.FC = () => {
         return <GradientButton type="submit" width="30%">Salvar</GradientButton>
     }
 
+    const renderSavePasswordButton = () => {
+        if (loadingPasswordRequest) {
+            return <Loading style={{ color: '#11c76f' }} />
+        }
+
+        return <GradientButton type="submit" width="30%">Salvar</GradientButton>
+    }
+
     const onSubmit = (data: any) => {
         setLoadingRequest(true);
 
@@ -250,14 +262,27 @@ const EditProfilePage: React.FC = () => {
             .catch(error => onSubmitErrorHandler(error.response.data));
     }
 
-    const onSubmitSuccess = () => {
-        setLoadingRequest(false);
-        setLoadingEmailRequest(false);
-        setNameError('');
-        setPhoneError('');
-        setBirthDateError('');
-        setPasswordError('');
+    const onSubmitPasswordEdit = (data: any) => {
+        setLoadingPasswordRequest(true);
 
+        const formData = {
+            oldPassword: data.oldPassword,
+            newPassword: data.newPassword
+        }
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/passwordUpdate',
+            headers: {
+                'Authorization': `Bearer ${cookie_token || session_token}`
+            },
+            data: formData
+        })
+            .then(resp => onSubmitSuccess())
+            .catch(error => onSubmitErrorHandler(error.response.data));
+    }
+
+    const onSubmitSuccess = () => {
         localStorage.setItem('snackbar', 'true');
         window.location.reload();
     }
@@ -270,18 +295,22 @@ const EditProfilePage: React.FC = () => {
         password: [string];
         newEmail: [string];
         oldEmail: [string];
+        newPassword: [string];
+        oldPassword: [string];
         message: string;
     }
 
     const onSubmitErrorHandler = (error: ErrorTypes) => {
         setLoadingRequest(false);
         setLoadingEmailRequest(false);
+        setLoadingPasswordRequest(false);
         setNameError('');
         setPhoneError('');
         setBirthDateError('');
-        setPasswordError('');
         setOldEmailError('');
         setNewEmailError('');
+        setOldPasswordError('');
+        setNewPasswordError('');
 
         if (error.name) {
             return setNameError(errorHandler(error));
@@ -295,16 +324,20 @@ const EditProfilePage: React.FC = () => {
             return setPhoneError(errorHandler(error));
         }
 
-        if (error.password) {
-            return setPasswordError(errorHandler(error));
-        }
-
         if (error.oldEmail) {
             return setOldEmailError(errorHandler(error));
         }
 
         if (error.newEmail) {
             return setNewEmailError(errorHandler(error));
+        }
+
+        if (error.oldPassword) {
+            return setOldPasswordError(errorHandler(error));
+        }
+
+        if (error.newPassword) {
+            return setNewPasswordError(errorHandler(error));
         }
 
         if (error.message) {
@@ -314,6 +347,10 @@ const EditProfilePage: React.FC = () => {
 
             if (error.message === 'wrong-old-email') {
                 return setOldEmailError(errorHandler(error));
+            }
+
+            if (error.message === 'wrong-old-password') {
+                return setOldPasswordError(errorHandler(error));
             }
         }
     }
@@ -407,6 +444,44 @@ const EditProfilePage: React.FC = () => {
                                         <LightTextRegister fontSize={18}>Alterar senha</LightTextRegister>
                                     </Title>
                                 </TitleInfo>
+                                <form onSubmit={handleSubmit(onSubmitPasswordEdit)  }>
+                                    <Controller
+                                        name="oldPassword"
+                                        control={control}
+                                        defaultValue=""
+                                        render={({ field }) => (
+                                            <CustomTextField
+                                                type="password"
+                                                error={!!oldPasswordError}
+                                                helperText={oldPasswordError}
+                                                width="50%"
+                                                marginLeft={80}
+                                                label="Senha atual"
+                                                {...field} 
+                                            />
+                                        )} 
+                                    />
+                                    <Controller
+                                        name="newPassword"
+                                        control={control}
+                                        defaultValue=""
+                                        render={({ field }) => (
+                                            <CustomTextField
+                                                type="password"
+                                                error={!!newPasswordError}
+                                                helperText={newPasswordError}
+                                                width="50%"
+                                                marginLeft={80}
+                                                marginTop={30}
+                                                label="Nova senha"
+                                                {...field} 
+                                            />
+                                        )} 
+                                    />
+                                    <FormButtonSection marginTop={50} width="75%">
+                                        {renderSavePasswordButton()}
+                                    </FormButtonSection>
+                                </form>
                             </SecureEdit>
                         </OtherInfo>
                     </UserInfo>

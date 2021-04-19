@@ -6,6 +6,8 @@ interface ErrorTypes {
     password: [string];
     newEmail: [string];
     oldEmail: [string];
+    newPassword: [string];
+    oldPassword: [string];
     message: string;
 }
 
@@ -68,6 +70,23 @@ export default function errorHandler(error: ErrorTypes) {
         }
     }
 
+    if (error.oldPassword) {
+        if (error.oldPassword[0] === 'The old password field is required.') {
+            return 'A senha atual é obrigatória!';
+        }
+    }
+
+    if (error.newPassword) {
+        if (error.newPassword[0] === 'The new password field is required.') {
+            return 'A nova senha é obrigatória!';
+        }
+
+        if (error.newPassword[0] === 'The new password must be at least 10 characters.') {
+            return 'Nova senha muito curta!';
+        }
+
+    }
+
     if (error.oldEmail) {
         if (error.oldEmail[0] === 'The old email field is required.') {
             return 'O e-mail atual é obrigatório!';
@@ -107,6 +126,10 @@ export default function errorHandler(error: ErrorTypes) {
 
         if (error.message === 'wrong-old-email') {
             return 'E-mail atual incorreto!';
+        }
+
+        if (error.message === 'wrong-old-password') {
+            return 'Senha atual incorreta!';
         }
     }
 
