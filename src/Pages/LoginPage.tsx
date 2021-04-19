@@ -95,6 +95,8 @@ const LoginPage: React.FC = () => {
         birth_date: [string];
         phone_number: [string];
         password: [string];
+        newEmail: [string];
+        oldEmail: [string];
         message: string;
     }
 

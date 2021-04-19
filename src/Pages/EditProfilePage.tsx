@@ -26,7 +26,13 @@ import {
     InfoGroup,
     BottomInfo,
     CurrentInfo,
-    GradientButton
+    GradientButton,
+    OtherInfo,
+    SecureEdit,
+    TitleInfo,
+    Title,
+    LightTextRegister,
+    FormButtonSection
 } from '../StyledComponents';
 
 const cookie_token = Cookie.get('authToken');
@@ -37,6 +43,8 @@ interface EditInputValues {
     email: string;
     birth_date: string;
     phone_number: string;
+    oldEmail: string;
+    newEmail: string;
 }
 
 const EditProfilePage: React.FC = () => {
@@ -44,18 +52,27 @@ const EditProfilePage: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadingRequest, setLoadingRequest] = useState(false);
+    const [loadingEmailRequest, setLoadingEmailRequest] = useState(false);
     const [profileInfo, setProfileInfo] = useState<any>({});
     const [currentImage, setCurrentImage] = useState<any>();
     const [previewImage, setPreviewImage] = useState<any>();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const [nameError, setNameError] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const [newEmailError, setNewEmailError] = useState('');
+    const [oldEmailError, setOldEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [birthDateError, setBirthDateError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
     useEffect(() => {
+        const tmp = localStorage.getItem('snackbar');
+
+        if (tmp) {
+            setSnackbarOpen(true);
+            localStorage.removeItem('snackbar');
+        }
+
         axios({
             method: 'GET',
             url: 'http://127.0.0.1:8000/api/user/getInfo',
@@ -182,6 +199,14 @@ const EditProfilePage: React.FC = () => {
         return <GradientButton type="submit" width="25%">Salvar</GradientButton>
     }
 
+    const renderSaveEmailButton = () => {
+        if (loadingEmailRequest) {
+            return <Loading style={{ color: '#11c76f' }} />
+        }
+
+        return <GradientButton type="submit" width="30%">Salvar</GradientButton>
+    }
+
     const onSubmit = (data: any) => {
         setLoadingRequest(true);
 
@@ -205,15 +230,36 @@ const EditProfilePage: React.FC = () => {
             .catch(error => onSubmitErrorHandler(error.response.data));
     }
 
+    const onSubmitEmailEdit = (data: any) => {
+        setLoadingEmailRequest(true);
+
+        const formData = {
+            oldEmail: data.oldEmail,
+            newEmail: data.newEmail
+        }
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/emailUpdate',
+            headers: {
+                'Authorization': `Bearer ${cookie_token || session_token}`
+            },
+            data: formData
+        })
+            .then(resp => onSubmitSuccess())
+            .catch(error => onSubmitErrorHandler(error.response.data));
+    }
+
     const onSubmitSuccess = () => {
         setLoadingRequest(false);
+        setLoadingEmailRequest(false);
         setNameError('');
-        setEmailError('');
         setPhoneError('');
         setBirthDateError('');
         setPasswordError('');
 
-        setSnackbarOpen(true);
+        localStorage.setItem('snackbar', 'true');
+        window.location.reload();
     }
 
     interface ErrorTypes {
@@ -222,23 +268,23 @@ const EditProfilePage: React.FC = () => {
         birth_date: [string];
         phone_number: [string];
         password: [string];
+        newEmail: [string];
+        oldEmail: [string];
         message: string;
     }
 
     const onSubmitErrorHandler = (error: ErrorTypes) => {
         setLoadingRequest(false);
+        setLoadingEmailRequest(false);
         setNameError('');
-        setEmailError('');
         setPhoneError('');
         setBirthDateError('');
         setPasswordError('');
+        setOldEmailError('');
+        setNewEmailError('');
 
         if (error.name) {
             return setNameError(errorHandler(error));
-        }
-
-        if (error.email) {
-            return setEmailError(errorHandler(error));
         }
 
         if (error.birth_date) {
@@ -251,6 +297,24 @@ const EditProfilePage: React.FC = () => {
 
         if (error.password) {
             return setPasswordError(errorHandler(error));
+        }
+
+        if (error.oldEmail) {
+            return setOldEmailError(errorHandler(error));
+        }
+
+        if (error.newEmail) {
+            return setNewEmailError(errorHandler(error));
+        }
+
+        if (error.message) {
+            if (error.message === 'email-already-in-use') {
+                return setNewEmailError(errorHandler(error));
+            }
+
+            if (error.message === 'wrong-old-email') {
+                return setOldEmailError(errorHandler(error));
+            }
         }
     }
 
@@ -293,6 +357,58 @@ const EditProfilePage: React.FC = () => {
                         <MainInfo>
                             {renderInfo()}
                         </MainInfo>
+                        <OtherInfo>
+                            <SecureEdit marginBottom={20}>
+                                <TitleInfo>
+                                    <Title>
+                                        <LightTextRegister fontSize={18}>Alterar e-mail</LightTextRegister>
+                                    </Title>
+                                </TitleInfo>
+                                <form onSubmit={handleSubmit(onSubmitEmailEdit)}>
+                                    <Controller
+                                        name="oldEmail"
+                                        control={control}
+                                        defaultValue=""
+                                        render={({ field }) => (
+                                            <CustomTextField
+                                                error={!!oldEmailError}
+                                                helperText={oldEmailError}
+                                                width="50%"
+                                                marginLeft={80}
+                                                label="E-mail atual"
+                                                {...field} 
+                                            />
+                                        )} 
+                                    />
+                                    <Controller
+                                        name="newEmail"
+                                        control={control}
+                                        defaultValue=""
+                                        render={({ field }) => (
+                                            <CustomTextField
+                                                error={!!newEmailError}
+                                                helperText={newEmailError}
+                                                width="50%"
+                                                marginLeft={80}
+                                                marginTop={30}
+                                                label="Novo e-mail"
+                                                {...field} 
+                                            />
+                                        )} 
+                                    />
+                                    <FormButtonSection marginTop={50} width="75%">
+                                        {renderSaveEmailButton()}
+                                    </FormButtonSection>
+                                </form>
+                            </SecureEdit>
+                            <SecureEdit>
+                                <TitleInfo>
+                                    <Title>
+                                        <LightTextRegister fontSize={18}>Alterar senha</LightTextRegister>
+                                    </Title>
+                                </TitleInfo>
+                            </SecureEdit>
+                        </OtherInfo>
                     </UserInfo>
                 </ProfilePageContent>
             </ProfilePageSection>

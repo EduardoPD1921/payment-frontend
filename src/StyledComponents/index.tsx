@@ -272,12 +272,14 @@ export const RegisterIllustration = styled.img`
 interface CustomTextFieldProps {
     width?: string;
     marginTop?: number;
+    marginLeft?: number;
 }
 
 export const CustomTextField = styled(TextField)`
     && {
         width: ${(props: CustomTextFieldProps) => props.width || '120%'};
         margin-top: ${(props: CustomTextFieldProps) => props.marginTop || ''}px;
+        margin-left: ${(props: CustomTextFieldProps) => props.marginLeft || ''}px;
     }
 
     & .MuiInput-underline:after {
@@ -304,11 +306,12 @@ export const RegisterFormTitle = styled.span`
 
 interface FormButtonSectionProps {
     width: string;
+    marginTop?: number;
 }
 
 export const FormButtonSection = styled.div`
     display: flex;
-    margin-top: 20px;
+    margin-top: ${(props: FormButtonSectionProps) => props.marginTop || 20}px;
     flex-direction: column;
     align-items: center;
     width: ${(props: FormButtonSectionProps) => props.width};
@@ -440,6 +443,7 @@ export const UserInfo = styled.div`
     flex-direction: row;
     height: 85%;
     width: 85%;
+    flex: 1;
     padding: 50px;
     border-radius: 25px;
     background: black;
@@ -448,13 +452,34 @@ export const UserInfo = styled.div`
 
 export const MainInfo = styled.div`
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: white;
     border-radius: 25px;
     height: 100%;
-    width: 50%;
+`;
+
+export const OtherInfo = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 20px;
+`;
+
+interface SecureEditProps {
+    marginBottom?: number;
+}
+
+export const SecureEdit = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-bottom: ${(props: SecureEditProps) => props.marginBottom || ''}px;
+    background: white;
+    border-radius: 25px;
 `;
 
 export const ImageInfo = styled.div`

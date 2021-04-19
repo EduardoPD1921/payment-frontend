@@ -4,6 +4,8 @@ interface ErrorTypes {
     birth_date: [string];
     phone_number: [string];
     password: [string];
+    newEmail: [string];
+    oldEmail: [string];
     message: string;
 }
 
@@ -66,6 +68,26 @@ export default function errorHandler(error: ErrorTypes) {
         }
     }
 
+    if (error.oldEmail) {
+        if (error.oldEmail[0] === 'The old email field is required.') {
+            return 'O e-mail atual é obrigatório!';
+        }
+
+        if (error.oldEmail[0] === 'The old email must be a valid email address.') {
+            return 'O e-mail atual deve ser válido!';
+        }
+    }
+
+    if (error.newEmail) {
+        if (error.newEmail[0] === 'The new email field is required.') {
+            return 'O novo e-mail é obrigatório!';
+        }
+
+        if (error.newEmail[0] === 'The new email must be a valid email address.') {
+            return 'O novo e-mail deve ser válido!';
+        }
+    }
+
     if (error.message) {
         if (error.message === 'wrong-email') {
             return 'E-mail incorreto!';
@@ -77,6 +99,14 @@ export default function errorHandler(error: ErrorTypes) {
 
         if (error.message === 'phone-number-has-already-been-taken') {
             return 'Telefone já está em uso!';
+        }
+
+        if (error.message === 'email-already-in-use') {
+            return 'E-mail já está em uso!';
+        }
+
+        if (error.message === 'wrong-old-email') {
+            return 'E-mail atual incorreto!';
         }
     }
 
