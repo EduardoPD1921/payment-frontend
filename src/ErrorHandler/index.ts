@@ -74,6 +74,10 @@ export default function errorHandler(error: ErrorTypes) {
         if (error.message === 'wrong-password') {
             return 'Senha incorreta!';
         }
+
+        if (error.message === 'phone-number-has-already-been-taken') {
+            return 'Telefone já está em uso!';
+        }
     }
 
     console.log(error);

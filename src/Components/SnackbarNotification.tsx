@@ -8,6 +8,7 @@ function Alert(props: AlertProps) {
 }
 
 interface SnackbarNotificationProps {
+    message: string;
     isOpen: boolean;
     handleClose: (event?: React.SyntheticEvent, reason?: string) => void;
 }
@@ -16,7 +17,8 @@ const SnackbarNotification: React.FC<SnackbarNotificationProps> = props => {
     return (
         <Snackbar open={props.isOpen} autoHideDuration={6000} onClose={props.handleClose}>
             <Alert onClose={props.handleClose} severity="success">
-                Conta criada com sucesso!
+                {/* Conta criada com sucesso! */}
+                {props.message}
             </Alert>
         </Snackbar>
     )

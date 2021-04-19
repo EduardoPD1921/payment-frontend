@@ -35,7 +35,7 @@ const MainPage: React.FC = () => {
             <Navbar mainPage />
             <Header />
             <Footer />
-            <Snackbar isOpen={snackbarOpen} handleClose={handleClose} />
+            <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
         </div>
     )
 }

@@ -7,9 +7,12 @@ import Cookie from 'js-cookie';
 
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
+import Snackbar from '../Components/SnackbarNotification';
 
 import Button from '@material-ui/core/Button';
 import Loading from '@material-ui/core/CircularProgress';
+
+import errorHandler from '../ErrorHandler';
 
 import {
     ProfilePageSection,
@@ -44,6 +47,13 @@ const EditProfilePage: React.FC = () => {
     const [profileInfo, setProfileInfo] = useState<any>({});
     const [currentImage, setCurrentImage] = useState<any>();
     const [previewImage, setPreviewImage] = useState<any>();
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+    const [nameError, setNameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
+    const [birthDateError, setBirthDateError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     useEffect(() => {
         axios({
@@ -57,6 +67,14 @@ const EditProfilePage: React.FC = () => {
             .then(() => setIsLoading(false))
             .catch(error => console.log(error.response));
     }, [])
+
+    const handleSnackbarClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarOpen(false);
+    }
 
     const renderInfo = () => {
         if (isLoading) {
@@ -103,6 +121,8 @@ const EditProfilePage: React.FC = () => {
                                             <CustomTextField
                                                 label="Nome"
                                                 {...field} 
+                                                error={!!nameError}
+                                                helperText={nameError}
                                             />
                                         )} 
                                     />
@@ -119,6 +139,8 @@ const EditProfilePage: React.FC = () => {
                                             <CustomTextField
                                                 width="90%"
                                                 label="Telefone"
+                                                error={!!phoneError}
+                                                helperText={phoneError}
                                                 {...inputProps} 
                                             />
                                         )}
@@ -132,7 +154,10 @@ const EditProfilePage: React.FC = () => {
                                     >
                                         {(inputProps: object) => (
                                             <CustomTextField
+                                                width="90%"
                                                 label="Data de nascimento"
+                                                error={!!birthDateError}
+                                                helperText={birthDateError}
                                                 {...inputProps} 
                                             />
                                         )}
@@ -176,14 +201,57 @@ const EditProfilePage: React.FC = () => {
             },
             data: formData
         })
-            .then(resp => {
-                setLoadingRequest(false);
-                console.log(resp);
-            })
-            .catch(error => {
-                setLoadingRequest(false);
-                console.log(error.response);
-            });
+            .then(resp => onSubmitSuccess())
+            .catch(error => onSubmitErrorHandler(error.response.data));
+    }
+
+    const onSubmitSuccess = () => {
+        setLoadingRequest(false);
+        setNameError('');
+        setEmailError('');
+        setPhoneError('');
+        setBirthDateError('');
+        setPasswordError('');
+
+        setSnackbarOpen(true);
+    }
+
+    interface ErrorTypes {
+        name: [string];
+        email: [string];
+        birth_date: [string];
+        phone_number: [string];
+        password: [string];
+        message: string;
+    }
+
+    const onSubmitErrorHandler = (error: ErrorTypes) => {
+        setLoadingRequest(false);
+        setNameError('');
+        setEmailError('');
+        setPhoneError('');
+        setBirthDateError('');
+        setPasswordError('');
+
+        if (error.name) {
+            return setNameError(errorHandler(error));
+        }
+
+        if (error.email) {
+            return setEmailError(errorHandler(error));
+        }
+
+        if (error.birth_date) {
+            return setBirthDateError(errorHandler(error));
+        }
+
+        if (error.phone_number) {
+            return setPhoneError(errorHandler(error));
+        }
+
+        if (error.password) {
+            return setPasswordError(errorHandler(error));
+        }
     }
 
     const dateFormatter = (date: string) => {
@@ -228,6 +296,11 @@ const EditProfilePage: React.FC = () => {
                     </UserInfo>
                 </ProfilePageContent>
             </ProfilePageSection>
+            <Snackbar
+                message="Alterações realizadas com sucesso!"
+                isOpen={snackbarOpen}
+                handleClose={handleSnackbarClose} 
+            />
         </div>
     )
 }

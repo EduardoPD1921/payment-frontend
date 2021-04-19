@@ -72,10 +72,7 @@ const RegisterPage: React.FC = () => {
             data: data
         })
             .then(resp => submitSuccessHandler(resp.data))
-            .catch(error => {
-                setIsLoading(false);
-                submitErrorHandler(error.response.data);
-            });
+            .catch(error => submitErrorHandler(error.response.data));
     }
 
     const renderSubmitButton = () => {
@@ -111,6 +108,7 @@ const RegisterPage: React.FC = () => {
     }
 
     const submitErrorHandler = (error: ErrorTypes) => {
+        setIsLoading(false);
         setNameMessage('');
         setEmailMessage('');
         setBirthDateMessage('');
