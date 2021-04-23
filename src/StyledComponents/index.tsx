@@ -569,12 +569,21 @@ export const GradientButton = styled(Button)`
     }
 `;
 
+interface AvatarIconProps {
+    height: number;
+    width: number;
+}
+
 export const AvatarIcon = styled(Avatar)`
     && {
         background: #d6d6d6;
-        height: 300px;
-        width: 300px;
+        height: ${(props: AvatarIconProps) => props.height}px;
+        width: ${(props: AvatarIconProps) => props.width}px;
         margin-top: 45px;
         margin-bottom: 20px;
     }
 `;
+
+// background: #d6d6d6;
+// height: 300px;
+//         width: 300px;

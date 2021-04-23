@@ -7,10 +7,15 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import {
     SideMenuSection,
-    SideMenuOption
+    SideMenuOption,
+    AvatarIcon
 } from '../../StyledComponents';
 
-const Content: React.FC = () => {
+interface ContentProps {
+    avatar: string;
+}
+
+const Content: React.FC<ContentProps> = props => {
     const logout = () => {
         Cookie.remove('authToken');
         sessionStorage.removeItem('authToken');
@@ -20,6 +25,7 @@ const Content: React.FC = () => {
     return (
         <React.Fragment>
             <SideMenuSection>
+                <AvatarIcon width={90} height={90} src={props.avatar} />
                 <SideMenuOption
                     startIcon={<PersonIcon />}
                     href="/user/profile"

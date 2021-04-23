@@ -105,7 +105,7 @@ const EditProfilePage: React.FC = () => {
         return (
             <React.Fragment>
                 <ImageInfo>
-                    <AvatarIcon src={previewImage ? previewImage : profileInfo.image} />
+                    <AvatarIcon height={300} width={300} src={previewImage ? previewImage : profileInfo.image} />
                     <input
                         accept="image/*"
                         id="file-button"

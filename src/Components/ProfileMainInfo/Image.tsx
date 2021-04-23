@@ -9,7 +9,7 @@ interface ImageProps {
 const Image: React.FC<ImageProps> = props => {
     return (
         <ImageInfo>
-            <AvatarIcon src={props.image} />
+            <AvatarIcon height={300} width={300} src={props.image} />
         </ImageInfo>
     )
 }
