@@ -8,8 +8,13 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import Snackbar from '../Components/SnackbarNotification';
 
+import {
+    SearchSection
+} from '../StyledComponents';
+
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [searchedUsers, setSearchedUsers] = useState<any>();
 
     console.log(sessionStorage.getItem('test'));
 
@@ -34,6 +39,9 @@ const MainPage: React.FC = () => {
         <div className="app">
             <Navbar mainPage />
             <Header />
+            <SearchSection>
+                Test
+            </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
         </div>

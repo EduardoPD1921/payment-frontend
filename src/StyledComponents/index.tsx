@@ -595,6 +595,6 @@ export const AvatarIcon = styled(Avatar)`
     }
 `;
 
-// background: #d6d6d6;
-// height: 300px;
-//         width: 300px;
+export const SearchSection = styled.div`
+    width: 100%;
+`;
