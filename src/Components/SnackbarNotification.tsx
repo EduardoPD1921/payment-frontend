@@ -17,7 +17,6 @@ const SnackbarNotification: React.FC<SnackbarNotificationProps> = props => {
     return (
         <Snackbar open={props.isOpen} autoHideDuration={6000} onClose={props.handleClose}>
             <Alert onClose={props.handleClose} severity="success">
-                {/* Conta criada com sucesso! */}
                 {props.message}
             </Alert>
         </Snackbar>

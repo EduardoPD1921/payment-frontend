@@ -27,6 +27,17 @@ export const LightText = styled.span`
     font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
 `;
 
+interface LightInfoProps {
+    fontSize: number;
+    marginBottom?: number;
+}
+
+export const LightInfo = styled.span`
+    color: white;
+    font-size: ${(props: LightInfoProps) => props.fontSize}px;
+    margin-bottom: ${(props: LightInfoProps) => props.marginBottom || 0}px;
+`;
+
 export const LinkItem = styled.a`
     color: #11c76f;
     font-size: 14px;

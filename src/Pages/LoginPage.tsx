@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Cookie from 'js-cookie';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import Navbar from '../Components/Navbar';
@@ -45,8 +44,6 @@ const GreenCheckbox = withStyles({
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />)
 
 const LoginPage: React.FC = () => {
-    const history = useHistory();
-
     const { handleSubmit, control } = useForm<InputValues>();
 
     const [emailMessage, setEmailMessage] = useState('');
@@ -85,8 +82,7 @@ const LoginPage: React.FC = () => {
             sessionStorage.setItem('authToken', token);
         }
 
-        const path = '/';
-        history.push(path);
+        window.location.href = "/";
     }
 
     interface ErrorTypes {

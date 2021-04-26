@@ -53,7 +53,12 @@ const SideMenu: React.FC = () => {
 
     const renderDrawerContent = () => {
         if (userInfo) {
-            return <Content avatar={userInfo.image} />
+            return (
+                <Content 
+                    avatar={userInfo.image}
+                    email={userInfo.email}
+                />
+            )
         }
     }
 

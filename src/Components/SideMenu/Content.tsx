@@ -8,11 +8,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {
     SideMenuSection,
     SideMenuOption,
-    AvatarIcon
+    AvatarIcon,
+    LightInfo
 } from '../../StyledComponents';
 
 interface ContentProps {
     avatar: string;
+    email: string;
 }
 
 const Content: React.FC<ContentProps> = props => {
@@ -25,7 +27,8 @@ const Content: React.FC<ContentProps> = props => {
     return (
         <React.Fragment>
             <SideMenuSection>
-                <AvatarIcon width={90} height={90} src={props.avatar} />
+                <AvatarIcon width={110} height={110} src={props.avatar} />
+                <LightInfo marginBottom={30} fontSize={13}>{props.email}</LightInfo>
                 <SideMenuOption
                     startIcon={<PersonIcon />}
                     href="/user/profile"
