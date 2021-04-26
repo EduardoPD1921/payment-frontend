@@ -1,7 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-import { HeaderSection, SearchInput, HeaderInputSection, DefaultButton } from '../StyledComponents';
+import { HeaderSection, HeaderInputSection, DefaultButton, ProfilePageSection } from '../StyledComponents';
 
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -11,17 +12,26 @@ interface SearchValues {
     search: string;
 }
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    setSearchResult: (data: { search: string }) => void;
+}
+
+const Header: React.FC<HeaderProps> = props => {
     const { handleSubmit, control } = useForm<SearchValues>();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = (data: { search: string }) => {
+        axios({
+            method: 'GET',
+            url: 'http://127.0.0.1:8000/api/search',
+            data: data.search
+        })
+            .then(resp => props.setSearchResult(resp.data))
+            .catch(error => console.log(error.response));
     }
 
     return (
         <HeaderSection>
             <HeaderInputSection>
-                {/* <SearchInput type="text" placeholder="Buscar usuário" /> */}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <HeaderSearchInput placeHolder="Buscar usuário" control={control} name="search" />
                     <DefaultButton type="submit" backgroundDefault="#426dff" backgroundHover="#365ad6" borderRadius="10px" margin="10px">

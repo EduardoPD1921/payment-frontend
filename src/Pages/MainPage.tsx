@@ -16,8 +16,6 @@ const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [searchedUsers, setSearchedUsers] = useState<any>();
 
-    console.log(sessionStorage.getItem('test'));
-
     useEffect(() => {
         const storageSnackbar = localStorage.getItem('snackbarOpen');
 
@@ -38,9 +36,9 @@ const MainPage: React.FC = () => {
     return (
         <div className="app">
             <Navbar mainPage />
-            <Header />
+            <Header setSearchResult={setSearchedUsers} />
             <SearchSection>
-                Test
+                <button onClick={() => console.log(searchedUsers)}></button>
             </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
