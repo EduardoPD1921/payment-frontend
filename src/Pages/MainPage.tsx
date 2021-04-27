@@ -6,6 +6,7 @@ import '../Static/Css/index.css';
 import Navbar from '../Components/Navbar';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import UserCard from '../Components/UserCard';
 import Snackbar from '../Components/SnackbarNotification';
 
 import {
@@ -38,7 +39,16 @@ const MainPage: React.FC = () => {
             <Navbar mainPage />
             <Header setSearchResult={setSearchedUsers} />
             <SearchSection>
-                <button onClick={() => console.log(searchedUsers)}></button>
+                {searchedUsers && searchedUsers.map((element: any, key: any) => {
+                    return (
+                        <UserCard
+                            avatar={element.image}
+                            name={element.name}
+                            email={element.email}
+                        />
+                    )
+                })}
+                {/* <button onClick={() => console.log(searchedUsers)}></button> */}
             </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />

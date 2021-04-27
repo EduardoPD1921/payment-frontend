@@ -144,6 +144,7 @@ export const HeaderInputSection = styled.div`
     display: flex;
     width: 30%;
     align-items: center;
+    justify-content: center;
 `;
 
 export const FooterSection = styled.footer`

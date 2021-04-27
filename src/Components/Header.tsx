@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-import { HeaderSection, HeaderInputSection, DefaultButton, ProfilePageSection } from '../StyledComponents';
+import { HeaderSection, HeaderInputSection, DefaultButton } from '../StyledComponents';
 
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = props => {
         axios({
             method: 'GET',
             url: 'http://127.0.0.1:8000/api/search',
-            data: data.search
+            params: data
         })
             .then(resp => props.setSearchResult(resp.data))
             .catch(error => console.log(error.response));
