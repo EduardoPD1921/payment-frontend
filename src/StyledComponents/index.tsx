@@ -597,5 +597,21 @@ export const AvatarIcon = styled(Avatar)`
 `;
 
 export const SearchSection = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100%;
+    height: auto;
+`;
+
+export const UserCard = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    height: 300px;
+    margin: 20px;
+    -webkit-box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
+    box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
 `;

@@ -6,7 +6,8 @@ import '../Static/Css/index.css';
 import Navbar from '../Components/Navbar';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import UserCard from '../Components/UserCard';
+// import UserCard from '../Components/UserCard';
+import SearchCard from '../Components/SearchCard';
 import Snackbar from '../Components/SnackbarNotification';
 
 import {
@@ -41,10 +42,11 @@ const MainPage: React.FC = () => {
             <SearchSection>
                 {searchedUsers && searchedUsers.map((element: any, key: any) => {
                     return (
-                        <UserCard
+                        <SearchCard
                             avatar={element.image}
                             name={element.name}
                             email={element.email}
+                            id={element.id} 
                         />
                     )
                 })}
