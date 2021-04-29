@@ -12,17 +12,21 @@ interface LightTextGeneralProps {
     fontSize: number;
     marginTop?: number;
     marginRight?: number;
+    marginLeft?: number;
+    marginBottom?: number;
 }
 
 export const LightTextRegister = styled.span`
     margin-top: ${(props: LightTextGeneralProps) => props.marginTop || 0}px;
-    margin-right: ${(props: LightTextGeneralProps) => props.marginRight || ''}px;
+    margin-right: ${(props: LightTextGeneralProps) => props.marginRight || 0}px;
+    margin-bottom: ${(props: LightTextGeneralProps) => props.marginBottom || 0}px;
     font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
     color: #5c5c5c;
 `;
 
 export const LightText = styled.span`
     margin-top: ${(props: LightTextGeneralProps) => props.marginTop || 0}px;
+    margin-left: ${(props: LightTextGeneralProps) => props.marginLeft || 0}px;
     color: #d4d4d4;
     font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
 `;
@@ -598,10 +602,17 @@ export const AvatarIcon = styled(Avatar)`
 
 export const SearchSection = styled.div`
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 30px 0 500px 0;
+    height: auto;
+`;
+
+export const SearchResults = styled.div`
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin: 30px 0 500px 0;
     height: auto;
 `;
 

@@ -9,8 +9,13 @@ import Footer from '../Components/Footer';
 import SearchCard from '../Components/SearchCard';
 import Snackbar from '../Components/SnackbarNotification';
 
+import Loading from '@material-ui/core/CircularProgress';
+
 import {
-    SearchSection
+    SearchSection,
+    LightText,
+    LightTextRegister,
+    SearchResults
 } from '../StyledComponents';
 
 const MainPage: React.FC = () => {
@@ -37,8 +42,10 @@ const MainPage: React.FC = () => {
 
     const renderSearchText = () => {
         if (currentSearch) {
-            return `Exibindo resultado por: ${currentSearch}`;
+            return <LightText marginLeft={20} fontSize={20}>Exibindo resultados por: <LightTextRegister fontSize={20}>{currentSearch}</LightTextRegister></LightText>
         }
+
+        return <Loading />
     }
 
     return (
@@ -47,16 +54,18 @@ const MainPage: React.FC = () => {
             <Header setCurrentSearch={setCurrentSearch} setSearchResult={setSearchedUsers} />
             <SearchSection>
                 {renderSearchText()}
-                {searchedUsers && searchedUsers.map((element: any, key: any) => {
-                    return (
-                        <SearchCard
-                            avatar={element.image}
-                            name={element.name}
-                            email={element.email} 
-                            id={element.id}
-                        />
-                    )
-                })}
+                <SearchResults>
+                    {searchedUsers && searchedUsers.map((element: any, key: any) => {
+                        return (
+                            <SearchCard
+                                avatar={element.image}
+                                name={element.name}
+                                email={element.email} 
+                                id={element.id}
+                            />
+                        )
+                    })}
+                </SearchResults>
             </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
