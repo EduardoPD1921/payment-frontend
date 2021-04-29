@@ -15,12 +15,15 @@ interface SearchValues {
 interface HeaderProps {
     setSearchResult: (data: { search: string }) => void;
     setCurrentSearch: (search: string) => void;
+    setSearchLoading: (loading: boolean) => void;
 }
 
 const Header: React.FC<HeaderProps> = props => {
     const { handleSubmit, control } = useForm<SearchValues>();
 
     const onSubmit = (data: { search: string }) => {
+        props.setSearchLoading(true);
+
         axios({
             method: 'GET',
             url: 'http://127.0.0.1:8000/api/search',
@@ -29,6 +32,7 @@ const Header: React.FC<HeaderProps> = props => {
             .then(resp => {
                 props.setSearchResult(resp.data);
                 props.setCurrentSearch(data.search);
+                props.setSearchLoading(false);
             })
             .catch(error => console.log(error.response));
     }

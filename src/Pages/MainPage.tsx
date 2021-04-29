@@ -13,13 +13,13 @@ import Loading from '@material-ui/core/CircularProgress';
 
 import {
     SearchSection,
+    SearchResults,
     LightText,
-    LightTextRegister,
-    SearchResults
 } from '../StyledComponents';
 
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [searchLoading, setSearchLoading] = useState(false);
     const [currentSearch, setCurrentSearch] = useState('');
     const [searchedUsers, setSearchedUsers] = useState<any>();
 
@@ -40,32 +40,36 @@ const MainPage: React.FC = () => {
         setSnackbarOpen(false);
     }
 
-    const renderSearchText = () => {
-        if (currentSearch) {
-            return <LightText marginLeft={20} fontSize={20}>Exibindo resultados por: <LightTextRegister fontSize={20}>{currentSearch}</LightTextRegister></LightText>
+    const renderSearchResults = () => {
+        if (searchLoading) {
+            return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
+        } else if (!searchLoading && searchedUsers) {
+            return (
+                <React.Fragment>
+                    <LightText marginLeft={25} fontSize={20}>Exibindo resultados por: {currentSearch}</LightText>
+                    <SearchResults>
+                        {searchedUsers.map((element: any, key: any) => {
+                            return (
+                                <SearchCard
+                                    avatar={element.image}
+                                    name={element.name}
+                                    email={element.email}
+                                    id={element.id} 
+                                />
+                            )
+                        })}
+                    </SearchResults>
+                </React.Fragment>
+            )
         }
-
-        return <Loading />
     }
 
     return (
         <div className="app">
             <Navbar mainPage />
-            <Header setCurrentSearch={setCurrentSearch} setSearchResult={setSearchedUsers} />
-            <SearchSection>
-                {renderSearchText()}
-                <SearchResults>
-                    {searchedUsers && searchedUsers.map((element: any, key: any) => {
-                        return (
-                            <SearchCard
-                                avatar={element.image}
-                                name={element.name}
-                                email={element.email} 
-                                id={element.id}
-                            />
-                        )
-                    })}
-                </SearchResults>
+            <Header setSearchLoading={setSearchLoading} setCurrentSearch={setCurrentSearch} setSearchResult={setSearchedUsers} />
+            <SearchSection>   
+                {renderSearchResults()}
             </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
