@@ -45,12 +45,10 @@ const MainPage: React.FC = () => {
                         <SearchCard
                             avatar={element.image}
                             name={element.name}
-                            email={element.email}
-                            id={element.id} 
+                            email={element.email} 
                         />
                     )
                 })}
-                {/* <button onClick={() => console.log(searchedUsers)}></button> */}
             </SearchSection>
             <Footer />
             <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />

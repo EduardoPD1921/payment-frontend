@@ -600,12 +600,13 @@ export const SearchSection = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 500px;
     height: auto;
 `;
 
 export const UserCard = styled.div`
     display: flex;
-    flex: 1;
+    width: 15%;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;

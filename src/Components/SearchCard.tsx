@@ -10,7 +10,6 @@ interface SearchCardProps {
     avatar: string;
     name: string;
     email: string;
-    id: number;
 }
 
 const SearchCard: React.FC<SearchCardProps> = props => {
@@ -19,7 +18,6 @@ const SearchCard: React.FC<SearchCardProps> = props => {
             <AvatarIcon src={props.avatar} height={100} width={100} />
             {props.name}
             <LightTextRegister fontSize={12}>{props.email}</LightTextRegister>
-            {props.id}
         </UserCard>
     )
 }
