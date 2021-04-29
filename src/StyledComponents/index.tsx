@@ -599,19 +599,20 @@ export const AvatarIcon = styled(Avatar)`
 export const SearchSection = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 500px;
+    margin: 30px 0 500px 0;
     height: auto;
 `;
 
 export const UserCard = styled.div`
     display: flex;
-    width: 15%;
+    width: 14%;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
     height: 300px;
-    margin: 20px;
+    margin: 25px;
     -webkit-box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
     box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);

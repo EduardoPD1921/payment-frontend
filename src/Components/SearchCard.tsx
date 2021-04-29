@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+
 import {
     UserCard,
     AvatarIcon,
@@ -10,6 +12,7 @@ interface SearchCardProps {
     avatar: string;
     name: string;
     email: string;
+    id: number;
 }
 
 const SearchCard: React.FC<SearchCardProps> = props => {
@@ -18,6 +21,7 @@ const SearchCard: React.FC<SearchCardProps> = props => {
             <AvatarIcon src={props.avatar} height={100} width={100} />
             {props.name}
             <LightTextRegister fontSize={12}>{props.email}</LightTextRegister>
+            <Button href={`/user/${props.id}`} color="primary">Ver perfil</Button>
         </UserCard>
     )
 }

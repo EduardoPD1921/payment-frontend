@@ -6,7 +6,6 @@ import '../Static/Css/index.css';
 import Navbar from '../Components/Navbar';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-// import UserCard from '../Components/UserCard';
 import SearchCard from '../Components/SearchCard';
 import Snackbar from '../Components/SnackbarNotification';
 
@@ -16,6 +15,7 @@ import {
 
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [currentSearch, setCurrentSearch] = useState('');
     const [searchedUsers, setSearchedUsers] = useState<any>();
 
     useEffect(() => {
@@ -35,17 +35,25 @@ const MainPage: React.FC = () => {
         setSnackbarOpen(false);
     }
 
+    const renderSearchText = () => {
+        if (currentSearch) {
+            return `Exibindo resultado por: ${currentSearch}`;
+        }
+    }
+
     return (
         <div className="app">
             <Navbar mainPage />
-            <Header setSearchResult={setSearchedUsers} />
+            <Header setCurrentSearch={setCurrentSearch} setSearchResult={setSearchedUsers} />
             <SearchSection>
+                {renderSearchText()}
                 {searchedUsers && searchedUsers.map((element: any, key: any) => {
                     return (
                         <SearchCard
                             avatar={element.image}
                             name={element.name}
                             email={element.email} 
+                            id={element.id}
                         />
                     )
                 })}

@@ -14,6 +14,7 @@ interface SearchValues {
 
 interface HeaderProps {
     setSearchResult: (data: { search: string }) => void;
+    setCurrentSearch: (search: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = props => {
@@ -25,7 +26,10 @@ const Header: React.FC<HeaderProps> = props => {
             url: 'http://127.0.0.1:8000/api/search',
             params: data
         })
-            .then(resp => props.setSearchResult(resp.data))
+            .then(resp => {
+                props.setSearchResult(resp.data);
+                props.setCurrentSearch(data.search);
+            })
             .catch(error => console.log(error.response));
     }
 
