@@ -31,7 +31,7 @@ const Content: React.FC<ContentProps> = props => {
                 <LightInfo marginBottom={30} fontSize={13}>{props.email}</LightInfo>
                 <SideMenuOption
                     startIcon={<PersonIcon />}
-                    href="/user/profile"
+                    href="/profile"
                 >
                     Perfil
                 </SideMenuOption>

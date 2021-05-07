@@ -9,9 +9,9 @@ import {
 const SideNav: React.FC = () => {
     return (
         <SideNavSection>
-            <Item first icon="profile" path="/user/profile" name="Perfil" />
-            <Item icon="edit" path="/user/edit" name="Editar perfil" />
-            <Item icon="payment" path="/user/payments" name="Pagamentos" />
+            <Item first icon="profile" path="/profile" name="Perfil" />
+            <Item icon="edit" path="/profile/edit" name="Editar perfil" />
+            <Item icon="payment" path="/payments" name="Pagamentos" />
         </SideNavSection>
     )
 }

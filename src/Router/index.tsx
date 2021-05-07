@@ -20,8 +20,8 @@ const Routes: React.FC = () => {
                 <Route path="/user/:id" exact component={UserInfo} />
                 {!cookie_token && !session_token ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
                 {!cookie_token && !session_token ?  <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
-                {cookie_token || session_token ? <Route path="/user/profile" exact component={ProfilePage} /> : <Redirect from="/user/profile" to="/" />}
-                {cookie_token || session_token ? <Route path="/user/edit" exact component={EditProfilePage} /> : <Redirect from="/user/edit" to="/" />}
+                {cookie_token || session_token ? <Route path="/profile" exact component={ProfilePage} /> : <Redirect from="/profile" to="/" />}
+                {cookie_token || session_token ? <Route path="/profile/edit" exact component={EditProfilePage} /> : <Redirect from="/profile/edit" to="/" />}
             </Switch>
         </Router>
     )
