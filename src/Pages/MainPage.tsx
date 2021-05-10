@@ -11,16 +11,21 @@ import Snackbar from '../Components/SnackbarNotification';
 
 import Loading from '@material-ui/core/CircularProgress';
 
+import ErrorIcon from '@material-ui/icons/Error';
+
 import {
     SearchSection,
     SearchResults,
     LightText,
+    // ErrorMessage,
+    ErrorSection
 } from '../StyledComponents';
 
 const MainPage: React.FC = () => {
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [searchLoading, setSearchLoading] = useState(false);
-    const [currentSearch, setCurrentSearch] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+    const [searchLoading, setSearchLoading] = useState<boolean>(false);
+    const [searchErrorMessage, setSearchErrorMessage] = useState<string>('');
+    const [currentSearch, setCurrentSearch] = useState<string>('');
     const [searchedUsers, setSearchedUsers] = useState<any>();
 
     useEffect(() => {
@@ -43,6 +48,13 @@ const MainPage: React.FC = () => {
     const renderSearchResults = () => {
         if (searchLoading) {
             return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
+        } else if (searchErrorMessage) {
+            return (
+                <ErrorSection>
+                    <ErrorIcon style={{ marginRight: 10 }} />
+                    {searchErrorMessage}
+                </ErrorSection>
+            )
         } else if (!searchLoading && searchedUsers) {
             return (
                 <React.Fragment>
@@ -67,7 +79,12 @@ const MainPage: React.FC = () => {
     return (
         <div className="app">
             <Navbar mainPage />
-            <Header setSearchLoading={setSearchLoading} setCurrentSearch={setCurrentSearch} setSearchResult={setSearchedUsers} />
+            <Header 
+                setSearchLoading={setSearchLoading} 
+                setCurrentSearch={setCurrentSearch} 
+                setSearchResult={setSearchedUsers}
+                setSearchErrorMessage={setSearchErrorMessage}
+            />
             <SearchSection>   
                 {renderSearchResults()}
             </SearchSection>

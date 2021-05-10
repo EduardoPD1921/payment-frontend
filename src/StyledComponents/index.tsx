@@ -628,3 +628,15 @@ export const UserCard = styled.div`
     -moz-box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
     box-shadow: 7px 4px 27px -5px rgba(0,0,0,0.75);
 `;
+
+export const ErrorSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    color: red;
+    margin-left: 10px;
+`;
+
+// export const ErrorMessage = styled.span`
+//     color: red;
+//     margin-left: 10px;
+// `;

@@ -16,6 +16,7 @@ interface HeaderProps {
     setSearchResult: (data: { search: string }) => void;
     setCurrentSearch: (search: string) => void;
     setSearchLoading: (loading: boolean) => void;
+    setSearchErrorMessage: (errorMessage: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = props => {
@@ -34,7 +35,17 @@ const Header: React.FC<HeaderProps> = props => {
                 props.setCurrentSearch(data.search);
                 props.setSearchLoading(false);
             })
-            .catch(error => console.log(error.response));
+            .catch(error => searchErrorHandler(error.response.data.message));
+    }
+
+    const searchErrorHandler = (error: string) => {
+        props.setSearchLoading(false);
+
+        if (error === 'user-not-found') {
+            props.setSearchErrorMessage('Usuário não encontrado!');
+        } else {
+            props.setSearchErrorMessage('Erro desconhecido!');
+        }
     }
 
     return (
