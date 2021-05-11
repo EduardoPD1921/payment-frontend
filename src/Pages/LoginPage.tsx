@@ -6,12 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import LoginInput from '../Components/LoginInput';
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 
-import Grid from '@material-ui/core/Grid';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import Loading from '@material-ui/core/CircularProgress';
 
@@ -21,7 +21,6 @@ import {
     FormSection,
     DefaultFormSection,
     DefaultButton,
-    CustomTextField,
     FormButtonSection,
     RememberAccountSection,
     LightTextRegister
@@ -141,49 +140,25 @@ const LoginPage: React.FC = () => {
                 <DefaultFormSection alignItems="center" justifyContent="center" flexDirection="column" width="20%" height={500}>
                     <AccountCircleIcon style={{ color: '#11c76f', fontSize: 100 }} />
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Grid style={{ marginTop: 20 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <EmailIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <Controller
-                                    name="email"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <CustomTextField
-                                            helperText={emailMessage}
-                                            error={!!emailMessage}
-                                            width="90%"
-                                            label="E-mail"
-                                            {...field} 
-                                        />
-                                    )} 
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid style={{ marginTop: 20 }} container spacing={1} alignItems="flex-end">
-                            <Grid item>
-                                <LockIcon style={{ color: '#11c76f' }} />
-                            </Grid>
-                            <Grid item>
-                                <Controller
-                                    name="password"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <CustomTextField
-                                            helperText={passwordMessage}
-                                            error={!!passwordMessage}
-                                            type="password"
-                                            width="90%"
-                                            label="Senha"
-                                            {...field} 
-                                        />
-                                    )} 
-                                />
-                            </Grid>
-                        </Grid>
+                        <LoginInput
+                            name="email"
+                            label="E-mail"
+                            helperText={emailMessage}
+                            error={!!emailMessage}
+                            control={control}
+                            icon={<EmailIcon style={{ color: '#11c76f' }} />} 
+                        />
+
+                        <LoginInput
+                            name="password"
+                            label="Senha"
+                            helperText={passwordMessage}
+                            error={!!passwordMessage}
+                            isPassword
+                            control={control}
+                            icon={<LockIcon style={{ color: '#11c76f' }} />} 
+                        />
+                        
                         <RememberAccountSection>
                             <Controller
                                 name="rememberAccount" 
