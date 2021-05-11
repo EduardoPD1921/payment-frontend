@@ -9,8 +9,6 @@ import ProfilePage from '../Pages/ProfilePage';
 import EditProfilePage from '../Pages/EditProfilePage';
 import UserInfo from '../Pages/UserInfo';
 
-import TestPage from '../Pages/TestPage';
-
 const Routes: React.FC = () => {
     const cookie_token = Cookie.get('authToken');
     const session_token = sessionStorage.getItem('authToken');
@@ -20,7 +18,6 @@ const Routes: React.FC = () => {
             <Switch>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/user/:id" exact component={UserInfo} />
-                <Route path="/test" exact component={TestPage} />
                 {!cookie_token && !session_token ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
                 {!cookie_token && !session_token ?  <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
                 {cookie_token || session_token ? <Route path="/profile" exact component={ProfilePage} /> : <Redirect from="/profile" to="/" />}

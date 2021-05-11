@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { CustomTextField } from '../StyledComponents';
@@ -19,6 +19,7 @@ import MaskedInput from 'react-input-mask';
 
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import RegisterInput from '../Components/RegisterInput';
 
 import Image from '../Static/Images/bitcoin-trading.svg';
 
@@ -151,44 +152,24 @@ const RegisterPage: React.FC = () => {
                     <RegisterFormInputs>
                         <RegisterFormTitle>Cadastro</RegisterFormTitle>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
-                                <Grid item>
-                                    <PersonIcon style={{ color: '#11c76f' }} />
-                                </Grid>
-                                <Grid item>
-                                    <Controller
-                                         name="name"
-                                         control={control}
-                                         defaultValue=""
-                                         render={({ field }) => 
-                                        <CustomTextField
-                                            helperText={nameMessage}
-                                            error={!!nameMessage}
-                                            label="Nome"
-                                            {...field} 
-                                        />}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
-                                <Grid item>
-                                    <EmailIcon style={{ color: '#11c76f' }} />
-                                </Grid>
-                                <Grid item>
-                                    <Controller
-                                         name="email"
-                                         control={control}
-                                         defaultValue=""
-                                         render={({ field }) => 
-                                        <CustomTextField
-                                            helperText={emailMessage}
-                                            error={!!emailMessage}
-                                            label="E-mail"
-                                            {...field} 
-                                        />}
-                                    />
-                                </Grid>
-                            </Grid>
+                            <RegisterInput
+                                name="name"
+                                label="Nome"
+                                helperText={nameMessage}
+                                error={!!nameMessage}
+                                control={control}
+                                icon={<PersonIcon style={{ color: '#11c76f' }} />} 
+                            />
+
+                            <RegisterInput
+                                name="email"
+                                label="E-mail"
+                                helperText={emailMessage}
+                                error={!!emailMessage}
+                                control={control}
+                                icon={<EmailIcon style={{ color: '#11c76f' }} />} 
+                            />
+
                             <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
                                 <Grid item>
                                     <EventIcon style={{ color: '#11c76f' }} />
@@ -209,6 +190,7 @@ const RegisterPage: React.FC = () => {
                                     </MaskedInput>
                                 </Grid>
                             </Grid>
+
                             <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
                                 <Grid item>
                                     <PhoneAndroidIcon style={{ color: '#11c76f' }} />
@@ -229,27 +211,17 @@ const RegisterPage: React.FC = () => {
                                     </MaskedInput>
                                 </Grid>
                             </Grid>
-                            <Grid style={{ marginLeft: 30, marginTop: 20 }} container spacing={1} alignItems="flex-end">
-                                <Grid item>
-                                    <LockIcon style={{ color: '#11c76f' }} />
-                                </Grid>
-                                <Grid item>
-                                    <Controller
-                                        name="password"
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field }) => (
-                                            <CustomTextField
-                                                helperText={passwordMessage}
-                                                error={!!passwordMessage}
-                                                type="password"
-                                                label="Senha"
-                                                {...field} 
-                                            />
-                                        )} 
-                                    />
-                                </Grid>
-                            </Grid>
+
+                            <RegisterInput
+                                name="password"
+                                label="Senha"
+                                helperText={passwordMessage}
+                                error={!!passwordMessage}
+                                isPassword
+                                control={control}
+                                icon={<LockIcon style={{ color: '#11c76f' }} />} 
+                            />
+
                             <FormButtonSection width="80%">
                                 {renderSubmitButton()}
                                 <LightTextRegister fontSize={12}>ou</LightTextRegister>
