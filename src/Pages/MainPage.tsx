@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import Cookie from 'js-cookie';
+import Cookie from 'js-cookie';
 
 import '../Static/Css/index.css';
 
@@ -17,7 +17,6 @@ import {
     SearchSection,
     SearchResults,
     LightText,
-    // ErrorMessage,
     ErrorSection
 } from '../StyledComponents';
 
@@ -73,6 +72,16 @@ const MainPage: React.FC = () => {
                     </SearchResults>
                 </React.Fragment>
             )
+        } else {
+            const rawData = Cookie.get('search_historic');
+
+            if (rawData) {
+                const searchHistoric = JSON.parse(rawData);
+
+                searchHistoric.map((element: any, key: any) => {
+                    return console.log(element);
+                })            
+            }
         }
     }
 

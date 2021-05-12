@@ -635,8 +635,3 @@ export const ErrorSection = styled.div`
     color: red;
     margin-left: 10px;
 `;
-
-// export const ErrorMessage = styled.span`
-//     color: red;
-//     margin-left: 10px;
-// `;
