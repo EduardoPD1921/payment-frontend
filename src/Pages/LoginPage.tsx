@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
         setIsLoading(false);
 
         if (rememberAccount) {
-            Cookie.set('authToken', token, { secure: true });
+            Cookie.set('authToken', token, { secure: true, expires: 3650 });
         } else {
             sessionStorage.setItem('authToken', token);
         }
