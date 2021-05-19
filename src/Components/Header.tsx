@@ -1,5 +1,4 @@
 import React from 'react';
-import Cookie from 'js-cookie';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -35,8 +34,6 @@ const Header: React.FC<HeaderProps> = props => {
                 props.setSearchResult(resp.data);
                 props.setCurrentSearch(data.search);
                 props.setSearchLoading(false);
-
-                Cookie.set('search_historic', JSON.stringify(resp.data), { secure: true });
             })
             .catch(error => searchErrorHandler(error.response.data.message));
     }

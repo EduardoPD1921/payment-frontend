@@ -21,6 +21,7 @@ const Content: React.FC<ContentProps> = props => {
     const logout = () => {
         Cookie.remove('authToken');
         sessionStorage.removeItem('authToken');
+        Cookie.remove('user_historic');
         window.location.reload();
     }
 

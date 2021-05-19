@@ -72,16 +72,6 @@ const MainPage: React.FC = () => {
                     </SearchResults>
                 </React.Fragment>
             )
-        } else {
-            const rawData = Cookie.get('search_historic');
-
-            if (rawData) {
-                const searchHistoric = JSON.parse(rawData);
-
-                searchHistoric.map((element: any, key: any) => {
-                    return console.log(element);
-                })            
-            }
         }
     }
 

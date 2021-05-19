@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Cookie from 'js-cookie';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ const UserInfo: React.FC = () => {
     const [userInfo, setUserInfo] = useState<any>();
 
     useEffect(() => {
-        const formData = { id }
+        const formData = { id };
 
         axios({
             method: 'GET',
