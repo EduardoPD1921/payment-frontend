@@ -34,7 +34,7 @@ const MainPage: React.FC = () => {
             setSnackbarOpen(true);
             localStorage.removeItem('snackbarOpen');
         }
-    }, [])
+    }, []);
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
@@ -45,34 +45,56 @@ const MainPage: React.FC = () => {
     }
 
     const renderSearchResults = () => {
-        if (searchLoading) {
-            return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
-        } else if (searchErrorMessage) {
+        // if (searchLoading) {
+        //     return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
+        // } else if (searchErrorMessage) {
+        //     return (
+        //         <ErrorSection>
+        //             <ErrorIcon style={{ marginRight: 10 }} />
+        //             {searchErrorMessage}
+        //         </ErrorSection>
+        //     )
+        // } else if (!searchLoading && searchedUsers) {
+        //     return (
+        //         <React.Fragment>
+        //             <LightText marginLeft={25} fontSize={20}>Exibindo resultados por: {currentSearch}</LightText>
+        //             <SearchResults>
+        //                 {searchedUsers.map((element: any, key: any) => {
+        //                     return (
+        //                         <SearchCard
+        //                             avatar={element.image}
+        //                             name={element.name}
+        //                             email={element.email}
+        //                             id={element.id} 
+        //                         />
+        //                     )
+        //                 })}
+        //             </SearchResults>
+        //         </React.Fragment>
+        //     )
+        // }
+        const userHistoric = Cookie.get('user_historic');
+
+        if (userHistoric) {
+            const userHistoricArray = JSON.parse(userHistoric);
+
             return (
-                <ErrorSection>
-                    <ErrorIcon style={{ marginRight: 10 }} />
-                    {searchErrorMessage}
-                </ErrorSection>
-            )
-        } else if (!searchLoading && searchedUsers) {
-            return (
-                <React.Fragment>
-                    <LightText marginLeft={25} fontSize={20}>Exibindo resultados por: {currentSearch}</LightText>
-                    <SearchResults>
-                        {searchedUsers.map((element: any, key: any) => {
-                            return (
-                                <SearchCard
-                                    avatar={element.image}
-                                    name={element.name}
-                                    email={element.email}
-                                    id={element.id} 
-                                />
-                            )
-                        })}
-                    </SearchResults>
-                </React.Fragment>
+                <SearchResults>
+                    {userHistoricArray.map((element: any, key: any) => {
+                        return (
+                            <SearchCard
+                                avatar={element.image}
+                                name={element.name}
+                                email={element.email}
+                                id={element.id} 
+                            />
+                        )
+                    })}
+                </SearchResults>
             )
         }
+
+        return <div></div>
     }
 
     return (

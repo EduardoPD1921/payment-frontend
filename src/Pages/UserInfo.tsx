@@ -20,9 +20,21 @@ const UserInfo: React.FC = () => {
             url: 'http://127.0.0.1:8000/api/searchById',
             params: formData
         })
-            .then(resp => setUserInfo(resp.data))
+            .then(resp => {
+                setUserInfo(resp.data);
+
+                const userHistoric = Cookie.get('user_historic');
+
+                if (userHistoric) {
+                    const userHistoricArray = JSON.parse(userHistoric);
+                    userHistoricArray.push(resp.data);
+
+                    const userHistoricJSON = JSON.stringify(userHistoricArray);
+                    Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+                }
+            })
             .catch(error => console.log(error.response));
-    }, [id])
+    }, [id]);
 
     const renderUserInfo = () => {
         if (userInfo) {
