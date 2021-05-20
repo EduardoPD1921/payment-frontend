@@ -45,56 +45,58 @@ const MainPage: React.FC = () => {
     }
 
     const renderSearchResults = () => {
-        // if (searchLoading) {
-        //     return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
-        // } else if (searchErrorMessage) {
-        //     return (
-        //         <ErrorSection>
-        //             <ErrorIcon style={{ marginRight: 10 }} />
-        //             {searchErrorMessage}
-        //         </ErrorSection>
-        //     )
-        // } else if (!searchLoading && searchedUsers) {
-        //     return (
-        //         <React.Fragment>
-        //             <LightText marginLeft={25} fontSize={20}>Exibindo resultados por: {currentSearch}</LightText>
-        //             <SearchResults>
-        //                 {searchedUsers.map((element: any, key: any) => {
-        //                     return (
-        //                         <SearchCard
-        //                             avatar={element.image}
-        //                             name={element.name}
-        //                             email={element.email}
-        //                             id={element.id} 
-        //                         />
-        //                     )
-        //                 })}
-        //             </SearchResults>
-        //         </React.Fragment>
-        //     )
-        // }
-        const userHistoric = Cookie.get('user_historic');
-
-        if (userHistoric) {
-            const userHistoricArray = JSON.parse(userHistoric);
-
+        if (searchLoading) {
+            return <Loading style={{ alignSelf: 'center', color: '#11c76f' }} />
+        } else if (searchErrorMessage) {
             return (
-                <SearchResults>
-                    {userHistoricArray.map((element: any, key: any) => {
-                        return (
-                            <SearchCard
-                                avatar={element.image}
-                                name={element.name}
-                                email={element.email}
-                                id={element.id} 
-                            />
-                        )
-                    })}
-                </SearchResults>
+                <ErrorSection>
+                    <ErrorIcon style={{ marginRight: 10 }} />
+                    {searchErrorMessage}
+                </ErrorSection>
             )
-        }
+        } else if (!searchLoading && searchedUsers) {
+            return (
+                <React.Fragment>
+                    <LightText marginLeft={25} fontSize={20}>Exibindo resultados por: {currentSearch}</LightText>
+                    <SearchResults>
+                        {searchedUsers.map((element: any, key: any) => {
+                            return (
+                                <SearchCard
+                                    avatar={element.image}
+                                    name={element.name}
+                                    email={element.email}
+                                    id={element.id} 
+                                />
+                            )
+                        })}
+                    </SearchResults>
+                </React.Fragment>
+            )
+        } else {
+            const userHistoric = Cookie.get('user_historic');
 
-        return <div></div>
+            if (userHistoric) {
+                const userHistoricArray = JSON.parse(userHistoric);
+
+                return (
+                    <React.Fragment>
+                        <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
+                        <SearchResults>
+                            {userHistoricArray.map((element: any, key: any) => {
+                                return (
+                                    <SearchCard
+                                        avatar={element.image}
+                                        name={element.name}
+                                        email={element.email}
+                                        id={element.id} 
+                                    />
+                                )
+                            })}
+                        </SearchResults>
+                    </React.Fragment>
+                )
+            }
+        }
     }
 
     return (
