@@ -27,10 +27,28 @@ const UserInfo: React.FC = () => {
 
                 if (userHistoric) {
                     const userHistoricArray = JSON.parse(userHistoric);
-                    userHistoricArray.unshift(resp.data);
 
-                    const userHistoricJSON = JSON.stringify(userHistoricArray);
-                    Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+                    if (userHistoricArray.length === 0) {
+                        userHistoricArray.unshift(resp.data);
+
+                        const userHistoricJSON = JSON.stringify(userHistoricArray);
+                        Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+                    } else {
+                        for (let i = 0; i <= userHistoricArray.length - 1; i++) {
+                            if (userHistoricArray[i].email === resp.data.email) {
+                                break;
+                            }
+
+                            if (i === userHistoricArray.length - 1) {
+                                userHistoricArray.unshift(resp.data);
+
+                                const userHistoricJSON = JSON.stringify(userHistoricArray);
+                                Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+
+                                break;
+                            }
+                        }
+                    }
                 }
             })
             .catch(error => console.log(error.response));

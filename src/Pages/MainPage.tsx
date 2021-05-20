@@ -78,6 +78,8 @@ const MainPage: React.FC = () => {
             if (userHistoric) {
                 const userHistoricArray = JSON.parse(userHistoric);
 
+                console.log(userHistoricArray);
+
                 return (
                     <React.Fragment>
                         <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
