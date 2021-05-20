@@ -40,12 +40,23 @@ const UserInfo: React.FC = () => {
                             }
 
                             if (i === userHistoricArray.length - 1) {
-                                userHistoricArray.unshift(resp.data);
+                                console.log('test');
+                                if (userHistoricArray.length === 6) {
+                                    userHistoricArray.pop();
+                                    userHistoricArray.unshift(resp.data);
 
-                                const userHistoricJSON = JSON.stringify(userHistoricArray);
-                                Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+                                    const userHistoricJSON = JSON.stringify(userHistoricArray);
+                                    Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
 
-                                break;
+                                    break;
+                                } else {
+                                    userHistoricArray.unshift(resp.data);
+
+                                    const userHistoricJSON = JSON.stringify(userHistoricArray);
+                                    Cookie.set('user_historic', userHistoricJSON, { secure: true, expires: 3650 });
+
+                                    break;
+                                }
                             }
                         }
                     }
