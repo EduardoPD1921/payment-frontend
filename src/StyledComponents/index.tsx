@@ -14,6 +14,7 @@ interface LightTextGeneralProps {
     marginRight?: number;
     marginLeft?: number;
     marginBottom?: number;
+    alignSelfCenter?: boolean;
 }
 
 export const LightTextRegister = styled.span`
@@ -29,6 +30,7 @@ export const LightText = styled.span`
     margin-left: ${(props: LightTextGeneralProps) => props.marginLeft || 0}px;
     color: #d4d4d4;
     font-size: ${(props: LightTextGeneralProps) => props.fontSize}px;
+    align-self: ${(props: LightTextGeneralProps) => props.alignSelfCenter ? 'center' : ''};
 `;
 
 interface LightInfoProps {

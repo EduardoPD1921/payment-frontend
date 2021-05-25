@@ -74,12 +74,9 @@ const MainPage: React.FC = () => {
             )
         } else {
             const userHistoric = Cookie.get('user_historic');
+            const userHistoricArray = JSON.parse(userHistoric || '[]');
 
-            if (userHistoric) {
-                const userHistoricArray = JSON.parse(userHistoric);
-
-                console.log(userHistoricArray);
-
+            if (userHistoricArray.length > 0) {
                 return (
                     <React.Fragment>
                         <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
@@ -96,6 +93,10 @@ const MainPage: React.FC = () => {
                             })}
                         </SearchResults>
                     </React.Fragment>
+                )
+            } else {
+                return (
+                    <LightText alignSelfCenter marginLeft={25} fontSize={20}>Nenhum perfil visitado</LightText>
                 )
             }
         }
