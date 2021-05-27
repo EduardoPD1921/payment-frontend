@@ -113,7 +113,7 @@ interface DefaultButtonProps {
 export const DefaultButton = styled(Button)`
     && {
         height: 50px;
-        width: 130px;
+        width: 100%;
         color: white;
         font-weight: 600;
         margin: ${(props: DefaultButtonProps) => props.margin || '0'};
@@ -121,6 +121,10 @@ export const DefaultButton = styled(Button)`
         background: ${(props: DefaultButtonProps) => props.backgroundDefault};
         :hover {
             background: ${(props: DefaultButtonProps) => props.backgroundHover};
+        }
+
+        @media(max-width: 570px) {
+            height: 35px;
         }
     }
 `;
@@ -151,6 +155,17 @@ export const HeaderInputSection = styled.div`
     width: 30%;
     align-items: center;
     justify-content: center;
+`;
+
+export const SearchForm = styled.form`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @media(max-width: 570px) {
+        height: 100px;
+        flex-direction: column;
+    }
 `;
 
 export const FooterSection = styled.footer`

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-import { HeaderSection, HeaderInputSection, DefaultButton } from '../StyledComponents';
+import { HeaderSection, HeaderInputSection, DefaultButton, SearchForm } from '../StyledComponents';
 
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -51,12 +51,12 @@ const Header: React.FC<HeaderProps> = props => {
     return (
         <HeaderSection>
             <HeaderInputSection>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <SearchForm onSubmit={handleSubmit(onSubmit)}>
                     <HeaderSearchInput placeHolder="Buscar usuário" control={control} name="search" />
                     <DefaultButton type="submit" backgroundDefault="#426dff" backgroundHover="#365ad6" borderRadius="10px" margin="10px">
                         <SearchIcon />
                     </DefaultButton>
-                </form>
+                </SearchForm>
             </HeaderInputSection>
         </HeaderSection>
     )
