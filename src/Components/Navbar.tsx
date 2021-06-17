@@ -31,7 +31,8 @@ const Nav: React.FC<NavbarProps> = props => {
                     <DefaultButton 
                         backgroundDefault="#426dff" 
                         backgroundHover="#365ad6" 
-                        href="/register" 
+                        href="/register"
+                        width="35%" 
                         borderRadius="30px" 
                         variant="contained" 
                         color="primary"

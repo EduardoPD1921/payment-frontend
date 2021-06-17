@@ -21,7 +21,7 @@ const SearchCard: React.FC<SearchCardProps> = props => {
             <AvatarIcon src={props.avatar} height={100} width={100} />
             {props.name}
             <LightTextRegister marginBottom={10} fontSize={12}>{props.email}</LightTextRegister>
-            <Button href={`/user/${props.id}`} color="primary">Ver perfil</Button>
+            <Button href={`/payment/${props.id}`} color="primary">Depositar</Button>
         </UserCard>
     )
 }

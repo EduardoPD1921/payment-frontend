@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Cookie from 'js-cookie';
+// import Cookie from 'js-cookie';
 
 import '../Static/Css/index.css';
 
@@ -72,34 +72,35 @@ const MainPage: React.FC = () => {
                     </SearchResults>
                 </React.Fragment>
             )
-        } else {
-            const userHistoric = Cookie.get('user_historic');
-            const userHistoricArray = JSON.parse(userHistoric || '[]');
-
-            if (userHistoricArray.length > 0) {
-                return (
-                    <React.Fragment>
-                        <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
-                        <SearchResults>
-                            {userHistoricArray.map((element: any, key: any) => {
-                                return (
-                                    <SearchCard
-                                        avatar={element.image}
-                                        name={element.name}
-                                        email={element.email}
-                                        id={element.id} 
-                                    />
-                                )
-                            })}
-                        </SearchResults>
-                    </React.Fragment>
-                )
-            } else {
-                return (
-                    <LightText alignSelfCenter marginLeft={25} fontSize={20}>Nenhum perfil visitado</LightText>
-                )
-            }
         }
+        // } else {
+        //     const userHistoric = Cookie.get('user_historic');
+        //     const userHistoricArray = JSON.parse(userHistoric || '[]');
+
+        //     if (userHistoricArray.length > 0) {
+        //         return (
+        //             <React.Fragment>
+        //                 <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
+        //                 <SearchResults>
+        //                     {userHistoricArray.map((element: any, key: any) => {
+        //                         return (
+        //                             <SearchCard
+        //                                 avatar={element.image}
+        //                                 name={element.name}
+        //                                 email={element.email}
+        //                                 id={element.id} 
+        //                             />
+        //                         )
+        //                     })}
+        //                 </SearchResults>
+        //             </React.Fragment>
+        //         )
+        //     } else {
+        //         return (
+        //             <LightText alignSelfCenter marginLeft={25} fontSize={20}>Nenhum perfil visitado</LightText>
+        //         )
+        //     }
+        // }
     }
 
     return (

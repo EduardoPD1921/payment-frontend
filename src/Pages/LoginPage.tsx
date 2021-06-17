@@ -81,7 +81,7 @@ const LoginPage: React.FC = () => {
             sessionStorage.setItem('authToken', token);
         }
 
-        Cookie.set('user_historic', [], { secure: true, expires: 3650 });
+        // Cookie.set('user_historic', [], { secure: true, expires: 3650 });
 
         window.location.href = "/";
     }

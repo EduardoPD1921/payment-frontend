@@ -104,6 +104,7 @@ export const NavItem = styled.a`
 `;
 
 interface DefaultButtonProps {
+    width?: string;
     borderRadius: string;
     margin?: string;
     backgroundDefault: string;
@@ -113,7 +114,7 @@ interface DefaultButtonProps {
 export const DefaultButton = styled(Button)`
     && {
         height: 50px;
-        width: 100%;
+        width: ${(props: DefaultButtonProps) => props.width || '100%'};
         color: white;
         font-weight: 600;
         margin: ${(props: DefaultButtonProps) => props.margin || '0'};
