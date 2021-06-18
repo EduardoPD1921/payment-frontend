@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { CustomTextField } from '../StyledComponents';
-
 import Grid from '@material-ui/core/Grid';
 import Loading from '@material-ui/core/CircularProgress';
 
@@ -35,7 +33,8 @@ import {
     DefaultButton,
     FormButtonSection,
     LightTextRegister,
-    LinkItem
+    LinkItem,
+    CustomTextField
 } from '../StyledComponents';
 
 interface InputValues {

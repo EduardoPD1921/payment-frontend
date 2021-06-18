@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import Cookie from 'js-cookie';
 
 import '../Static/Css/index.css';
 
@@ -8,7 +7,9 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import SearchCard from '../Components/SearchCard';
 import Snackbar from '../Components/SnackbarNotification';
+import ModalBody from '../Components/ModalBody';
 
+import Modal from '@material-ui/core/Modal';
 import Loading from '@material-ui/core/CircularProgress';
 
 import ErrorIcon from '@material-ui/icons/Error';
@@ -26,6 +27,10 @@ const MainPage: React.FC = () => {
     const [searchErrorMessage, setSearchErrorMessage] = useState<string>('');
     const [currentSearch, setCurrentSearch] = useState<string>('');
     const [searchedUsers, setSearchedUsers] = useState<any>();
+
+    const [transactionValue, setTransactionValue] = useState<string>('');
+
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const storageSnackbar = localStorage.getItem('snackbarOpen');
@@ -73,39 +78,28 @@ const MainPage: React.FC = () => {
                 </React.Fragment>
             )
         }
-        // } else {
-        //     const userHistoric = Cookie.get('user_historic');
-        //     const userHistoricArray = JSON.parse(userHistoric || '[]');
+    }
 
-        //     if (userHistoricArray.length > 0) {
-        //         return (
-        //             <React.Fragment>
-        //                 <LightText marginLeft={25} fontSize={20}>Últimos perfis visitados:</LightText>
-        //                 <SearchResults>
-        //                     {userHistoricArray.map((element: any, key: any) => {
-        //                         return (
-        //                             <SearchCard
-        //                                 avatar={element.image}
-        //                                 name={element.name}
-        //                                 email={element.email}
-        //                                 id={element.id} 
-        //                             />
-        //                         )
-        //                     })}
-        //                 </SearchResults>
-        //             </React.Fragment>
-        //         )
-        //     } else {
-        //         return (
-        //             <LightText alignSelfCenter marginLeft={25} fontSize={20}>Nenhum perfil visitado</LightText>
-        //         )
-        //     }
-        // }
+    const onModalClose = () => {
+        setModalOpen(false);
+        setTransactionValue('');
     }
 
     return (
         <div className="app">
             <Navbar mainPage />
+            <Modal
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                open={modalOpen}
+                onClose={onModalClose}
+            >
+                <ModalBody
+                    transactionValue={transactionValue}
+                    setTransactionValue={setTransactionValue}
+                    onModalClose={onModalClose} 
+                />
+            </Modal>
+            <button onClick={() => setModalOpen(true)}>test</button>
             <Header 
                 setSearchLoading={setSearchLoading} 
                 setCurrentSearch={setCurrentSearch} 

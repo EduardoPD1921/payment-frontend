@@ -653,3 +653,57 @@ export const ErrorSection = styled.div`
     color: red;
     margin-left: 10px;
 `;
+
+export const ModalTransaction = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 30%;
+    border-radius: 5px;
+    background: #ebebeb;
+`;
+
+export const ModalTitle = styled.span`
+    font-size: 25px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.8);
+`;
+
+export const ModalTitleSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+`;
+
+export const TransactionValueSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+export const ButtonSection = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+export const ModalActionsSection = styled.div`
+    margin-top: 15px;
+`;
+
+interface ModalActionButtonProps {
+    deposit?: boolean;
+}
+
+export const ModalActionButton = styled(Button)`
+    flex: 1;
+    align-self: center;
+
+    && {
+        margin: 10px;
+        background: ${(props: ModalActionButtonProps) => props.deposit ? '#11c76f' : ''};
+        :hover {
+            background: ${(props: ModalActionButtonProps) => props.deposit ? '#10ad61' : ''};
+        }
+    }
+`;
