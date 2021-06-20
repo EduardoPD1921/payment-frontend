@@ -20,6 +20,7 @@ interface ModalBodyProps {
     transactionValue: string;
     setTransactionValue: (value: string) => void;
     onModalClose: () => void;
+    onConfirmTransaction: () => void;
 }
 
 const ModalBody: React.FC<ModalBodyProps> = props => {
@@ -48,7 +49,7 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
             <ButtonSection>
                 <ModalActionsSection>
                     <ModalActionButton onClick={props.onModalClose}>Cancelar</ModalActionButton>
-                    <ModalActionButton deposit variant="contained" style={{ color: '#ffff' }}>Depositar</ModalActionButton>
+                    <ModalActionButton onClick={() => props.onConfirmTransaction()} deposit variant="contained" style={{ color: '#ffff' }}>Depositar</ModalActionButton>
                 </ModalActionsSection>
             </ButtonSection>
         </ModalTransaction>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Cookie from 'js-cookie';
+import axios from 'axios';
 
 import '../Static/Css/index.css';
 
@@ -21,6 +23,9 @@ import {
     ErrorSection
 } from '../StyledComponents';
 
+const cookie_token = Cookie.get('authToken');
+const session_token = sessionStorage.getItem('authToken');
+
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
@@ -29,6 +34,7 @@ const MainPage: React.FC = () => {
     const [searchedUsers, setSearchedUsers] = useState<any>();
 
     const [transactionValue, setTransactionValue] = useState<string>('');
+    const [transactionReceiverId, setTransactionReceiverId] = useState<string>('');
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -67,6 +73,7 @@ const MainPage: React.FC = () => {
                         {searchedUsers.map((element: any, key: any) => {
                             return (
                                 <SearchCard
+                                    onDepositClick={onDepositClick}
                                     avatar={element.image}
                                     name={element.name}
                                     email={element.email}
@@ -85,6 +92,26 @@ const MainPage: React.FC = () => {
         setTransactionValue('');
     }
 
+    const onConfirmTransaction = () => {
+        const data = {
+            receiver_id: transactionReceiverId,
+            amount: parseFloat(transactionValue)
+        }
+
+        axios.post('http://127.0.0.1:8000/api/transaction/create', data, {
+            headers: {
+                'Authorization': `Bearer ${cookie_token || session_token}`
+            }
+        })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error.response))
+    }
+
+    const onDepositClick = (receiverId: string) => {
+        setTransactionReceiverId(receiverId);
+        setModalOpen(true);
+    }
+
     return (
         <div className="app">
             <Navbar mainPage />
@@ -96,10 +123,11 @@ const MainPage: React.FC = () => {
                 <ModalBody
                     transactionValue={transactionValue}
                     setTransactionValue={setTransactionValue}
+                    onConfirmTransaction={onConfirmTransaction}
                     onModalClose={onModalClose} 
                 />
             </Modal>
-            <button onClick={() => setModalOpen(true)}>test</button>
+            {/* <button onClick={() => setModalOpen(true)}>test</button> */}
             <Header 
                 setSearchLoading={setSearchLoading} 
                 setCurrentSearch={setCurrentSearch} 

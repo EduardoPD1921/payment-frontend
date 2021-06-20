@@ -12,7 +12,8 @@ interface SearchCardProps {
     avatar: string;
     name: string;
     email: string;
-    id: number;
+    id: string;
+    onDepositClick: (receiverId: string) => void;
 }
 
 const SearchCard: React.FC<SearchCardProps> = props => {
@@ -21,7 +22,7 @@ const SearchCard: React.FC<SearchCardProps> = props => {
             <AvatarIcon src={props.avatar} height={100} width={100} />
             {props.name}
             <LightTextRegister marginBottom={10} fontSize={12}>{props.email}</LightTextRegister>
-            <Button href={`/payment/${props.id}`} color="primary">Depositar</Button>
+            <Button onClick={() => props.onDepositClick(props.id)} color="primary">Depositar</Button>
         </UserCard>
     )
 }
