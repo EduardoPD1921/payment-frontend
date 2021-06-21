@@ -18,6 +18,7 @@ import {
 
 interface ModalBodyProps {
     transactionValue: string;
+    transactionErrorMessage: string;
     setTransactionValue: (value: string) => void;
     onModalClose: () => void;
     onConfirmTransaction: () => void;
@@ -44,6 +45,8 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
                     width="40%"
                     marginTop={30}
                     InputProps={{ startAdornment: <InputAdornment position="start">R$</InputAdornment> }}
+                    helperText={props.transactionErrorMessage}
+                    error={!!props.transactionErrorMessage}
                 />
             </TransactionValueSection>
             <ButtonSection>

@@ -28,6 +28,7 @@ const session_token = sessionStorage.getItem('authToken');
 
 const MainPage: React.FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+    const [transactionSnackbarOpen, setTransactionSnackbarOpen] = useState<boolean>(false);
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
     const [searchErrorMessage, setSearchErrorMessage] = useState<string>('');
     const [currentSearch, setCurrentSearch] = useState<string>('');
@@ -35,6 +36,8 @@ const MainPage: React.FC = () => {
 
     const [transactionValue, setTransactionValue] = useState<string>('');
     const [transactionReceiverId, setTransactionReceiverId] = useState<string>('');
+
+    const [transactionErrorMessage, setTransactionErrorMessage] = useState<string>('');
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -53,6 +56,14 @@ const MainPage: React.FC = () => {
         }
 
         setSnackbarOpen(false);
+    }
+
+    const handleTransactionSnackbarClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setTransactionSnackbarOpen(false);
     }
 
     const renderSearchResults = () => {
@@ -103,7 +114,10 @@ const MainPage: React.FC = () => {
                 'Authorization': `Bearer ${cookie_token || session_token}`
             }
         })
-            .then(resp => console.log(resp))
+            .then(resp => {
+                setTransactionSnackbarOpen(true);
+                onModalClose();
+            })
             .catch(error => console.log(error.response))
     }
 
@@ -124,10 +138,10 @@ const MainPage: React.FC = () => {
                     transactionValue={transactionValue}
                     setTransactionValue={setTransactionValue}
                     onConfirmTransaction={onConfirmTransaction}
-                    onModalClose={onModalClose} 
+                    onModalClose={onModalClose}
+                    transactionErrorMessage={transactionErrorMessage} 
                 />
             </Modal>
-            {/* <button onClick={() => setModalOpen(true)}>test</button> */}
             <Header 
                 setSearchLoading={setSearchLoading} 
                 setCurrentSearch={setCurrentSearch} 
@@ -138,7 +152,16 @@ const MainPage: React.FC = () => {
                 {renderSearchResults()}
             </SearchSection>
             <Footer />
-            <Snackbar message="Conta criada com sucesso!" isOpen={snackbarOpen} handleClose={handleClose} />
+            <Snackbar 
+                message="Conta criada com sucesso!" 
+                isOpen={snackbarOpen} 
+                handleClose={handleClose} 
+            />
+            <Snackbar
+                message="Transação efetuada com sucesso!" 
+                isOpen={transactionSnackbarOpen}
+                handleClose={handleTransactionSnackbarClose}
+            />
         </div>
     )
 }
