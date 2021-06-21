@@ -43,7 +43,7 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
                     label="Valor"
                     variant="filled"
                     width="40%"
-                    marginTop={30}
+                    marginTop={10}
                     InputProps={{ startAdornment: <InputAdornment position="start">R$</InputAdornment> }}
                     helperText={props.transactionErrorMessage}
                     error={!!props.transactionErrorMessage}

@@ -688,7 +688,7 @@ export const ButtonSection = styled.div`
 `;
 
 export const ModalActionsSection = styled.div`
-    margin-top: 60px;
+    margin-top: 30px;
 `;
 
 interface ModalActionButtonProps {

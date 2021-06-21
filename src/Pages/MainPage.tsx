@@ -23,6 +23,11 @@ import {
     ErrorSection
 } from '../StyledComponents';
 
+interface TransactionErrorProps {
+    amount?: Array<string>;
+    message?: string;
+}
+
 const cookie_token = Cookie.get('authToken');
 const session_token = sessionStorage.getItem('authToken');
 
@@ -101,6 +106,7 @@ const MainPage: React.FC = () => {
     const onModalClose = () => {
         setModalOpen(false);
         setTransactionValue('');
+        setTransactionErrorMessage('');
     }
 
     const onConfirmTransaction = () => {
@@ -118,7 +124,19 @@ const MainPage: React.FC = () => {
                 setTransactionSnackbarOpen(true);
                 onModalClose();
             })
-            .catch(error => console.log(error.response))
+            .catch(error => onTransactionErrorHandler(error.response.data))
+    }
+
+    const onTransactionErrorHandler = (error: TransactionErrorProps) => {
+        if (error.message) {
+            return setTransactionErrorMessage('O usuário precisa estar logado para efetuar transações!');
+        }
+
+        if (error.amount) {
+            return setTransactionErrorMessage(error.amount[0]);
+        }
+
+        return setTransactionErrorMessage('Erro do servidor!');
     }
 
     const onDepositClick = (receiverId: string) => {
