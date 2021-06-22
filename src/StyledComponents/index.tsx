@@ -478,21 +478,28 @@ export const UserInfo = styled.div`
     height: 85%;
     width: 85%;
     flex: 1;
+    justify-content: center;
     padding: 50px;
     border-radius: 25px;
     background: black;
     background: rgba(0, 0, 0, 0.1);
 `;
 
+interface MainInfoProps {
+    width?: number;
+}
+
 export const MainInfo = styled.div`
     display: flex;
-    flex: 1;
+    flex: ${(props: MainInfoProps) => props.width ? '' : '1'};
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: white;
     border-radius: 25px;
     height: 100%;
+    width: ${(props: MainInfoProps) => props.width ? props.width : ''}%;
+    margin: 0 20px 0 20px;
 `;
 
 export const OtherInfo = styled.div`

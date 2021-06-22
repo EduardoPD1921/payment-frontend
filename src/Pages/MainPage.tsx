@@ -124,7 +124,7 @@ const MainPage: React.FC = () => {
                 setTransactionSnackbarOpen(true);
                 onModalClose();
             })
-            .catch(error => onTransactionErrorHandler(error.response.data))
+            .catch(error => onTransactionErrorHandler(error.response.data));
     }
 
     const onTransactionErrorHandler = (error: TransactionErrorProps) => {

@@ -11,7 +11,7 @@ const SideNav: React.FC = () => {
         <SideNavSection>
             <Item first icon="profile" path="/profile" name="Perfil" />
             <Item icon="edit" path="/profile/edit" name="Editar perfil" />
-            <Item icon="payment" path="/payments" name="Pagamentos" />
+            <Item icon="payment" path="/profile/transactions" name="Transações" />
         </SideNavSection>
     )
 }

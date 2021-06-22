@@ -7,6 +7,7 @@ import RegisterPage from '../Pages/RegisterPage';
 import LoginPage from '../Pages/LoginPage';
 import ProfilePage from '../Pages/ProfilePage';
 import EditProfilePage from '../Pages/EditProfilePage';
+import TransactionsPage from '../Pages/TransactionsPage';
 
 const Routes: React.FC = () => {
     const cookie_token = Cookie.get('authToken');
@@ -20,6 +21,7 @@ const Routes: React.FC = () => {
                 {!cookie_token && !session_token ?  <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
                 {cookie_token || session_token ? <Route path="/profile" exact component={ProfilePage} /> : <Redirect from="/profile" to="/" />}
                 {cookie_token || session_token ? <Route path="/profile/edit" exact component={EditProfilePage} /> : <Redirect from="/profile/edit" to="/" />}
+                {cookie_token || session_token ? <Route path="/profile/transactions" exact component={TransactionsPage} /> : <Redirect from="/profile/transactions" to="/" />}
             </Switch>
         </Router>
     )
