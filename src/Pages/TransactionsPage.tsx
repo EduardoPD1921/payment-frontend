@@ -4,6 +4,7 @@ import Cookie from 'js-cookie';
 
 import ProfileTitle from '../Components/ProfileTitle';
 import SideNav from '../Components/SideNav';
+import TransactionInfoCard from '../Components/TransactionInfoCard';
 
 import {
     ProfilePageSection,
@@ -40,6 +41,39 @@ const TransactionsPage: React.FC = () => {
         setUserTransactions(organizedTransactions);
     }
 
+    const renderAllTransactions = () => {
+        if (userTransactions) {
+            return (
+                <React.Fragment>
+                    {userTransactions.map((transaction: any) => {
+                        if (transaction.receiver) {
+                            return (
+                                <TransactionInfoCard
+                                    userName={transaction.receiver.name}
+                                    date={transaction.created_at}
+                                    amount={transaction.amount}
+                                />
+                            )
+                        }
+
+                        if (transaction.payer) {
+                            return (
+                                <TransactionInfoCard
+                                    received
+                                    userName={transaction.payer.name}
+                                    date={transaction.created_at}
+                                    amount={transaction.amount} 
+                                />
+                            )
+                        }
+
+                        return false;
+                    })}
+                </React.Fragment>
+            )
+        }
+    }
+
     return (
         <div className="app">
             <ProfileTitle
@@ -51,7 +85,7 @@ const TransactionsPage: React.FC = () => {
                 <ProfilePageContent>
                     <UserInfo>
                         <MainInfo width={50}>
-                            <button onClick={() => console.log(userTransactions)}>test</button>
+                            {renderAllTransactions()}
                         </MainInfo>
                     </UserInfo>
                 </ProfilePageContent>

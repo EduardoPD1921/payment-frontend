@@ -113,10 +113,12 @@ const MainPage: React.FC = () => {
 
     const onConfirmTransaction = () => {
         setIsLoadingTransactionRequest(true);
+        const tmp = transactionValue.replaceAll('.', '');
+        const transactionValueFormatted = tmp.replace(',', '.');
 
         const data = {
             receiver_id: transactionReceiverId,
-            amount: parseFloat(transactionValue)
+            amount: parseFloat(transactionValueFormatted)
         }
 
         axios.post('http://127.0.0.1:8000/api/transaction/create', data, {

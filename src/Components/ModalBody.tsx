@@ -76,8 +76,6 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
             </TransactionValueSection>
             <ButtonSection>
                 <ModalActionsSection>
-                    {/* <ModalActionButton onClick={props.onModalClose}>Cancelar</ModalActionButton>
-                    <ModalActionButton onClick={() => props.onConfirmTransaction()} deposit variant="contained" style={{ color: '#ffff' }}>Depositar</ModalActionButton> */}
                     {loadingRender()}
                 </ModalActionsSection>
             </ButtonSection>

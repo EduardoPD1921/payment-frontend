@@ -494,7 +494,6 @@ export const MainInfo = styled.div`
     flex: ${(props: MainInfoProps) => props.width ? '' : '1'};
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background: white;
     border-radius: 25px;
     height: 100%;
@@ -713,4 +712,47 @@ export const ModalActionButton = styled(Button)`
             background: ${(props: ModalActionButtonProps) => props.deposit ? '#10ad61' : ''};
         }
     }
+`;
+
+export const TransactionInfo = styled.div`
+    display: flex;
+    width: 60%;
+    height: 8%;
+    flex-direction: row;
+    border-radius: 30px;
+    background: #f1f1fb;
+`;
+
+interface InfoSectionProps {
+    alignFlexEnd?: boolean;
+}
+
+export const InfoSection = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: ${(props: InfoSectionProps) => props.alignFlexEnd ? 'flex-end' : ''};
+    padding: 0 20px 0 20px;
+`;
+
+export const NameInfo = styled.span`
+    color: #263149;
+    font-size: 15px;
+    font-weight: 600;
+`;
+
+export const HourInfo = styled.span`
+    color: #c4c4c6;
+    font-size: 12px;
+`;
+
+interface TransactionAmountProps {
+    received?: boolean;
+}
+
+export const TransactionAmount = styled.span`
+    color: ${(props: TransactionAmountProps) => props.received ? '#16985d' : '#eb4f5c'};
+    font-size: 15px;
+    font-weight: 600;
 `;
