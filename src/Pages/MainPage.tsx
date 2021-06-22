@@ -46,6 +46,8 @@ const MainPage: React.FC = () => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
+    const [isLoadingTransactionRequest, setIsLoadingTransactionRequest] = useState<boolean>(false);
+
     useEffect(() => {
         const storageSnackbar = localStorage.getItem('snackbarOpen');
 
@@ -110,6 +112,8 @@ const MainPage: React.FC = () => {
     }
 
     const onConfirmTransaction = () => {
+        setIsLoadingTransactionRequest(true);
+
         const data = {
             receiver_id: transactionReceiverId,
             amount: parseFloat(transactionValue)
@@ -120,7 +124,8 @@ const MainPage: React.FC = () => {
                 'Authorization': `Bearer ${cookie_token || session_token}`
             }
         })
-            .then(resp => {
+            .then(() => {
+                setIsLoadingTransactionRequest(false);
                 setTransactionSnackbarOpen(true);
                 onModalClose();
             })
@@ -128,6 +133,8 @@ const MainPage: React.FC = () => {
     }
 
     const onTransactionErrorHandler = (error: TransactionErrorProps) => {
+        setIsLoadingTransactionRequest(false);
+
         if (error.message) {
             return setTransactionErrorMessage('O usuário precisa estar logado para efetuar transações!');
         }
@@ -153,6 +160,7 @@ const MainPage: React.FC = () => {
                 onClose={onModalClose}
             >
                 <ModalBody
+                    isLoadingTransactionRequest={isLoadingTransactionRequest}
                     transactionValue={transactionValue}
                     setTransactionValue={setTransactionValue}
                     onConfirmTransaction={onConfirmTransaction}

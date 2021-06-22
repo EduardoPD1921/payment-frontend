@@ -3,6 +3,8 @@ import React from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
+import Loading from '@material-ui/core/CircularProgress';
+
 import VMasker from 'vanilla-masker';
 
 import {
@@ -19,6 +21,7 @@ import {
 interface ModalBodyProps {
     transactionValue: string;
     transactionErrorMessage: string;
+    isLoadingTransactionRequest: boolean;
     setTransactionValue: (value: string) => void;
     onModalClose: () => void;
     onConfirmTransaction: () => void;
@@ -28,6 +31,28 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
     const onChangeHandler = (value: string) => {
         const maskedTransactionValue = VMasker.toMoney(value);
         props.setTransactionValue(maskedTransactionValue);
+    }
+
+    const loadingRender = () => {
+        if (props.isLoadingTransactionRequest) {
+            return <Loading style={{ color: '#11c76f' }} />
+        }
+
+        return (
+            <React.Fragment>
+                <ModalActionButton 
+                    onClick={props.onModalClose}>
+                    Cancelar
+                </ModalActionButton>
+                <ModalActionButton 
+                    onClick={() => props.onConfirmTransaction()} 
+                    deposit 
+                    variant="contained" 
+                    style={{ color: '#ffff' }}>
+                    Depositar
+                </ModalActionButton>
+            </React.Fragment>
+        )
     }
 
     return (
@@ -51,8 +76,9 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
             </TransactionValueSection>
             <ButtonSection>
                 <ModalActionsSection>
-                    <ModalActionButton onClick={props.onModalClose}>Cancelar</ModalActionButton>
-                    <ModalActionButton onClick={() => props.onConfirmTransaction()} deposit variant="contained" style={{ color: '#ffff' }}>Depositar</ModalActionButton>
+                    {/* <ModalActionButton onClick={props.onModalClose}>Cancelar</ModalActionButton>
+                    <ModalActionButton onClick={() => props.onConfirmTransaction()} deposit variant="contained" style={{ color: '#ffff' }}>Depositar</ModalActionButton> */}
+                    {loadingRender()}
                 </ModalActionsSection>
             </ButtonSection>
         </ModalTransaction>
