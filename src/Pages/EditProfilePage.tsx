@@ -391,7 +391,7 @@ const EditProfilePage: React.FC = () => {
                 <SideNav />
                 <ProfilePageContent>
                     <UserInfo>
-                        <MainInfo>
+                        <MainInfo displayFlex>
                             {renderInfo()}
                         </MainInfo>
                         <OtherInfo>

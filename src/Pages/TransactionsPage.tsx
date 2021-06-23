@@ -10,7 +10,9 @@ import {
     ProfilePageSection,
     ProfilePageContent,
     UserInfo,
-    MainInfo
+    MainInfo,
+    TransactionText,
+    TransactionTitleSection
 } from '../StyledComponents';
 
 const cookie_token = Cookie.get('authToken');
@@ -85,6 +87,11 @@ const TransactionsPage: React.FC = () => {
                 <ProfilePageContent>
                     <UserInfo>
                         <MainInfo width={50}>
+                            <TransactionTitleSection>
+                                <TransactionText marginLeft={40} fontSize={20}>
+                                    Transações
+                                </TransactionText>
+                            </TransactionTitleSection>
                             {renderAllTransactions()}
                         </MainInfo>
                     </UserInfo>

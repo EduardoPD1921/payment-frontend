@@ -487,10 +487,11 @@ export const UserInfo = styled.div`
 
 interface MainInfoProps {
     width?: number;
+    displayFlex?: boolean;
 }
 
 export const MainInfo = styled.div`
-    display: flex;
+    display: ${(props: MainInfoProps) => props.displayFlex ? 'flex' : ''};
     flex: ${(props: MainInfoProps) => props.width ? '' : '1'};
     flex-direction: column;
     align-items: center;
@@ -499,6 +500,7 @@ export const MainInfo = styled.div`
     height: 100%;
     width: ${(props: MainInfoProps) => props.width ? props.width : ''}%;
     margin: 0 20px 0 20px;
+    overflow-y: auto;
 `;
 
 export const OtherInfo = styled.div`
@@ -716,8 +718,11 @@ export const ModalActionButton = styled(Button)`
 
 export const TransactionInfo = styled.div`
     display: flex;
-    width: 60%;
+    width: 90%;
     height: 8%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     flex-direction: row;
     border-radius: 30px;
     background: #f1f1fb;
@@ -736,10 +741,16 @@ export const InfoSection = styled.div`
     padding: 0 20px 0 20px;
 `;
 
-export const NameInfo = styled.span`
+interface TransactionTextProps {
+    fontSize: number;
+    marginLeft?: number;
+}
+
+export const TransactionText = styled.span`
     color: #263149;
-    font-size: 15px;
+    font-size: ${(props: TransactionTextProps) => props.fontSize}px;
     font-weight: 600;
+    margin-left: ${(props: TransactionTextProps) => props.marginLeft}px;
 `;
 
 export const HourInfo = styled.span`
@@ -755,4 +766,11 @@ export const TransactionAmount = styled.span`
     color: ${(props: TransactionAmountProps) => props.received ? '#16985d' : '#eb4f5c'};
     font-size: 15px;
     font-weight: 600;
+`;
+
+export const TransactionTitleSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0 10px 0;
+    width: 85%;
 `;

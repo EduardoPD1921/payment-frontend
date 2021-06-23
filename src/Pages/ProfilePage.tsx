@@ -63,7 +63,7 @@ const ProfilePage: React.FC = () => {
                 <SideNav />
                 <ProfilePageContent>
                     <UserInfo>
-                        <MainInfo>
+                        <MainInfo displayFlex>
                             {renderInfo()}
                         </MainInfo>
                     </UserInfo>
